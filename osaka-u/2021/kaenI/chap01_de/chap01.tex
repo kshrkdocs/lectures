@@ -45,10 +45,9 @@ $x^{\prime}$について$x_0$から$x$まで積分する．
 初めのうちに常微分方程式をその形に応じて分類していることが多い(例えば線形 or 非線形など)．
 本テキストでは，
 まずは初等的な物理・化学でよく現れる常微分方程式の解法について
-一つ一つ学んだ後に，それらの方程式がどのように分類されるかを
-整理していく．
+一つ一つ学び，その後にそれらの方程式がどのように分類されるかを学んでいくことにする．
 
-\subsubsection{$\dfrac{dy}{dx} + a y = g(x)$}
+\subsubsection{$\dfrac{dy}{dx} + a y = g(x)$\label{sec:PDB02}}
 \begin{align}
   \dfrac{d}{dx}\left(e^{ax}y\right) & =e^{ax}\dfrac{dy}{dx}+ae^{ax}y.
 \end{align}
@@ -63,5 +62,28 @@ $x^{\prime}$について$x_0$から$x$まで積分する．
 \end{align}
 %
 \subsubsection{$\dfrac{d^2y}{dx^2} + a \dfrac{dy}{dx} + by = 0$}
+\begin{align}
+  \dfrac{d^{2}y}{dx^{2}}+a\dfrac{dy}{dx}+by & =\dfrac{d}{dx}\left(\dfrac{dy}{dx}-py\right)-q\left(\dfrac{dy}{dx}-py\right).
+\end{align}
+$Y = dy/dx - py$とおけば，
+\begin{align}
+  \dfrac{dY}{dx} + aY = 0, 
+\end{align}
+と書き換えたことになる．私たちは既にこの形の微分方程式の解法を学んでいる(節\ref{sec:PDB02})．
+\begin{align}
+  \dfrac{d}{dx}\left(\dfrac{dy}{dx}-py\right)-q\left(\dfrac{dy}{dx}-py\right) & =\dfrac{d^{2}y}{dx^{2}}-\left(p+q\right)\dfrac{dy}{dx}+pqy.
+\end{align}
+\begin{align}
+  \begin{cases}
+    p + q &= -a \\
+    pq    &= b 
+  \end{cases},
+\end{align}
+\begin{align}
+  \left(r-p\right)\left(r-q\right) \notag  
+  & = r^2 - \left(p+q\right)r + pq \notag \\
+  & = r^2 + ar + b \notag \\
+  & = 0.
+\end{align}
 \subsubsection{$\dfrac{dy^2}{dx^2} \pm \beta^2 y =0$}
 \subsection{常微分方程式の分類}
