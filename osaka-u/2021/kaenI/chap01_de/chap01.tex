@@ -1,0 +1,67 @@
+\chapter{微分方程式}
+\section{常微分方程式と偏微分方程式}
+
+\section{常微分方程式}
+\subsection{初期条件，一般解，特殊解 : 最も簡単な常微分方程式を通して}
+まずは，最も簡単な形の常微分方程式を通して，微分方程式の考え方に慣れていこう．
+ここでは，下記の形の方程式を扱うことにする．
+\begin{align}
+ \dfrac{dy}{dx} &= g(x), \label{eq:PDE_01} 
+\end{align}
+$g(x)$の関数形は与えられていて，例えば$g(x) = x$などをイメージしても良い．
+ここでは特定の$g(x)$の形によらない議論を行うために，$g(x)$については何も設定しない．
+また，上記の方程式に加えて，$x = x_0$のときの$y$の値が分かっていて，$y\left(x_0\right) = y_{0}$であったとする．このように，微分方程式に加えて満たすべき要請を初期条件と呼ぶ．
+微分方程式を解くということは，その与えられた方程式と条件を満たす関数$y\left(x\right)$を
+求める，ということである．
+
+最初なので，丁寧に式変形を示していくことにする．
+まず，式中の$x$を$x^\prime$と置き換えておく．
+%
+\begin{align}
+ \dfrac{dy}{dx^{\prime}} & =g\left(x^{\prime}\right).
+\end{align}
+%
+両辺を，
+$x^{\prime}$について$x_0$から$x$まで積分する．
+\begin{align}
+ \int_{x_{0}}^{x}dx^{\prime}\,\dfrac{dy}{dx^{\prime}} & =\int_{x_{0}}^{x}dx^{\prime}\,g\left(x^{\prime}\right).
+\end{align}
+そうすると，左辺は
+\begin{align}
+ \int_{y\left(x_{0}\right)}^{y\left(x\right)}dy & =y\left(x\right)-y_{0},
+\end{align}
+と書き直せる．右辺については，$g(x^\prime)$の形が具体的に与えられないことには
+積分を実行できないので，そのままにしておく．つまり，
+\begin{align}
+ y = \int_{x_0}^{x} dx^\prime \, g(x^\prime) + y\left(x_0\right), 
+\end{align}
+という形で$y$の表式が得られる．これが\Eq{eq:PDE_01}の解である．\\
+\textcolor{red}{通常の教科書との解の形の違い，一般解，特殊解について言及}\\
+\textcolor{blue}{具体例．}
+%
+\subsection{物理・化学でよく現れる常微分方程式}
+%
+微分方程式の教科書では，
+初めのうちに常微分方程式をその形に応じて分類していることが多い(例えば線形 or 非線形など)．
+本テキストでは，
+まずは初等的な物理・化学でよく現れる常微分方程式の解法について
+一つ一つ学んだ後に，それらの方程式がどのように分類されるかを
+整理していく．
+
+\subsubsection{$\dfrac{dy}{dx} + a y = g(x)$}
+\begin{align}
+  \dfrac{d}{dx}\left(e^{ax}y\right) & =e^{ax}\dfrac{dy}{dx}+ae^{ax}y.
+\end{align}
+\begin{align}
+  \dfrac{d}{dx}\left(e^{ax}y\right) & =e^{ax}g\left(x\right).
+\end{align}
+\begin{align}
+  e^{ax}y & =\int dx^{\prime}\,e^{ax^{\prime}}g\left(x^{\prime}\right)+C.
+\end{align}
+\begin{align}
+ y & =e^{-ax}\int dx^{\prime}\,e^{ax^{\prime}}g\left(x^{\prime}\right)+Ce^{-ax}.
+\end{align}
+%
+\subsubsection{$\dfrac{d^2y}{dx^2} + a \dfrac{dy}{dx} + by = 0$}
+\subsubsection{$\dfrac{dy^2}{dx^2} \pm \beta^2 y =0$}
+\subsection{常微分方程式の分類}

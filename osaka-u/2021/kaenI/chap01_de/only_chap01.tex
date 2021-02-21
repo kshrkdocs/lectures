@@ -1,0 +1,91 @@
+\documentclass[12pt,a4]{jsbook}
+\setcounter{secnumdepth}{3}
+\setcounter{tocdepth}{2}
+\bibliographystyle{h-physrev3}
+\usepackage[T1]{fontenc}
+\usepackage[active]{srcltx}
+
+\makeatletter
+%\usepackage{tgtermes}
+%\usepackage[T1]{fontenc}
+\usepackage[top=25truemm,bottom=25truemm,left=25truemm,right=25truemm]{geometry}
+\usepackage{fancyhdr, lastpage}
+\usepackage{amsmath}
+%\usepackage[lite,subscriptcorrection,slantedGreek,nofontinfo]{mtpro2}
+\usepackage{bm,braket,ascmac,enumerate,multirow}
+\usepackage{amssymb,wrapfig,afterpage,booktabs,url}
+\usepackage{listings}
+\numberwithin{equation}{section}
+%
+\usepackage{graphicx}
+\usepackage[dvips]{color}
+\usepackage{makeidx}
+\usepackage{fancyvrb}
+\usepackage{cprotect}
+%
+\newcommand{\vred}{\color{red}}
+\newcommand{\vblue}{\color{blue}}
+\newcommand{\vgreen}{\color{green}}
+\newcommand{\at}{@}
+%
+\renewcommand{\baselinestretch}{1.1}
+\renewcommand{\figurename}{Fig.}
+\renewcommand{\tablename}{Table }
+
+\makeindex 
+%\renewcommand{\contentsname}{\Large \centerline{目 次}}
+%\renewcommand{\figurename}{Fig.}
+%\renewcommand{\tablename}{Table }
+%\renewcommand{\refname}{}
+
+\makeatother
+
+\newcommand{ \Sec }[1]{Sec.~\ref{sec:#1}}
+\newcommand{ \Appendix }[1]{Appendix \ref{sec:#1}}
+
+\newcommand{ \Eq   }[1]{Eq.~(\ref{#1})}
+\newcommand{ \Eqs  }[2]{Eqs.~(\ref{#1}) and (\ref{#2})}
+\newcommand{ \Equation }[1]{Equation (\ref{#1})}
+
+\newcommand{ \Table }[1]{Table \ref{tab:#1}}
+
+%\newcommand{ \Ref  }[1]{Ref.~\onlinecite{#1}}
+\newcommand{ \Refs }[2]{Refs.~\onlinecite{#1} and \onlinecite{#2}}
+
+\newcommand{ \Fig     }[1]{Fig.~\ref{fig:#1}}
+\newcommand{ \Figs    }[2]{Figs.~\ref{fig:#1} and \ref{fig:#2}}
+\newcommand{ \Figure  }[1]{Figure \ref{fig:#1}}
+%.........................................................
+
+%.........................................................
+\newcommand*{\hrstart}{%
+\vspace*{.3cm}
+\hrule height 0.05cm 
+%\vspace*{.1cm}
+\vspace*{-.5cm}
+
+\noindent
+}
+%
+\newcommand*{\hrend}{%
+%\vspace*{.1cm}
+
+\hrule height 0.05cm
+\vspace*{.3cm}
+
+\noindent
+}
+%
+\newcommand{\boxin}[1]{%
+\vspace*{.4cm}
+
+\noindent
+\fbox{\textbf{#1}}
+\vspace*{-.2cm}
+
+\noindent
+}
+%
+\begin{document}
+\include{chap01}
+\end{document}
