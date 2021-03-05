@@ -70,7 +70,7 @@ $C=y_0$であることが分かる．
 まずは初等的な物理・化学でよく現れる常微分方程式の解法について
 一つ一つ学び，その後にそれらの方程式がどのように分類されるかを学んでいくことにする．
 
-\subsubsection{$\dfrac{dy}{dx} + a y = 0$}
+\subsubsection{$\dfrac{dy}{dx} + a y = 0$\label{sec:PDE_02}}
 %
 次の形の微分方程式を考える．
 \begin{align}
@@ -299,6 +299,42 @@ $\beta$は実数として，
 と表すことが出来る．
 導出過程を見れば分かるとおり，\Eq{eq:PDE_05_02_sol_01}と\Eq{eq:PDE_05_02_sol_02}のどちらも正しい一般解である．
 %
+\subsection{変数分離}
+%
+1階微分方程式のうち，
+\begin{align}
+  \dfrac{dy}{dx} & =f\left(y\right)g\left(x\right),
+\end{align}
+の形をしたものを，変数分離形と呼ぶ．$f\left(x\right) \neq 0$のとき，
+両辺を$f\left(x\right)$で割り，
+\begin{align}
+  \dfrac{1}{f\left(y\right)}\dfrac{dy}{dx} = g\left(x\right),
+\end{align}
+とした後，$x$について積分することで解を得ることが出来る．
+変数分離形の最もシンプルな例は，\Eq{eq:PDE_02}である．
+\begin{align}
+ \dfrac{dy}{dx} + ay = 0. 
+\end{align}
+確認してみると分かるが，
+この方程式の解を解くときにも，上記の手続きを踏んでいる．
+
+\subsubsection{同次形}
+%
+1階の微分方程式が
+\begin{align}
+  \dfrac{dy}{dx} = f\left(\dfrac{y}{x}\right),
+\end{align}
+の形であるとき，この微分方程式のことを同次形と呼ぶ．
+同次形の場合，変数変換により変数分離形に書き直すことが出来る．
+まず，$y=u\left(x\right)x$とおくと，
+\begin{align}
+ x\dfrac{du\left(x\right)}{dx}+u\left(x\right) & =f\left(u\left(x\right)\right),
+\end{align}
+だから，$f\left(u\right) - u\left(x\right) \neq 0$のとき，
+\begin{align}
+ \dfrac{1}{f\left(u\left(x\right)\right)-u\left(x\right)}\dfrac{du\left(x\right)}{dx}=\dfrac{1}{x},
+\end{align}
+と出来るので，確かに変数分離形になっている．
 \subsection{常微分方程式の分類}
 \subsubsection{線形と非線形}
 $x$を引数とする関数$y\left(x\right)$に関する常微分方程式を考える．
@@ -381,7 +417,7 @@ $y_1,~y_2$は微分方程式の階であるから，右辺の括弧内はゼロ�
 で表される．
 \end{shadebox}
 
-\subsubsection{非斉次形 : 非斉次形の一般解は，斉次形の一般解と非斉次形の特殊解の和}
+\subsubsection{非斉次形 : 非斉次形の一般解は，斉次形の一般解と非斉次形の特殊解の和\label{sec:inhomo_strategy}}
 \begin{shadebox}
 非斉次の$n$階線形常微分方程式
 \begin{align}
@@ -416,43 +452,143 @@ $y_1,~y_2$は微分方程式の階であるから，右辺の括弧内はゼロ�
 非斉次方程式の特殊解を探し出す方法について述べる．
 
 %
-\subsection{変数分離}
 %
-1階微分方程式のうち，
+\subsection{非斉次方程式の解法}
+%
+\subsubsection{定数変化法}
+%
+次の形の非斉次の微分方程式を考える．
 \begin{align}
-  \dfrac{dy}{dx} & =f\left(y\right)g\left(x\right),
+ \dfrac{dy}{dx}+a\left(x\right)y & =b\left(x\right), \label{eq:PDE_06}
 \end{align}
-の形をしたものを，変数分離形と呼ぶ．$f\left(x\right) \neq 0$のとき，
-両辺を$f\left(x\right)$で割り，
+%
+\Eq{eq:PDE_03}に似ているが，違うところは$y$の項の係数も
+$x$の関数になっているところである．
+\Sec{inhomo_strategy}で述べた通り，非斉次方程式の解を求める際には，
+まず対応する斉次方程式の一般解を求めることを考えると良い．
+つまり，
 \begin{align}
-  \dfrac{1}{f\left(y\right)}\dfrac{dy}{dx} = g\left(x\right),
+ \dfrac{dy}{dx}+a\left(x\right)y & = 0,
 \end{align}
-とした後，$x$について積分することで解を得ることが出来る．
-変数分離形の最もシンプルな例は，\Eq{eq:PDE_02}である．
+の一般解を求めることから始める．この方程式は変数分離形なので，
+$y\neq 0$のとき，
 \begin{align}
- \dfrac{dy}{dx} + ay = 0. 
+ \dfrac{1}{y}\dfrac{dy}{dx} & =-a\left(x\right),
 \end{align}
-確認してみると分かるが，
-この方程式の解を解くときにも，上記の手続きを踏んでいる．
+であるから，
+\begin{align}
+ \log\left|y\right| & =\int dx\,a\left(x\right),
+\end{align}
+である．
+\Sec{PDE_02}のときと全く同じ議論から，
+\begin{align}
+ y & =C\exp\left[-\int dx\,a\left(x\right)\right], \label{eq:PDE_06_homo_sol}
+\end{align}
+とできる．これは$y=0$のときも対応できる形になっており(つまり$C=0$)，一般解である．これで，非斉次方程式の一般解を求めるに当たっての最初の関門は突破したことになる．次は非斉次方程式の特殊解を求めよう．
+ここで次のように考える．
+非斉次であろうが，斉次方程式と解の形は似ていると推測する．
+ただし確認してみれば分かるが，
+一般に\Eq{eq:PDE_06_homo_sol}は\Eq{eq:PDE_06}の解にはならない．そこで，非斉次の場合に対応するために，任意定数$C$を$x$の関数$C\left(x\right)$にしてみる，つまり
+\begin{align}
+ y & =C\left(x\right)\exp\left[-\int dx\,a\left(x\right)\right],
+\end{align}
+を非斉次方程式の解の候補として考える．$A\left(x\right) = -\int dx\,a\left(x\right)$とおいた上で\Eq{eq:PDE_06}に代入してみると，左辺は
+\begin{align}
+ & \dfrac{d}{dx}\left[C\left(x\right)\exp\left(A\left(x\right)\right)\right]+a\left(x\right)C\left(x\right)\exp\left(A\left(x\right)\right)\notag\\
+ & =\dfrac{dC\left(x\right)}{dx}\exp\left(A\left(x\right)\right)+C\left(x\right)\dfrac{d}{dx}\exp\left(A\left(x\right)\right)-a\left(x\right)C\left(x\right)\exp\left(A\left(x\right)\right)\notag\\
+ & =\dfrac{dC\left(x\right)}{dx}\exp\left(A\left(x\right)\right)+C\left(x\right)a\left(x\right)\exp\left(A\left(x\right)\right)-a\left(x\right)C\left(x\right)\exp\left(A\left(x\right)\right)\notag\\
+ & =\dfrac{dC\left(x\right)}{dx}\exp\left(A\left(x\right)\right),
+\end{align}
+なので，元々の微分方程式から次式が得られる．
+\begin{align}
+ \dfrac{dC\left(x\right)}{dx}\exp\left(A\left(x\right)\right) & =b\left(x\right).
+\end{align}
+この方程式の解は
+\begin{align}
+ C\left(x\right) & =\int dx\,b\left(x\right)\exp\left(-A\left(x\right)\right)+C^*,
+\end{align}
+なので，\Eq{eq:PDE_06}の一般解は
+\begin{align}
+ y & =\exp\left(A\left(x\right)\right)\left[\int dx\,b\left(x\right)\exp\left(-A\left(x\right)\right)+C^*\right],
+\end{align}
+となることが分かった．
+このように，斉次方程式の一般解の任意定数を関数とみなして，
+非斉次方程式の特殊解を求める方法を定数変化法と呼ぶ．
+この方法はより高階の方程式に対しても使えるので，有用性は高い．
 
-\subsubsection{同次形}
+実は，この非斉次方程式について，\Eq{eq:PDE_03}のときと同じで，積の微分法から解を求めることが出来る．その解法も紹介しておこう．
+\Eq{eq:PDE_06}の両辺に，何らかの関数$f\left(x\right)$をかける．
+\begin{align}
+ f\left(x\right)\dfrac{dy}{dx}+a\left(x\right)f\left(x\right)y & =b\left(x\right).
+\end{align}
+左辺を
+\begin{align}
+  f\left(x\right)\dfrac{dy}{dx}+a\left(x\right)y & =\dfrac{d}{dx}\left[f\left(x\right)y\right],
+\end{align}
+と書き直せるような関数$f\left(x\right)$を求めれば，この方程式は解けたことになる．つまり，
+\begin{align}
+ \dfrac{df\left(x\right)}{dx} & =a\left(x\right)f\left(x\right),
+\end{align}
+を$f\left(x\right)$が満たせば良い．既に知っているようにこの方程式の解の一つは，
+\begin{align}
+ f\left(x\right) & =\exp\left[\int dx\,a\left(x\right)\right]\notag \\ 
+                 & =\exp\left(-A\left(x\right)\right)
+\end{align}
+である．くどくなってしまうので途中は省略するが，丁寧に式変形すれば，
+\begin{align}
+ y & =\exp\left(A\left(x\right)\right)\left[\int dx\,\exp\left(-A\left(x\right)\right)b\left(x\right)+C\right],
+\end{align}
+を得る．
 %
-1階の微分方程式が
-\begin{align}
-  \dfrac{dy}{dx} = f\left(\dfrac{y}{x}\right),
-\end{align}
-の形であるとき，この微分方程式のことを同次形と呼ぶ．
-同次形の場合，変数変換により変数分離形に書き直すことが出来る．
-まず，$y=u\left(x\right)x$とおくと，
-\begin{align}
- x\dfrac{du\left(x\right)}{dx}+u\left(x\right) & =f\left(u\left(x\right)\right),
-\end{align}
-だから，$f\left(u\right) - u\left(x\right) \neq 0$のとき，
-\begin{align}
- \dfrac{1}{f\left(u\left(x\right)\right)-u\left(x\right)}\dfrac{du\left(x\right)}{dx}=\dfrac{1}{x},
-\end{align}
-と出来るので，確かに変数分離形になっている．
 %
-\subsection{定数変化法}
+\subsubsection{未定係数法}
+%
+非斉次の2階線形常微分方程式
+\begin{align}
+\dfrac{d^{2}y}{dx^{2}}+a\dfrac{dy}{dx}+by & = g\left(x\right),
+\label{eq:inhomo_linear2}
+\end{align}
+を考える．ただし，$a,~b$は定数とする．
+対応する斉次方程式の一般解については\Sec{PDE_04}で既に述べた．
+従って，非斉次方程式の特殊解を求められれば，
+一般解が求まったことになる．
+そこで，ここでは非斉次項$g(x)$の形に応じて，
+特殊解$y_p$の形を予測するというアプローチをとることにする．
+例えば，微分方程式
+\begin{align}
+\dfrac{d^{2}y}{dx^{2}}+2\dfrac{dy}{dx}+y & =e^{3x},
+\end{align}
+については，特殊解が$e^{3x}$を含んでいるだろうと予測がつく．
+実際，$A$を未定係数として$y_p = Ae^{3x}$の形を仮定して
+微分方程式に代入してみると，
+\begin{align}
+9Ae^{3x}+6Ae^{3x}+Ae^{3x} & =e^{3x}, 
+\end{align}
+となり，$A=1/16$であれば確かに特殊解になっていることが分かる．
+このように，特殊解の形を予測して未定係数を
+決定することで特殊解を求める方法を未定係数法と呼ぶ．
+未定係数法を利用するに当たって，次の2つのコツがある．
 
-\subsection{未定係数法}
+\begin{itemize}
+  \item 非斉次項の形に応じた特殊解の候補は下記． 
+  \begin{table}[htbp]
+  \centering
+  \begin{tabular}{cc}
+  \hline
+  \hline
+  非斉次項$g\left(x\right)$ & 特殊解$y_{p}$の候補\tabularnewline
+  \hline 
+  $e^{ax}$ & $Ae^{ax}$\tabularnewline
+  $\sin ax,\,\cos ax$ & $A\sin ax+B\cos ax$\tabularnewline
+  $n$次多項式 & $n$次多項式\tabularnewline
+  \hline 
+  \end{tabular}
+  \end{table}
+  \item 上記のように予測した候補を用いたときに，
+	未定係数がうまく決められないときは，
+	その候補に$x$や$x^2$をかけたものを検討してみる．
+\end{itemize}
+この方法は，より高階の微分方程式に対しても適用できる．
+%
+\subsection{連立微分方程式}
+%
