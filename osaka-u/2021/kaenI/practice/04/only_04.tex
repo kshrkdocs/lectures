@@ -1,14 +1,16 @@
-\documentclass[11pt,a4]{jsbook}
+\documentclass[11pt,a4]{jsarticle}
+\pagestyle{empty}
 \setcounter{secnumdepth}{3}
 \setcounter{tocdepth}{2}
 \bibliographystyle{h-physrev3}
 \usepackage[T1]{fontenc}
 \usepackage[active]{srcltx}
+\usepackage[version=3]{mhchem}
 
 \makeatletter
 %\usepackage{tgtermes}
 %\usepackage[T1]{fontenc}
-\usepackage[top=25truemm,bottom=25truemm,left=25truemm,right=25truemm]{geometry}
+\usepackage[top=10truemm,bottom=10truemm,left=20truemm,right=20truemm]{geometry}
 \usepackage{fancyhdr, lastpage}
 \usepackage{amsmath}
 %\usepackage[lite,subscriptcorrection,slantedGreek,nofontinfo]{mtpro2}
@@ -61,13 +63,8 @@
 
 %.........................................................
 \newtheorem{reidai}{例題}
+\newtheorem{enshu}{演習問題}
 %
 \begin{document}
-\title{化学工学演習I (笠原担当分)}
-\maketitle
-\tableofcontents
-\include{chap01_de/chap01}
-\include{chap02_fr/chap02}
-%\include{chap03_fr/chap03}
-%\include{chap04_lp/chap04}
+\include{04}
 \end{document}
