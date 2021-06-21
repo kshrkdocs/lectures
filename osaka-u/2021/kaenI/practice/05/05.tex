@@ -1,0 +1,40 @@
+\section*{第5回 演習問題(2021/06/16)}
+%
+\enshu
+%
+テキストの「ラプラス変換の性質」と「ラプラス逆変換の性質」について復習し，
+自分なりにまとめてみよ．式の羅列のみは採点しない．
+また，テキストでは導出を省略した
+\begin{align}
+ &\mathcal{L}\left[f^{(n)}(t)\right] = s^n F(s) - s^{n-1}f(0) - s^{n-2}f^{\prime}(0) - \cdots -sf^{(n-2)}(0) - f^{(n-1)}(0), \\
+ &\mathcal{L}^{-1}\left[F^{(n)}(s)\right] = (-t)^{n}f(t),
+\end{align}
+を導出してみよ．
+
+%
+\enshu
+%
+次の関数$f(t)$のラプラス変換$F(s)$を求めよ．導出過程も含めて書くこと．
+(ラプラス変換表より...で，解答を終わらせないこと．もちろん，答え合わせには使っても良い)
+\begin{enumerate}[(1)]
+  %\item $f(t) = \dfrac{1}{\sqrt{\pi t}}$
+  \item $f(t) = \sinh(at)$
+  \item $f(t) = \cos^{2}(at)$
+  %\item $f(t) = \dfrac{1}{t}\left(e^{-at}-e^{-bt}\right)$
+  %\item $f(t) = e^{-at}\cos \omega_0 t$
+  \item $f(t) = te^{-at}\cos\omega_0 t$
+\end{enumerate}
+%
+\enshu
+%
+次の関数$F(s)$のラプラス逆変換$f(t)$を求めよ．テキストのラプラス変換表は用いて良い．
+\begin{enumerate}[(1)]
+  \item $F(s) = \dfrac{1}{s-2}$
+  \item $F(s) = \dfrac{1}{s^2+2s}$
+  %\item $F(s) = \dfrac{s}{s^2-3}$ 
+\end{enumerate}
+%
+\enshu
+%
+2階の線形常微分方程式を自分で作ってみて，それをラプラス変換で解いてみよ．
+ただし，テキストと同じ式にはしないこと．
