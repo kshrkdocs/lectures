@@ -1,0 +1,259 @@
+\documentclass[11pt,a4]{jsarticle}
+\pagestyle{empty}
+\setcounter{secnumdepth}{3}
+\setcounter{tocdepth}{2}
+\bibliographystyle{h-physrev3}
+\usepackage[T1]{fontenc}
+\usepackage[active]{srcltx}
+\usepackage[version=3]{mhchem}
+
+\makeatletter
+%\usepackage{tgtermes}
+%\usepackage[T1]{fontenc}
+\usepackage[top=10truemm,bottom=10truemm,left=20truemm,right=20truemm]{geometry}
+\usepackage{fancyhdr, lastpage}
+\usepackage{amsmath}
+%\usepackage[lite,subscriptcorrection,slantedGreek,nofontinfo]{mtpro2}
+\usepackage{bm,braket,ascmac,enumerate,multirow}
+\usepackage{amssymb,wrapfig,afterpage,booktabs,url}
+\usepackage{listings}
+\numberwithin{equation}{section}
+%
+\usepackage{graphicx}
+\usepackage[dvips]{color}
+\usepackage{makeidx}
+\usepackage{fancyvrb}
+\usepackage{cprotect}
+\usepackage[dvipdfmx]{hyperref}
+\usepackage{pxjahyper}
+%
+\newcommand{\vred}{\color{red}}
+\newcommand{\vblue}{\color{blue}}
+\newcommand{\vgreen}{\color{green}}
+\newcommand{\at}{@}
+%
+\renewcommand{\baselinestretch}{1.1}
+\renewcommand{\figurename}{Fig.}
+\renewcommand{\tablename}{Table }
+
+\makeindex 
+%\renewcommand{\contentsname}{\Large \centerline{目 次}}
+%\renewcommand{\figurename}{Fig.}
+%\renewcommand{\tablename}{Table }
+%\renewcommand{\refname}{}
+
+\makeatother
+
+\newcommand{ \Sec }[1]{Sec.~\ref{sec:#1}}
+\newcommand{ \Appendix }[1]{Appendix \ref{sec:#1}}
+
+\newcommand{ \Eq   }[1]{Eq.~(\ref{#1})}
+\newcommand{ \Eqs  }[2]{Eqs.~(\ref{#1}) and (\ref{#2})}
+\newcommand{ \Equation }[1]{Equation (\ref{#1})}
+
+\newcommand{ \Table }[1]{Table \ref{tab:#1}}
+
+%\newcommand{ \Ref  }[1]{Ref.~\onlinecite{#1}}
+\newcommand{ \Refs }[2]{Refs.~\onlinecite{#1} and \onlinecite{#2}}
+
+\newcommand{ \Fig     }[1]{Fig.~\ref{fig:#1}}
+\newcommand{ \Figs    }[2]{Figs.~\ref{fig:#1} and \ref{fig:#2}}
+\newcommand{ \Figure  }[1]{Figure \ref{fig:#1}}
+%.........................................................
+
+%.........................................................
+\newtheorem{reidai}{例題}
+\newtheorem{enshu}{演習問題}
+%
+\begin{document}
+\section*{第2回 演習問題(2021/04/22) 略解とヒント}
+%
+\hrule
+%
+\vspace*{.2cm}
+\enshu
+化学反応
+\begin{align*}
+  \ce{A + B <=>[k][k^{\prime}] C + D}, 
+\end{align*}
+を考える．ただし，$k,~k^{\prime}$はそれぞれ2次，1次反応の速度定数であり，
+A, B, C, Dの初期濃度を$a,~2a,~0,~0$とする．
+\begin{enumerate}[(1)]
+  \item Cの時刻$t$での濃度を$x(t)$と表すとき，
+	$x(t)$に関する微分方程式を立てよ．
+  \item $k^\prime = 2k$のとき，(1)で導出した微分方程式を解け． 
+\end{enumerate}
+%
+\hrule
+\vspace*{.2cm}
+%
+\begin{enumerate}[(1)]
+\item これは問題文が良くなかったです．$k^{\prime}$も2次の反応速度定数としている解答が多かったです\footnote{白状すると，$k^{\prime}$を2次の速度定数と書いて出題したつもりだったのですが，うっかりしていました．．．ただ，いずれにしても難易度はほとんど変わりません．}．1次, 2次どちらで扱っても正解ということにします．
+$k^{\prime}$を1次の速度定数とした場合は，
+\begin{align*}
+ \dfrac{dx}{dt} = k(a-x)(2a-x) - k^{\prime}x 
+\end{align*}
+2次の速度定数とした場合は，
+\begin{align*}
+ \dfrac{dx}{dt} = k(a-x)(2a-x) - k^{\prime}x^2
+\end{align*}
+%
+\item $k^{\prime}$を1次の速度定数とした場合を示します．
+\begin{align*}
+x\left(t\right) & =\dfrac{\beta e^{\alpha kt}-\alpha e^{\beta kt}}{e^{\alpha kt}-e^{\beta kt}}
+\end{align*}
+ただし，
+\begin{align}
+ \alpha = \dfrac{3a+2-\sqrt{a^2+12a+4}}{4},~\beta = \dfrac{3a+2+\sqrt{a^2+12a+4}}{4}, 
+\end{align}
+です．
+
+(1)で立てた微分方程式の右辺は$x$に関する2次の多項式なので，その根を求めれば因数分解の形で表せます．そうすると，例題6と似たような式変形が可能になります．
+
+%
+\end{enumerate}
+%
+\newpage
+%
+\hrule
+\enshu
+以下の問いに答えよ．
+\begin{enumerate}[(1)]
+  \item 非線形微分方程式
+	\begin{align*}
+	   \dfrac{dy}{dx} = p(x)y + q(x)y^{\alpha},\quad (\alpha \neq 0, 1),
+	\end{align*}
+	は$u=y^{1-\alpha}$と変数変換することにより，線形方程式に帰着することを示せ．
+  \item 微分方程式
+	\begin{align*}
+	  3x\dfrac{dy}{dx} + y = xy^5, 
+	\end{align*}
+	を解け．
+\end{enumerate}
+%
+\hrule
+\vspace*{.2cm}
+%
+\begin{enumerate}[(1)]
+\item 誘導に従って変数変換することで導けます．もし誘導に従っても導けなかった場合は，
+        ベルヌーイ型の微分方程式などのキーワードで調べてみてください．
+\item 
+\begin{align*}
+y\left(x\right) & =\dfrac{1}{\left(c_{1}x^{4/3}+4x\right)^{1/4}}
+\end{align*}
+$c_1$は任意定数です．
+(1)で示したように，与えられた微分方程式は線形微分方程式に直すことができますので，
+テキストで扱ってきた解法が使えます．
+\end{enumerate}
+%
+\newpage
+%
+\hrule
+\enshu
+以下の問いに答えよ．
+\begin{enumerate}[(1)]
+  \item 微分方程式
+	\begin{align*}
+	  \dfrac{dy}{dx} = a(x)y^2 + b(x)y + c(x), 
+	\end{align*}
+	の特殊解が既に一つ求まっており，それを$y_0$とすると，
+	変数変換$u = y - y_0$により，与えれた微分方程式は
+	\begin{align*}
+	  \dfrac{du}{dx} = p(x)u + q(x)u^{2}, 
+	\end{align*}
+	の形に帰着することを示せ．
+\end{enumerate}
+%
+\hrule
+\vspace*{.2cm}
+
+リッカチ(リッカティ)型の微分方程式で調べてみてください．
+
+%
+\newpage
+\hrule
+\enshu
+化学反応
+\begin{align*}
+ \ce{A  <=>[k_1][k_{-1}] B <=>[k_2][k_{-2}] C}, 
+\end{align*}
+を考える．A, B, Cの時刻$t$での濃度をそれぞれ
+$x\left(t\right),~y\left(t\right),~z\left(t\right)$,
+初期濃度を$x_0,~y_0,~z_0$とする．
+\begin{enumerate}[(1)]
+  \item $x(t),~y(t),~z(t)$に対する反応速度式(微分方程式)を立てよ．
+  \item (1)で立てた微分方程式のうち，$x(t)$に関する方程式を解け．
+	必要に応じて追加で定数を導入しても良い．ただし，その定義は書いておくこと．
+\end{enumerate}
+%
+\hrule
+%
+\begin{enumerate}[(1)]
+  \item 
+\begin{align*}
+  & \dfrac{dx}{dt} = -k_1 x + k_{-1} y \cdots \textcircled{1}\\
+  & \dfrac{dy}{dt} = k_1 x -(k_{-1}+k_2)y + k_{-2}z \cdots \textcircled{2}\\
+  & \dfrac{dz}{dt} = k_2 y - k_{-2}z \cdots \textcircled{3}
+\end{align*} 
+\end{enumerate}
+%
+\newpage
+%
+\enshu
+微分方程式
+\begin{align*}
+ \dfrac{d^2x}{dt^2} + 2\gamma \dfrac{dx}{dt} + \omega_{0}^{2}x = f_0 \cos \omega t, 
+\end{align*}
+を考える\footnote{この方程式の斉次形が何者かは第1回の演習問題4を参照すること．粘性流体の中でバネに繋がれたおもりに，外力$f_0 \cos \omega t$が加えられた状態に対応するのが今回の微分方程式である．}．ただし，$0< \gamma < \omega_{0}$とする．
+\begin{enumerate}[(1)]
+  \item 一般解を求めよ．
+  \item 初期条件を$x(0)=0, d x(t)/dt|_{t=0}=0$として，$x(t)$の概形を描いてみよ．
+	また$t$が十分に大きいときの$x(t)$を求めよ．
+\end{enumerate}
+%
+\enshu (べき級数解法)
+%
+
+講義では省略したべき級数解法について，雰囲気だけでも掴んでおこう．
+例えば，次の微分方程式を考える．
+\begin{align*}
+  \dfrac{dy}{dx} - y = 0. 
+\end{align*}
+既に知っているように，一般解は$y=Ce^{x}$である．
+ここでは一般解をべき級数解法を用いて導いてみる．
+
+どのような$y$が方程式の解になっているか全く見当がつかないとする(実際にはついているとしても)．
+そこで，どんな形であっても対応できるように，$y$をべき級数の形で表しておくことにする．
+\begin{align*}
+  y = \sum_{n=0}^{\infty} a_{n}x^{n}. 
+\end{align*}
+これを与えられた微分方程式に代入すると，
+\begin{align*}
+  \dfrac{dy}{dx} - y &= \sum_{n=0}^{\infty}\left(n+1\right)a_{n+1}x^n 
+                        - \sum_{n=0}^{\infty}a_n x^{n} \notag \\
+                     &= \sum_{n=0}^{\infty}\underline{\left\{(n+1)a_{n+1}-a_n\right\}}x^{n} \notag \\
+                     &= 0, 
+\end{align*}
+となる．これが$x$の値によらず成り立つためには，
+全ての$x^{n}$についての係数(下線部)がゼロ
+でなければならない．つまり，
+\begin{align*}
+  &(n+1)a_{n+1} - a_n = 0, \notag \\
+  &\rightarrow a_{n+1} = \dfrac{1}{n+1}a_{n},
+\end{align*}
+という漸化式が得られ，一般項を求めると，
+\begin{align*}
+ a_n = \dfrac{1}{n!}a_0,
+\end{align*}
+である．従って，微分方程式の解が，
+\begin{align*}
+  y = a_0 \sum_{n=0}^{\infty}\dfrac{1}{n!}x^n = a_{0}e^{x} 
+\end{align*}
+となることを示せた．
+
+上記の例を参考にして，微分方程式
+\begin{align*}
+  \dfrac{d^2y}{dx^2} + y = 0,
+\end{align*}
+を解いてみよう．
+\end{document}

@@ -177,8 +177,8 @@ $\mathrm{Re}(s)>\alpha$ではラプラス変換が存在するが，$\mathrm{Re}
 	\end{align}
   \item 移動性
 	\begin{align}
-          \mathcal{L}\left[f(t-a)\Theta(t-a)\right] = e^{-as}F(s), \\
-          \mathcal{L}\left[e^{at}f(t)\right]   = F(s-a),
+          \mathcal{L}\left[f(t-a)\Theta(t-a)\right] = e^{-as}F(s), \label{laplace_shift01}\\
+          \mathcal{L}\left[e^{at}f(t)\right]   = F(s-a),           \label{laplace_shift02}
 	\end{align}
 	ただし，$a>0$である．
 	$\Theta(t)$はヘヴィサイドの階段(step)関数と呼ばれるものであり，
@@ -642,3 +642,360 @@ F(s) = \dfrac{d}{ds}F_{0}(s),
 
 この例を見て分かるように，ラプラス変換を使った解法は最後の逆変換が実行出来るかどうかにかかっている．
 次節からは，ラプラス変換を変換表に載っている形に書き直す技巧について解説する．
+%
+\newpage
+%
+%
+%\subsection{単根} 
+%
+%\begin{align}
+%F\left(s\right) & =\dfrac{B\left(s\right)}{A\left(s\right)}=b_{n}+\sum_{i=1}^{n}\dfrac{c_{i1}}{s+p_{i}}
+%\end{align}
+%
+%\begin{align}
+%f\left(t\right) & =b_{n}\delta\left(t\right)+\sum_{i=1}^{n}c_{i1}e^{-p_{i}t}.
+%\end{align}
+\section{部分分数展開によるラプラス逆変換}
+%
+\subsection{一般論}
+%
+前節で，ラプラス変換を学ぶモチベーションを説明するために，
+ラプラス変換を用いた微分方程式の解法を紹介した．
+微分方程式の解のラプラス変換$F(s)$の多くは，
+\begin{align}
+ F\left(s\right) & =\dfrac{B\left(s\right)}{A\left(s\right)}=\dfrac{b_{n}s^{n}+b_{n-1}s^{n-1}+\cdots+b_{0}}{s^{n}+a_{n-1}s^{n-1}+a_{n-2}s^{n-2}+\cdots+a_{0}},
+\end{align}
+の形をとっている．ここで，$A(s),~B(s)$はそれぞれ分母，分子の多項式を表す．
+上式のような形で表される関数のことを有理関数と呼ぶ．
+ラプラス変換が有理関数の場合には，式変形により$F(s)$をラプラス変換表に載っているシンプルな式の組み合わせで表せる．
+そのことを以下で見ていこう．
+
+$A(s)$は$n$次なので$n$個の根を持つ．
+値の異なる根を$p_1,~p_2,\cdots,~p_r$，そしてそれらの多重度を$m_1,~m_2,\cdots,~m_r$とすると\footnote{$n$と$r$の関係は$n=\displaystyle\sum_{i=1}^{r}m_{i}$.}，
+%
+\begin{align}
+ A\left(s\right) & =\left(s+p_{1}\right)^{m_{1}}\left(s+p_{2}\right)^{m_{2}}\cdots\left(s+p_{r}\right)^{m_{r}}\notag\\
+ & =\prod_{i=1}^{r}\left(s+p_{i}\right)^{m_{i}},
+\end{align}
+と書き表せる．
+$A(s)$をこのような形で表しておけば，$F(s)$を部分分数に展開できる．
+%
+\begin{align}
+ F\left(s\right) & =\dfrac{B\left(s\right)}{A\left(s\right)}=b_{n}+\sum_{i=1}^{r}\sum_{k=1}^{m_{i}}\dfrac{c_{ik}}{\left(s+p_{i}\right)^{k}}. \label{partial_fraction_expansion}
+\end{align}
+%
+この形に直すと，何がありがたいかと言うと，ラプラス変換の移動性\Eq{laplace_shift01}と変換表にある
+\begin{align}
+ &\mathcal{L}\left[\dfrac{t^{n-1}}{(n-1)!}\right] = \dfrac{1} {s^n}, \\
+ &\mathcal{L}\left[\delta(t)\right] = 1,
+\end{align}
+から，ラプラス逆変換が次のように実行できてしまうのである．
+%
+\begin{align}
+f\left(t\right) & =b_{n}\delta\left(t\right)+\sum_{i=1}^{r}\sum_{k=1}^{m_{i}}\dfrac{c_{ik}}{\left(k-1\right)!}t^{k-1}e^{-p_{i}t}\notag\\
+ & =b_{n}\delta\left(t\right)+\sum_{i=1}^{r}e^{-p_{i}t}\left(\sum_{k=1}^{m_{i}}\dfrac{c_{ik}}{\left(k-1\right)!}t^{k-1}\right). 
+\end{align}
+%
+従って，$F(s)$が有理関数の場合には，ラプラス逆変換を求める問題は
+部分分数展開\Eq{partial_fraction_expansion}における
+係数$c_{ik}$を求める問題に帰着する．
+部分分数分解は高校数学でも学ぶものではあるが，係数を求める方法をいくつか紹介する．
+%
+\subsection{未定係数法}
+%
+次に示すラプラス変換$F(s)$を例に考える．
+\begin{align}
+ F(s) = \dfrac{4}{(s+1)^2(s+3)}. 
+\end{align}
+%
+次式のように部分分数展開することを考える．
+\begin{align}
+ F(s) = \dfrac{c_1}{(s+1)^2} + \dfrac{c_2}{s+1} + \dfrac{c_3}{s+3}. 
+\end{align}
+%
+これは
+\begin{align}
+ F(s) &= \dfrac{c_1(s+3)+c_2(s+1)(s+3) + c_3(s+1)^2}{(s+1)^2(s+3)} \notag \\
+      &= \dfrac{(c_1+c_2)s^2+(c_1+4c_2+2c_3)s+(3c_1+3c_2+c_3)}{(s+1)^2(s+3)}, 
+\end{align}
+と書き直せるので，元々の式と比較することで，次の連立方程式を得る．
+\begin{align}
+  &c_1  +  c_2 = 0, \\
+  &c_1  + 4c_2 + 2 c_3 = 0, \\
+  &3c_1 + 3c_2 +   c_3 = 4, 
+\end{align}
+これを解くことにより，$c_1=1,~c_2=-1,~c_3=1$を得るので，
+\begin{align}
+ F(s) = \dfrac{1}{(s+1)^2} - \dfrac{1}{s+1} + \dfrac{3}{s+3}, 
+\end{align}
+である．従って，ラプラス逆変換$f(t)$は
+\begin{align}
+ f(t) = e^{-t}(2t - 1) + e^{-3t}, 
+\end{align}
+である．
+%
+\subsection{ヘヴィサイドの方法}
+%
+未定係数法と同じ$F(s)$を例に考える．この場合でも，
+\begin{align}
+ F(s) = \dfrac{c_1}{(s+1)^2} + \dfrac{c_2}{s+1} + \dfrac{c_3}{s+3}, \label{pfe_ex01} 
+\end{align}
+と展開することを考える．
+まず，両辺に$(s+3)$をかけると，
+\begin{align}
+ &             (s+3)F(s)          = (s+3)\left(\dfrac{c_1}{(s+1)^2}+\dfrac{c_2}{s+1}\right) + c_3, \notag \\
+ &\rightarrow  \dfrac{4}{(s+1)^2} = (s+3)\left(\dfrac{c_1}{(s+1)^2}+\dfrac{c_2}{s+1}\right) + c_3,
+\end{align}
+となる．$s=-3$を代入することで，$c_3=1$を得る．
+次に，\Eq{pfe_ex01}の両辺に$(s+1)^2$をかける．
+\begin{align}
+ \dfrac{4}{s+3} = c_1 + (s+1)c_2 + \dfrac{(s+1)^2}{s+3}. \label{pfe_ex01_heav01} 
+\end{align}
+$s=-1$を代入することで，$c_1 = 2$を得る．さらに，上式を$s$で微分すると，
+\begin{align}
+ -\dfrac{4}{(s+3)^2} = c_2 + (s+1)X(s) + (s+1)^2 Y(s), 
+\end{align}
+の形になる．$(s+1)X(s)$と$(s+1)^2Y(s)$は$(s+1)^2/(s+3)$の微分により生ずる項であるが，具体的に求める必要はない．
+上式に$s=-1$を代入することで，$c_2 = -1$を得るので，未定係数法と同じ結果が得られた．
+ヘヴィサイドの方法では，係数を求めるのに連立方程式を解くことを必要としない一方で，微分演算が(場合によっては)必要となる．
+
+%
+\subsection{混合法}
+%
+未定係数法とヘヴィサイドの方法を混合した方法を紹介する．
+ここでも，未定係数法やヘヴィサイドの方法と同じ$F(s)$を例にし，同様の部分分数分解を行うことを考える．
+%
+\begin{align}
+ \dfrac{4}{(s+1)^2(s+3)} &=  \dfrac{c_1}{(s+1)^2} + \dfrac{c_2}{s+1} + \dfrac{c_3}{s+3} \notag \\
+                         &=  \dfrac{c_1(s+3)+c_2(s+1)(s+3)+c_3(s+1)^2(s+3)}{(s+1)^2(s+3)}.
+\end{align}
+%
+両辺の分子を比較することで，
+\begin{align}
+ 4 = c_1(s+3) + c_2(s+1)(s+3) + c_3(s+1)^2. 
+\end{align}
+$s=-3$を代入することで$c_3 = 1$，そして
+$s=-1$を代入することで$c_1 = 2$を得る．
+両辺を$s$で微分することで，
+\begin{align}
+ 0 = c_1 + c_2(s+3) + (s+1)X(s).
+\end{align}
+これに$s=-1$を代入することで$c_2 = -1$を得る．
+この方法では，通分する手間さえかければ，単純な微分演算から係数を決定できる\footnote{研究室の学生さんにヒアリングしてみたところ，混合法が一番計算がラクに感じるようだ．}．
+%
+\newpage
+%
+\section{線形定数係数常微分方程式}
+%
+$y(t)$に関する定数係数の常微分方程式
+\begin{align}
+ \sum_{k=0}^{n}a_i\dfrac{d^{k}}{dt^{k}}y(t) = \sum_{k=0}^{n}b_{k}\dfrac{d^k}{dt^k}u(t),\quad a_n=1, 
+\end{align}
+を考える．これをラプラス変換を用いて整理してみよう．$y(t)$と$u(t)$のラプラス変換をそれぞれ$Y(s),~U(s)$とする．
+両辺をラプラス変換すると，微分のラプラス変換の公式より，
+\begin{align}
+   &\sum_{k=0}^{n}a_{k}\left(s^{k}Y\left(s\right)-\sum_{l=1}^{k}s^{k-l}y^{\left(l-1\right)}\left(0\right)\right) =\sum_{k=0}^{n}b_{k}\left(s^{k}U\left(s\right)-\sum_{l=1}^{k}s^{k-l}u^{\left(l-1\right)}\left(0\right)\right), \notag \\
+   &\rightarrow \underbrace{\left(\sum_{k=0}^{n}a_{k}s^{k}\right)}_{\equiv A(s)} Y (s) 
+    - \sum_{k=0}^{n}\sum_{l=1}^{k}a_{k}s^{k-l}y^{(l-1)}(0) 
+   = \underbrace{\left(\sum_{k=0}^{n}b_{k}s^{k}\right)}_{\equiv B(s)}U(s) - \sum_{k=0}^{n}\sum_{l=1}^{k}b_{k}s^{k-l}u^{(l-1)}(0), \notag \\
+   &\rightarrow A(s)Y(s) = B(s)U(s) + 
+   \underbrace{\sum_{k=0}^{n}\sum_{l=1}^{k}a_{k}s^{k-l}y^{(l-1)}(0) - \sum_{k=0}^{n}\sum_{l=1}^{k}b_{k}s^{k-l}b^{(l-1)}(0)}_{\equiv C(s)}, \notag \\
+   &\rightarrow Y(s) = \dfrac{B(s)}{A(s)}U(s) + \dfrac{C(s)}{A(s)}.
+\end{align}
+これをラプラス逆変換することで，解$y(t)$に関する表式を得る．
+\begin{align}
+ y(t) = \mathcal{L}^{-1}\left[\dfrac{B(s)U(s)+C(s)}{A(s)}\right]. 
+\end{align}
+$A(s)$, $B(s)$は微分方程式の係数から決まる関数，$C(s)$は係数と初期値から決まる関数である．
+従って，$u(t)$のラプラス変換$U(s)$を計算できれば，上式から$y(t)$を求めることが出来る．
+この式そのものが微分方程式を解くのに便利に使える，というわけでは必ずしもないが，定数係数の線形常微分方程式
+が(逆変換さえ実行できれば)ラプラス変換により解ける，ということを示すものである．
+ここで，
+\begin{align}
+  G(s) = \dfrac{B(s)}{A(s)},\quad g(t) = \mathcal{L}^{-1}\left[G(s)\right],
+\end{align}
+を定義すると，畳み込み積分のラプラス変換の公式より，
+\begin{align}
+ y(t) = \int_{0}^{t}d\tau\,g(t-\tau)u(\tau) + \mathcal{L}^{-1}\left[\dfrac{C(s)}{A(s)}\right], 
+\end{align}
+と表せる．$g(t)$のことを伝達関数と呼ぶ\footnote{正確には，$G(s)$のことを伝達関数と呼ぶ．}．
+%
+\newpage
+%
+\hrule
+\reidai
+次の微分方程式を解け．ただし，$y(0)=1$とする．
+\begin{align}
+ \dfrac{d}{dt}y(t) + 3y(t) + \int_{0}^{\infty}d \tau\, e^{-(t-\tau)}y(\tau) = -e^{-t} 
+\end{align}
+\hrule
+\vspace*{.2cm}
+
+まず，両辺をラプラス変換する．その際，
+微分のラプラス変換の公式
+\begin{align}
+  \mathcal{L}\left[\dfrac{d}{dt}f(t)\right] = sF(s) - f(0), 
+\end{align}
+畳み込み積分のラプラス変換の公式
+\begin{align}
+  \mathcal{L}\left[\int_{0}^{\infty}d\tau\,f\left(t-\tau\right)g\left(\tau\right)\right] & =F\left(s\right)G\left(s\right),
+\end{align}
+を用いることで，
+\begin{align}
+ & \left(sY\left(s\right)-y\left(0\right)\right)+3Y\left(s\right)+\dfrac{1}{s+1}Y\left(s\right)=-\dfrac{1}{s+1},\notag\\
+ & \rightarrow\left(s+3+\dfrac{1}{s+1}\right)Y\left(s\right)=\dfrac{s}{s+1},\notag\\
+ & \rightarrow Y\left(s\right)=\dfrac{s}{\left(s+2\right)^{2}},
+\end{align}
+を得る．
+さらに，次のように部分分数分解することを考える．
+\begin{align}
+ Y(s) = \dfrac{a}{(s+2)^2} + \dfrac{b}{s+2}. 
+\end{align}
+$a,~b$はどんな方法を使って求めても良いが，ここでは(かなりくどいが)ヘヴィサイドの方法を使う．
+まず，両辺に$(s+2)^2$をかけて，
+\begin{align}
+  s = a + b(s+2), 
+\end{align}
+となるので，$s=-2$を代入して，$a=-2$を得る．次に，上式を$s$で微分して，
+\begin{align}
+  b = 1, 
+\end{align}
+を得る．
+従って，
+\begin{align}
+ Y(s) = -\dfrac{2}{(s+2)^2} + \dfrac{1}{s+1}, 
+\end{align}
+である．これをラプラス逆変換する．第2項のラプラス変換は既に知っているように，
+\begin{align}
+ \mathcal{L}^{-1}\left[\dfrac{1}{s+2}\right] = e^{-2t}, 
+\end{align}
+である．第2項のラプラス変換は，
+\begin{align}
+ \mathcal{L}^{-1}\left[-\dfrac{2}{(s+2)^2}\right] 
+ &= 2\mathcal{L}^{-1}\left[\dfrac{d}{ds}\left(\dfrac{1}{s+2}\right)\right],
+\end{align}
+と書き直せるので，微分のラプラス逆変換の公式
+\begin{align}
+ \mathcal{L}^{-1}\left[\dfrac{d}{ds}F(s)\right] = -tf(t), 
+\end{align}
+を用いて，
+\begin{align}
+ \mathcal{L}^{-1}\left[-\dfrac{2}{(s+2)^2}\right] 
+ &= 2(-t)\mathcal{L}^{-1}\left[\dfrac{1}{s+2}\right] \notag \\
+ &= -2te^{-2t},
+\end{align}
+である．以上より，
+\begin{align}
+  y(t) = (1-2t)e^{-2t},
+\end{align}
+である．
+%
+\newpage
+%
+\hrule
+\reidai
+次の微分方程式を解け．
+\begin{align}
+ \dfrac{d}{dt}y(t) + a y (t) = (1+a^2)\sin t, \quad y(0) = 0 
+\end{align}
+\hrule
+\vspace*{.2cm}
+
+両辺をラプラス変換すると，
+\begin{align}
+& sY(s) - y(0) + a Y(s) = (1+a^2)\dfrac{1}{s^2 + 1}, \notag \\
+& \rightarrow Y(s) = (1+a^2)\dfrac{1}{s+a}\dfrac{1}{s^2+1} \notag \\
+& \rightarrow Y(s) = \dfrac{1}{s+a} + \dfrac{a}{s^2+1} - \dfrac{s}{s^2+1}, 
+\end{align}
+となる．従って，ラプラス逆変換することにより，
+\begin{align}
+ y(t) = e^{-at} + a \sin t - \cos t, 
+\end{align}
+を得る．
+\vspace*{.2cm}
+
+比較のために，第1章で学んだ常微分方程式の解法を使って解いてみよう．
+まず，与えられた微分方程式の両辺に$e^{at}$をかけて，
+\begin{align}
+  \dfrac{d}{dt}\left(e^{at}y(t)\right) = (1+a^2)e^{at}\sin t. 
+\end{align}
+両辺を$t=0\sim t$で積分して，
+\begin{align}
+  e^{at}y(t) - y(0) 
+  &= (1+a^2)\int_{0}^{t}d\tau\, e^{at}\sin t \notag \\
+  &= (1+a^2)\dfrac{e^{at}(a\sin t - \cos t) + 1}{1+a^2} \notag \\
+  &= e^{at}(a\sin t - \cos t) + 1.
+\end{align}
+両辺に$e^{-at}$をかけることで，
+\begin{align}
+  y(t) = e^{at} + a\sin t -\cos t, 
+\end{align}
+となり，ラプラス変換を使って求めたものと同じ解を得る．
+両解法で異なるのは，解を求める過程で積分を実行する必要があるか否かである．
+大体の場合，代数的な計算の方が楽なので，ラプラス逆変換を知っている場合はラプラス変換を用いて解く方が計算が楽になる．
+%
+\newpage
+%
+\section{ラプラス逆変換しなくても分かること}
+%
+これまで，
+方程式の解のラプラス変換の表式をまず求め，その後に逆変換を実行することで解を得る，
+という手続きをとってきた．
+しかし，今求めたいものが解$y(t)$そのものではなく，
+例えば初期値$y(0)$や$t\to\infty$での値(最終値, $y(\infty)$)だった場合，
+ラプラス逆変換を実行しなくてもこれらの情報を得ることが出来る．
+%
+\subsection{初期値の定理}
+関数$f(t)$のラプラス変換を$F(s)$とすると，初期値$f(0)$とラプラス変換$F(s)$の間には
+次の関係式が成り立つ．
+\begin{align}
+ f(0) = \lim_{s\to \infty}sF(s). 
+\end{align}
+これを初期値の定理と呼ぶ．
+
+これは微分のラプラス変換の公式より，
+\begin{align}
+  \lim_{s\to\infty}\left(sF(s)-f(0)\right)
+  &=\lim_{s\to\infty}\left(\int_{0}^{\infty}dt\,\left(\dfrac{d}{dt}f(t)\right)e^{-st}\right) \notag \\
+  &=\int_{0}^{\infty}dt\,\left(\dfrac{d}{dt}f(t)\right)\left(\lim_{s\to \infty}e^{-st}\right) \notag \\
+  &= \int_{0}^{\infty}dt\,\left(\dfrac{d}{dt}f(t)\right)\times 0 \notag \\
+  &=0,
+\end{align}
+と出来ることから導かれる．
+%
+\subsection{最終値の定理}
+%
+関数$f(t)$のラプラス変換を$F(s)$とすると，最終値$f(\infty)$とラプラス変換$F(s)$の間には
+次の関係式が成り立つ．
+\begin{align}
+ f(\infty) = \lim_{s\to 0}sF(s). 
+\end{align}
+これを最終値の定理と呼ぶ．
+初期値の定理と同様，微分のラプラス変換の公式から，
+
+\begin{align}
+  \lim_{s\to0}\left(sF(s)-f(0)\right)
+  &=\lim_{s\to 0}\left(\int_{0}^{\infty}dt\,\left(\dfrac{d}{dt}f(t)\right)e^{-st}\right) \notag \\
+  &=\int_{0}^{\infty}dt\,\left(\dfrac{d}{dt}f(t)\right)\left(\lim_{s\to 0}e^{-st}\right) \notag \\
+  &= \int_{0}^{\infty}dt\,\left(\dfrac{d}{dt}f(t)\right)\times 1 \notag \\
+  &=f(\infty)-f(0),
+\end{align}
+と出来ることから導かれる．
+%
+%
+例えば，ある関数$\rho(r,t)$の$t$に関するラプラス変換$\hat{\rho}(r,s)$が次式のように与えられていたとする．
+\begin{align}
+ \hat{\rho}(r,s) = \dfrac{1}{s}\left[1-\dfrac{R}{r}\exp\left\{\left(\dfrac{s}{D}\right)^{1/2}(R-r)\right\}\right]. 
+\end{align}
+$D,~R$は正の定数である．
+具体的には述べないが，この関数は実際にある化学反応モデルに登場するものである．
+この関数のラプラス逆変換を実行すれば，$\rho(r,t)$が当然得られるわけだが，応用上最もよく使われるのはこの関数の
+$t\to \infty$での振る舞いである．
+最終値の定理を用いれば，ラプラス逆変換しなくても，
+\begin{align}
+ \rho(r,\infty) 
+  & = \lim_{s\to 0} s\hat{\rho}(r,s) \notag \\
+  & = 1- \dfrac{R}{r}, 
+\end{align}
+と$\rho(r,\infty)$が簡単に求められる．
+
