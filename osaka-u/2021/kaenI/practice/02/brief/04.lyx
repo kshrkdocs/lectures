@@ -1,0 +1,409 @@
+#LyX 2.3 created this file. For more info see http://www.lyx.org/
+\lyxformat 544
+\begin_document
+\begin_header
+\save_transient_properties true
+\origin unavailable
+\textclass article
+\use_default_options true
+\maintain_unincluded_children false
+\language japanese
+\language_package default
+\inputencoding auto
+\fontencoding global
+\font_roman "default" "default"
+\font_sans "default" "default"
+\font_typewriter "default" "default"
+\font_math "auto" "auto"
+\font_default_family default
+\use_non_tex_fonts false
+\font_sc false
+\font_osf false
+\font_sf_scale 100 100
+\font_tt_scale 100 100
+\use_microtype false
+\use_dash_ligatures true
+\graphics default
+\default_output_format default
+\output_sync 0
+\bibtex_command default
+\index_command default
+\paperfontsize default
+\spacing single
+\use_hyperref false
+\papersize default
+\use_geometry false
+\use_package amsmath 1
+\use_package amssymb 1
+\use_package cancel 1
+\use_package esint 1
+\use_package mathdots 1
+\use_package mathtools 1
+\use_package mhchem 1
+\use_package stackrel 1
+\use_package stmaryrd 1
+\use_package undertilde 1
+\cite_engine basic
+\cite_engine_type default
+\biblio_style plain
+\use_bibtopic false
+\use_indices false
+\paperorientation portrait
+\suppress_date false
+\justification true
+\use_refstyle 1
+\use_minted 0
+\index Index
+\shortcut idx
+\color #008000
+\end_index
+\secnumdepth 3
+\tocdepth 3
+\paragraph_separation indent
+\paragraph_indentation default
+\is_math_indent 0
+\math_numbering_side default
+\quotes_style cjk
+\dynamic_quotes 0
+\papercolumns 1
+\papersides 1
+\paperpagestyle default
+\tracking_changes false
+\output_changes false
+\html_math_output 0
+\html_css_as_file 0
+\html_be_strict false
+\end_header
+
+\begin_body
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{align*}
+\dfrac{d^{2}x}{dt^{2}} & =-k_{1}\dfrac{dx}{dt}+k_{-1}\dfrac{dy}{dt}
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{align*}
+ & -\dfrac{dx}{dt}-\dfrac{dy}{dt}=k_{2}y-k_{-2}\left(c_{0}-x-y\right)\\
+ & \rightarrow\dfrac{dy}{dt}=-\dfrac{dx}{dt}-\left(k_{2}+k_{-2}\right)y-k_{-2}x+k_{-2}c_{0}\cdots\textcircled{4}
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{align*}
+\dfrac{dy}{dt} & =k_{1}x-\left(k_{-1}+k_{2}\right)y+k_{-2}\left(c_{0}-x-y\right)\\
+ & =\left(k_{1}-k_{-2}\right)x-\left(k_{-1}+k_{2}+k_{-2}\right)y+k_{-2}c_{0}\cdots\textcircled{5}
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula $y$
+\end_inset
+
+を消去したいので，
+\begin_inset Formula $\textcircled{4}\times\left(k_{-1}+k_{2}+k_{-2}\right)$
+\end_inset
+
+, 
+\begin_inset Formula $\textcircled{5}\times\left(k_{2}+k_{-2}\right)$
+\end_inset
+
+とすると，
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{align*}
+\left(k_{-1}+k_{2}+k_{-2}\right)\dfrac{dy}{dt} & =-\left(k_{-1}+k_{2}+k_{-2}\right)\dfrac{dx}{dt}-\left(k_{2}+k_{-2}\right)\left(k_{-1}+k_{2}+k_{-2}\right)y-k_{-2}\left(k_{-1}+k_{2}+k_{-2}\right)x+k_{-2}\left(k_{-1}+k_{2}+k_{-2}\right)c_{0}
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{align*}
+\left(k_{2}+k_{-2}\right)\dfrac{dy}{dt} & =\left(k_{1}-k_{-2}\right)\left(k_{2}+k_{-2}\right)x-\left(k_{2}+k_{-2}\right)\left(k_{-1}+k_{2}+k_{-2}\right)y+k_{-2}\left(k_{2}+k_{-2}\right)c_{0}
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+上式2つから
+\begin_inset Formula $y$
+\end_inset
+
+を消去できて，
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{align*}
+k_{-1}\dfrac{dy}{dt} & =-\left(k_{-1}+k_{2}+k_{-2}\right)\dfrac{dx}{dt}-k_{-2}\left(k_{-1}+k_{2}+k_{-2}\right)x-\left(k_{1}-k_{-2}\right)\left(k_{2}+k_{-2}\right)x+k_{-2}\left(k_{-1}+k_{2}+k_{-2}\right)c_{0}-k_{-2}\left(k_{2}+k_{-2}\right)c_{0}\\
+ & =-\left(k_{-1}+k_{2}+k_{-2}\right)\dfrac{dx}{dt}+\left(-k_{-1}k_{-2}\underline{-k_{2}k_{-2}}\underline{\underline{-k_{-2}^{2}}}-k_{1}k_{2}-k_{1}k_{-2}\underline{+k_{2}k_{-2}}+\underline{\underline{k_{-2}^{2}}}\right)x+\left(k_{-1}k_{-2}+\underline{\underline{k_{2}k_{-2}}}+\underline{k_{-2}^{2}}\underline{\underline{-k_{2}k_{-2}}}\underline{-k_{-2}^{2}}\right)c_{0}\\
+ & =-\left(k_{-1}+k_{2}+k_{-2}\right)\dfrac{dx}{dt}-\left(k_{1}k_{2}+k_{1}k_{-2}+k_{-1}k_{-2}\right)x+k_{-1}k_{-2}c_{0}
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+従って，
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{align*}
+\dfrac{d^{2}x}{dt^{2}} & =-k_{1}\dfrac{dx}{dt}+k_{-1}\dfrac{dy}{dt}\\
+ & =-\left(k_{1}+k_{-1}+k_{2}+k_{-2}\right)\dfrac{dx}{dt}-\left(k_{1}k_{2}+k_{1}k_{-2}+k_{-1}k_{-2}\right)x+k_{-1}k_{-2}c_{0}
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{align*}
+\dfrac{d^{2}x}{dt^{2}}+\left(k_{1}+k_{-1}+k_{2}+k_{-2}\right)\dfrac{dx}{dt}+\left(k_{1}k_{2}+k_{1}k_{-2}+k_{-1}k_{-2}\right)x & =k_{-1}k_{-2}c_{0}
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+ここで，
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{align*}
+2\alpha & =k_{-1}+k_{2}+k_{-2}\\
+\beta & =k_{1}k_{2}+k_{1}k_{-2}+k_{-1}k_{-2}
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+とおくと，微分方程式の左辺は方程式
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{align*}
+\lambda^{2}+2\alpha\lambda+\beta & =0
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+の解
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{align*}
+\lambda_{1} & =-\alpha+\sqrt{\alpha^{2}-\beta},\quad\lambda_{2}=-\alpha-\sqrt{\alpha^{2}-\beta}
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+を用いて，
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{align*}
+\dfrac{d}{dt}\left(\dfrac{dx}{dt}-\lambda_{1}x\right)-\lambda_{2}\left(\dfrac{dx}{dt}-\lambda_{1}x\right) & =k_{-1}k_{-2}c_{0}
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+と変形できるので
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{align*}
+X & =\dfrac{dx}{dt}-\lambda_{1}x
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+とおくと，
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{align*}
+\dfrac{dX}{dt}-\lambda_{2}X & =k_{-1}k_{-2}c_{0}
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{align*}
+\dfrac{d}{dt}\left(e^{-\lambda_{2}t}X\right) & =k_{-1}k_{-2}c_{0}e^{-\lambda_{2}t}
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{align*}
+e^{-\lambda_{2}t}X-X\left(0\right) & =k_{-1}k_{-2}c_{0}\int_{0}^{t}d\tau\,e^{-\lambda_{2}\tau}\\
+ & =k_{-1}k_{-2}c_{0}\left(-\dfrac{1}{\lambda_{2}}\right)\left[e^{-\lambda_{2}\tau}\right]_{0}^{t}\\
+ & =\dfrac{k_{-1}k_{-2}c_{0}}{\lambda_{2}}\left(1-e^{-\lambda_{2}t}\right)
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{align*}
+X\left(t\right) & =e^{\lambda_{2}t}X\left(0\right)+\dfrac{k_{-1}k_{-2}c_{0}}{\lambda_{2}}\left(e^{\lambda_{2}t}-1\right)
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{align*}
+\dfrac{dx}{dt}-\lambda_{1}x & =e^{\lambda_{2}t}X\left(0\right)+\dfrac{k_{-1}k_{-2}c_{0}}{\lambda_{2}}\left(e^{\lambda_{2}t}-1\right)
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{align*}
+\dfrac{d}{dt}\left(e^{-\lambda_{1}t}x\right) & =e^{-\left(\lambda_{1}-\lambda_{2}\right)t}X\left(0\right)+\dfrac{k_{-1}k_{-2}c_{0}}{\lambda_{2}}\left(e^{-\left(\lambda_{1}-\lambda_{2}\right)t}-e^{-\lambda_{1}t}\right)
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{align*}
+e^{-\lambda_{1}t}x-x_{0} & =\dfrac{X\left(0\right)}{\lambda_{1}-\lambda_{2}}\left(1-e^{-\left(\lambda_{1}-\lambda_{2}\right)t}\right)+\dfrac{k_{-1}k_{-2}c_{0}}{\lambda_{2}}\left\{ \dfrac{1}{\lambda_{1}-\lambda_{2}}\left(1-e^{-\left(\lambda_{1}-\lambda_{2}\right)t}\right)+\dfrac{1}{\lambda_{1}}\left(e^{-\lambda_{1}t}-1\right)\right\} 
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{align*}
+x & =\underline{x_{0}e^{\lambda_{1}t}}+\dfrac{X\left(0\right)}{\lambda_{1}-\lambda_{2}}\left(\underline{e^{\lambda_{1}t}}\underline{\underline{\underline{-e^{\lambda_{2}t}}}}\right)+\dfrac{k_{-1}k_{-2}c_{0}}{\lambda_{2}\left(\lambda_{1}-\lambda_{2}\right)}\left(\underline{e^{\lambda_{1}t}}\underline{\underline{\underline{-e^{\lambda_{2}t}}}}\right)+\dfrac{k_{-1}k_{-2}c_{0}}{\lambda_{1}\lambda_{2}}\left(\underline{\underline{1}}\underline{-e^{\lambda_{1}t}}\right)\\
+ & =\dfrac{k_{-1}k_{-2}c_{0}}{\lambda_{1}\lambda_{2}}+\left(x_{0}+\dfrac{X\left(0\right)}{\lambda_{1}-\lambda_{2}}+\dfrac{k_{-1}k_{-2}c_{0}}{\lambda_{2}\left(\lambda_{1}-\lambda_{2}\right)}-\dfrac{k_{-1}k_{-2}c_{0}}{\lambda_{1}\lambda_{2}}\right)e^{\lambda_{1}t}-\left(\dfrac{X\left(0\right)}{\lambda_{1}-\lambda_{2}}+\dfrac{k_{-1}k_{-2}c_{0}}{\lambda_{2}\left(\lambda_{1}-\lambda_{2}\right)}\right)e^{\lambda_{2}t}
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+もう少しだけ整理しておくと，
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{align*}
+\lambda_{1}\lambda_{2} & =\beta
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{align*}
+X\left(0\right) & =\left(\dfrac{dx}{dt}-\lambda_{1}x\right)\biggr|_{t=0}=-k_{1}x_{0}+k_{-1}y_{0}-\lambda_{1}x_{0}
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{align*}
+x\left(t\right) & =\dfrac{k_{-1}k_{-2}c_{0}}{\beta}+\left(x_{0}-\dfrac{k_{1}x_{0}-k_{-1}y_{0}}{\lambda_{1}-\lambda_{2}}+\dfrac{k_{-1}k_{-2}c_{0}}{\lambda_{2}\left(\lambda_{1}-\lambda_{2}\right)}-\dfrac{k_{-1}k_{-2}c_{0}}{\beta}\right)e^{\lambda_{1}t}+\left(\dfrac{k_{1}x_{0}-k_{-1}y_{0}}{\lambda_{1}-\lambda_{2}}-\dfrac{k_{-1}k_{-2}c_{0}}{\lambda_{2}\left(\lambda_{1}-\lambda_{2}\right)}\right)e^{\lambda_{2}t}
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\end_body
+\end_document

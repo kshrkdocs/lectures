@@ -1,52 +1,88 @@
-\contentsline {chapter}{\numberline {第1章}常微分方程式入門}{5}{chapter.1}%
-\contentsline {section}{\numberline {1.1}微分方程式とは}{5}{section.1.1}%
-\contentsline {section}{\numberline {1.2}初期条件，特殊解，一般解 �^^80^^93最も簡単な常微分方程式を通して�^^80^^93}{5}{section.1.2}%
-\contentsline {section}{\numberline {1.3}微分方程式の解を求めるときのアプローチ}{8}{section.1.3}%
-\contentsline {section}{\numberline {1.4}物理・化学でよく現れる常微分方程式}{9}{section.1.4}%
-\contentsline {subsection}{\numberline {1.4.1}$\genfrac {}{}{}0{dy}{dx} + a y = 0$}{10}{subsection.1.4.1}%
-\contentsline {subsection}{\numberline {1.4.2}$\genfrac {}{}{}0{dy}{dx} + a y = g(x)$}{10}{subsection.1.4.2}%
-\contentsline {subsection}{\numberline {1.4.3}$\genfrac {}{}{}0{d^2y}{dx^2} + a \genfrac {}{}{}0{dy}{dx} + by = 0$}{13}{subsection.1.4.3}%
-\contentsline {subsection}{\numberline {1.4.4}$\genfrac {}{}{}0{dy^2}{dx^2} \pm \beta ^2 y =0$}{17}{subsection.1.4.4}%
-\contentsline {section}{\numberline {1.5}変数分離}{20}{section.1.5}%
-\contentsline {subsection}{\numberline {1.5.1}同次形}{23}{subsection.1.5.1}%
-\contentsline {section}{\numberline {1.6}常微分方程式の分類}{26}{section.1.6}%
-\contentsline {subsection}{\numberline {1.6.1}線形と非線形}{26}{subsection.1.6.1}%
-\contentsline {subsection}{\numberline {1.6.2}斉次と非斉次}{26}{subsection.1.6.2}%
-\contentsline {section}{\numberline {1.7}線形常微分方程式に関する基本的な定理}{27}{section.1.7}%
-\contentsline {subsection}{\numberline {1.7.1}斉次形 : 解の線形結合もまた解}{27}{subsection.1.7.1}%
-\contentsline {subsubsection}{\numberline {1.7.1.1}斉次形 : $n$階微分方程式の一般解の形}{27}{subsubsection.1.7.1.1}%
-\contentsline {subsubsection}{\numberline {1.7.1.2}非斉次形 : 非斉次形の一般解は，斉次形の一般解と非斉次形の特殊解の和}{29}{subsubsection.1.7.1.2}%
-\contentsline {section}{\numberline {1.8}非斉次方程式の解法}{29}{section.1.8}%
-\contentsline {subsection}{\numberline {1.8.1}未定係数法}{29}{subsection.1.8.1}%
-\contentsline {subsection}{\numberline {1.8.2}定数変化法その1 �^^80^^93簡単な非斉次方程式への応用�^^80^^93}{34}{subsection.1.8.2}%
-\contentsline {subsection}{\numberline {1.8.3}定数変化法その2�^^80^^93斉次方程式への応用�^^80^^93}{37}{subsection.1.8.3}%
-\contentsline {subsection}{\numberline {1.8.4}定数変化法その3 �^^80^^932階の非斉次線形方程式�^^80^^93}{39}{subsection.1.8.4}%
-\contentsline {chapter}{\numberline {第2章}フーリエ解析入門}{41}{chapter.2}%
-\contentsline {section}{\numberline {2.1}フーリエ級数}{41}{section.2.1}%
-\contentsline {subsection}{\numberline {2.1.1}三角関数に関する諸公式}{42}{subsection.2.1.1}%
-\contentsline {subsection}{\numberline {2.1.2}複素フーリエ級数}{43}{subsection.2.1.2}%
-\contentsline {subsection}{\numberline {2.1.3}実フーリエ級数}{44}{subsection.2.1.3}%
-\contentsline {subsection}{\numberline {2.1.4}フーリエ級数の展開可能性}{45}{subsection.2.1.4}%
-\contentsline {subsection}{\numberline {2.1.5}フーリエ余弦級数，正弦級数}{47}{subsection.2.1.5}%
-\contentsline {subsection}{\numberline {2.1.6}フーリエ積分}{47}{subsection.2.1.6}%
-\contentsline {section}{\numberline {2.2}ディラックのデルタ関数}{50}{section.2.2}%
-\contentsline {subsection}{\numberline {2.2.1}デルタ関数が持つ性質}{50}{subsection.2.2.1}%
-\contentsline {subsection}{\numberline {2.2.2}デルタ関数の導関数}{51}{subsection.2.2.2}%
-\contentsline {subsection}{\numberline {2.2.3}デルタ関数の具体的な形}{52}{subsection.2.2.3}%
-\contentsline {subsubsection}{\numberline {2.2.3.1}矩形関数}{52}{subsubsection.2.2.3.1}%
-\contentsline {subsubsection}{\numberline {2.2.3.2}ガウス関数}{52}{subsubsection.2.2.3.2}%
-\contentsline {subsubsection}{\numberline {2.2.3.3}ローレンツ関数}{52}{subsubsection.2.2.3.3}%
-\contentsline {subsubsection}{\numberline {2.2.3.4}シンク関数}{53}{subsubsection.2.2.3.4}%
-\contentsline {subsection}{\numberline {2.2.4}3次元空間のデルタ関数}{53}{subsection.2.2.4}%
-\contentsline {section}{\numberline {2.3}フーリエ変換}{53}{section.2.3}%
-\contentsline {subsection}{\numberline {2.3.1}3次元空間でのフーリエ変換}{54}{subsection.2.3.1}%
-\contentsline {subsection}{\numberline {2.3.2}デルタ関数のフーリエ変換}{54}{subsection.2.3.2}%
-\contentsline {subsection}{\numberline {2.3.3}フーリエ変換が持つ性質}{55}{subsection.2.3.3}%
-\contentsline {subsubsection}{\numberline {2.3.3.1}線形性}{56}{subsubsection.2.3.3.1}%
-\contentsline {subsubsection}{\numberline {2.3.3.2}移動性}{56}{subsubsection.2.3.3.2}%
-\contentsline {subsubsection}{\numberline {2.3.3.3}拡大性}{56}{subsubsection.2.3.3.3}%
-\contentsline {subsubsection}{\numberline {2.3.3.4}導関数のフーリエ変換}{57}{subsubsection.2.3.3.4}%
-\contentsline {subsubsection}{\numberline {2.3.3.5}フーリエ変換の微分}{57}{subsubsection.2.3.3.5}%
-\contentsline {subsubsection}{\numberline {2.3.3.6}積分のフーリエ変換}{58}{subsubsection.2.3.3.6}%
-\contentsline {subsubsection}{\numberline {2.3.3.7}畳み込み積分のフーリエ変換}{58}{subsubsection.2.3.3.7}%
-\contentsline {subsubsection}{\numberline {2.3.3.8}積のフーリエ変換}{59}{subsubsection.2.3.3.8}%
+\contentsline {chapter}{\numberline {第1章}常微分方程式入門}{7}{chapter.1}%
+\contentsline {section}{\numberline {1.1}微分方程式とは}{7}{section.1.1}%
+\contentsline {section}{\numberline {1.2}初期条件，特殊解，一般解 �^^80^^93最も簡単な常微分方程式を通して�^^80^^93}{7}{section.1.2}%
+\contentsline {section}{\numberline {1.3}微分方程式の解を求めるときのアプローチ}{10}{section.1.3}%
+\contentsline {section}{\numberline {1.4}物理・化学でよく現れる常微分方程式}{11}{section.1.4}%
+\contentsline {subsection}{\numberline {1.4.1}$\genfrac {}{}{}0{dy}{dx} + a y = 0$}{12}{subsection.1.4.1}%
+\contentsline {subsection}{\numberline {1.4.2}$\genfrac {}{}{}0{dy}{dx} + a y = g(x)$}{12}{subsection.1.4.2}%
+\contentsline {subsection}{\numberline {1.4.3}$\genfrac {}{}{}0{d^2y}{dx^2} + a \genfrac {}{}{}0{dy}{dx} + by = 0$}{15}{subsection.1.4.3}%
+\contentsline {subsection}{\numberline {1.4.4}$\genfrac {}{}{}0{dy^2}{dx^2} \pm \beta ^2 y =0$}{19}{subsection.1.4.4}%
+\contentsline {section}{\numberline {1.5}変数分離}{22}{section.1.5}%
+\contentsline {subsection}{\numberline {1.5.1}同次形}{25}{subsection.1.5.1}%
+\contentsline {section}{\numberline {1.6}常微分方程式の分類}{28}{section.1.6}%
+\contentsline {subsection}{\numberline {1.6.1}線形と非線形}{28}{subsection.1.6.1}%
+\contentsline {subsection}{\numberline {1.6.2}斉次と非斉次}{28}{subsection.1.6.2}%
+\contentsline {section}{\numberline {1.7}線形常微分方程式に関する基本的な定理}{29}{section.1.7}%
+\contentsline {subsection}{\numberline {1.7.1}斉次形 : 解の線形結合もまた解}{29}{subsection.1.7.1}%
+\contentsline {subsubsection}{\numberline {1.7.1.1}斉次形 : $n$階微分方程式の一般解の形}{29}{subsubsection.1.7.1.1}%
+\contentsline {subsubsection}{\numberline {1.7.1.2}非斉次形 : 非斉次形の一般解は，斉次形の一般解と非斉次形の特殊解の和}{31}{subsubsection.1.7.1.2}%
+\contentsline {section}{\numberline {1.8}非斉次方程式の解法}{31}{section.1.8}%
+\contentsline {subsection}{\numberline {1.8.1}未定係数法}{31}{subsection.1.8.1}%
+\contentsline {subsection}{\numberline {1.8.2}定数変化法その1 �^^80^^93簡単な非斉次方程式への応用�^^80^^93}{36}{subsection.1.8.2}%
+\contentsline {subsection}{\numberline {1.8.3}定数変化法その2�^^80^^93斉次方程式への応用�^^80^^93}{39}{subsection.1.8.3}%
+\contentsline {subsection}{\numberline {1.8.4}定数変化法その3 �^^80^^932階の非斉次線形方程式�^^80^^93}{41}{subsection.1.8.4}%
+\contentsline {chapter}{\numberline {第2章}フーリエ解析入門}{43}{chapter.2}%
+\contentsline {section}{\numberline {2.1}フーリエ級数}{43}{section.2.1}%
+\contentsline {subsection}{\numberline {2.1.1}三角関数に関する諸公式}{44}{subsection.2.1.1}%
+\contentsline {subsection}{\numberline {2.1.2}複素フーリエ級数}{45}{subsection.2.1.2}%
+\contentsline {subsection}{\numberline {2.1.3}実フーリエ級数}{46}{subsection.2.1.3}%
+\contentsline {subsection}{\numberline {2.1.4}フーリエ級数の展開可能性}{47}{subsection.2.1.4}%
+\contentsline {subsection}{\numberline {2.1.5}フーリエ余弦級数，正弦級数}{49}{subsection.2.1.5}%
+\contentsline {subsection}{\numberline {2.1.6}フーリエ積分}{49}{subsection.2.1.6}%
+\contentsline {section}{\numberline {2.2}ディラックのデルタ関数}{52}{section.2.2}%
+\contentsline {subsection}{\numberline {2.2.1}デルタ関数が持つ性質}{52}{subsection.2.2.1}%
+\contentsline {subsection}{\numberline {2.2.2}デルタ関数の導関数}{53}{subsection.2.2.2}%
+\contentsline {subsection}{\numberline {2.2.3}デルタ関数の具体的な形}{54}{subsection.2.2.3}%
+\contentsline {subsubsection}{\numberline {2.2.3.1}矩形関数}{54}{subsubsection.2.2.3.1}%
+\contentsline {subsubsection}{\numberline {2.2.3.2}ガウス関数}{54}{subsubsection.2.2.3.2}%
+\contentsline {subsubsection}{\numberline {2.2.3.3}ローレンツ関数}{54}{subsubsection.2.2.3.3}%
+\contentsline {subsubsection}{\numberline {2.2.3.4}シンク関数}{55}{subsubsection.2.2.3.4}%
+\contentsline {subsection}{\numberline {2.2.4}3次元空間のデルタ関数}{55}{subsection.2.2.4}%
+\contentsline {section}{\numberline {2.3}フーリエ変換}{55}{section.2.3}%
+\contentsline {subsection}{\numberline {2.3.1}3次元空間でのフーリエ変換}{56}{subsection.2.3.1}%
+\contentsline {subsection}{\numberline {2.3.2}デルタ関数のフーリエ変換}{56}{subsection.2.3.2}%
+\contentsline {subsection}{\numberline {2.3.3}フーリエ変換が持つ性質}{57}{subsection.2.3.3}%
+\contentsline {subsubsection}{\numberline {2.3.3.1}線形性}{58}{subsubsection.2.3.3.1}%
+\contentsline {subsubsection}{\numberline {2.3.3.2}移動性}{58}{subsubsection.2.3.3.2}%
+\contentsline {subsubsection}{\numberline {2.3.3.3}拡大性}{58}{subsubsection.2.3.3.3}%
+\contentsline {subsubsection}{\numberline {2.3.3.4}導関数のフーリエ変換}{59}{subsubsection.2.3.3.4}%
+\contentsline {subsubsection}{\numberline {2.3.3.5}フーリエ変換の微分}{59}{subsubsection.2.3.3.5}%
+\contentsline {subsubsection}{\numberline {2.3.3.6}積分のフーリエ変換}{60}{subsubsection.2.3.3.6}%
+\contentsline {subsubsection}{\numberline {2.3.3.7}畳み込み積分のフーリエ変換}{60}{subsubsection.2.3.3.7}%
+\contentsline {subsubsection}{\numberline {2.3.3.8}積のフーリエ変換}{61}{subsubsection.2.3.3.8}%
+\contentsline {chapter}{\numberline {第3章}ラプラス解析入門}{65}{chapter.3}%
+\contentsline {section}{\numberline {3.1}ラプラス変換・逆変換}{65}{section.3.1}%
+\contentsline {subsection}{\numberline {3.1.1}ラプラス変換}{65}{subsection.3.1.1}%
+\contentsline {subsection}{\numberline {3.1.2}ラプラス変換が持つ性質}{69}{subsection.3.1.2}%
+\contentsline {subsubsection}{\numberline {3.1.2.1}線形性}{70}{subsubsection.3.1.2.1}%
+\contentsline {subsubsection}{\numberline {3.1.2.2}移動性}{70}{subsubsection.3.1.2.2}%
+\contentsline {subsubsection}{\numberline {3.1.2.3}拡大性}{70}{subsubsection.3.1.2.3}%
+\contentsline {subsubsection}{\numberline {3.1.2.4}導関数のラプラス変換}{71}{subsubsection.3.1.2.4}%
+\contentsline {subsubsection}{\numberline {3.1.2.5}積分のラプラス変換}{71}{subsubsection.3.1.2.5}%
+\contentsline {subsubsection}{\numberline {3.1.2.6}畳み込み積分のラプラス変換}{72}{subsubsection.3.1.2.6}%
+\contentsline {subsection}{\numberline {3.1.3}ラプラス逆変換}{72}{subsection.3.1.3}%
+\contentsline {subsection}{\numberline {3.1.4}ラプラス逆変換の性質}{76}{subsection.3.1.4}%
+\contentsline {subsubsection}{\numberline {3.1.4.1}微分のラプラス逆変換}{76}{subsubsection.3.1.4.1}%
+\contentsline {subsubsection}{\numberline {3.1.4.2}積分のラプラス逆変換}{77}{subsubsection.3.1.4.2}%
+\contentsline {subsection}{\numberline {3.1.5}ラプラス変換を学ぶ動機 : 線形常微分方程式への応用}{79}{subsection.3.1.5}%
+\contentsline {section}{\numberline {3.2}部分分数展開によるラプラス逆変換}{81}{section.3.2}%
+\contentsline {subsection}{\numberline {3.2.1}一般論}{81}{subsection.3.2.1}%
+\contentsline {subsection}{\numberline {3.2.2}未定係数法}{82}{subsection.3.2.2}%
+\contentsline {subsection}{\numberline {3.2.3}ヘヴィサイドの方法}{82}{subsection.3.2.3}%
+\contentsline {subsection}{\numberline {3.2.4}混合法}{83}{subsection.3.2.4}%
+\contentsline {section}{\numberline {3.3}線形定数係数常微分方程式}{84}{section.3.3}%
+\contentsline {section}{\numberline {3.4}ラプラス逆変換しなくても分かること}{88}{section.3.4}%
+\contentsline {subsection}{\numberline {3.4.1}初期値の定理}{88}{subsection.3.4.1}%
+\contentsline {subsection}{\numberline {3.4.2}最終値の定理}{88}{subsection.3.4.2}%
+\contentsline {chapter}{\numberline {第4章}偏微分方程式入門}{91}{chapter.4}%
+\contentsline {section}{\numberline {4.1}偏微分方程式での問題設定}{91}{section.4.1}%
+\contentsline {subsection}{\numberline {4.1.1}初期条件}{92}{subsection.4.1.1}%
+\contentsline {subsection}{\numberline {4.1.2}境界条件}{92}{subsection.4.1.2}%
+\contentsline {section}{\numberline {4.2}変数分離法}{92}{section.4.2}%
+\contentsline {section}{\numberline {4.3}拡散方程式}{94}{section.4.3}%
+\contentsline {subsection}{\numberline {4.3.1}有限区間での拡散現象}{94}{subsection.4.3.1}%
+\contentsline {subsection}{\numberline {4.3.2}無限区間での拡散現象(1次元)}{96}{subsection.4.3.2}%
+\contentsline {subsection}{\numberline {4.3.3}無限区間での拡散現象(3次元)}{97}{subsection.4.3.3}%
+\contentsline {section}{\numberline {4.4}波動方程式}{99}{section.4.4}%
+\contentsline {subsection}{\numberline {4.4.1}波動方程式の導出}{99}{subsection.4.4.1}%
+\contentsline {subsection}{\numberline {4.4.2}無限に広がる媒質中での波}{101}{subsection.4.4.2}%

@@ -116,6 +116,7 @@ $\mathrm{Re}(s)>\alpha$ではラプラス変換が存在するが，$\mathrm{Re}
 \begin{enumerate}[(1)]
   \item $f(t)=a$
   \item $f(t)=t^n$
+  \item $f(t)=e^{at}$
   \item $f(t)=\sin(at)$
   \item $f(t)=\cos(at)$ 
 \end{enumerate}
@@ -826,7 +827,7 @@ $A(s)$, $B(s)$は微分方程式の係数から決まる関数，$C(s)$は係数
 \reidai
 次の微分方程式を解け．ただし，$y(0)=1$とする．
 \begin{align}
- \dfrac{d}{dt}y(t) + 3y(t) + \int_{0}^{\infty}d \tau\, e^{-(t-\tau)}y(\tau) = -e^{-t} 
+ \dfrac{d}{dt}y(t) + 3y(t) + \int_{0}^{t}d \tau\, e^{-(t-\tau)}y(\tau) = -e^{-t} 
 \end{align}
 \hrule
 \vspace*{.2cm}

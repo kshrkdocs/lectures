@@ -47,7 +47,7 @@
 %
 \begin{figure}[htbp]
   %\includegraphics[width=1.0\linewidth]{figures/extend_function.eps} 
-  \includegraphics[width=1.0\linewidth]{/Users/kasa/GitHub/lectures/osaka-u/2021/kaenI/chap02_fr/figures/extend_function.eps} 
+  \includegraphics[width=1.0\linewidth]{/Users/kasa/Dropbox/GitHub/lectures/osaka-u/2021/kaenI/chap02_fr/figures/extend_function.eps} 
 \end{figure}
 %
 \subsection{三角関数に関する諸公式}
@@ -195,7 +195,7 @@ $a_n$については，
 右側の関数は不連続点で発散しているので，区分的になめらかとは言えない．
 \begin{figure}[htbp]
  %\includegraphics[width=1.0\linewidth]{figures/fourier_smooth.eps} 
- \includegraphics[width=1.0\linewidth]{/Users/kasa/GitHub/lectures/osaka-u/2021/kaenI/chap02_fr/figures/fourier_smooth.eps} 
+ \includegraphics[width=1.0\linewidth]{/Users/kasa/Dropbox/GitHub/lectures/osaka-u/2021/kaenI/chap02_fr/figures/fourier_smooth.eps} 
 \end{figure}
 %
 \newpage
@@ -252,7 +252,7 @@ $a_n$については，
 \begin{figure}[htbp]
  %\vspace*{-\intextsep}
  %\includegraphics[width=1.0\linewidth]{figures/reidai01.eps} 
- \includegraphics[width=1.0\linewidth]{/Users/kasa/GitHub/lectures/osaka-u/2021/kaenI/chap02_fr/figures/reidai01.eps} 
+ \includegraphics[width=1.0\linewidth]{/Users/kasa/Dropbox/GitHub/lectures/osaka-u/2021/kaenI/chap02_fr/figures/reidai01.eps} 
 \end{figure}
 %
 \newpage
@@ -269,8 +269,8 @@ i) 偶関数に拡張した場合
 フーリエ級数も偶関数になるはずである．
 その場合は$\cos$関数だけで展開出来，フーリエ係数は，
 \begin{align}
- a_n &= \dfrac{1}{L}\int_{-T}^{T}dt\,f\left(t\right)\cos\left(\dfrac{\pi n}{T}t\right) \notag \\
-     &= \dfrac{2}{L}\int_{0}^{T}dt\, f\left(t\right)\cos\left(\dfrac{\pi n}{T}t\right), \\
+ a_n &= \dfrac{1}{T}\int_{-T}^{T}dt\,f\left(t\right)\cos\left(\dfrac{\pi n}{T}t\right) \notag \\
+     &= \dfrac{2}{T}\int_{0}^{T}dt\, f\left(t\right)\cos\left(\dfrac{\pi n}{T}t\right), \\
  b_n & = 0, 
 \end{align}
 となる．偶関数に拡張したときのフーリエ級数をフーリエ余弦級数と呼ぶ．
@@ -281,7 +281,7 @@ ii) 奇関数に拡張した場合
 フーリエ係数は，
 \begin{align}
   a_n & = 0, \notag \\
-  b_n & = \dfrac{2}{L}\int_{0}^{T}dt\,f\left(t\right) \sin\left(\dfrac{\pi n}{T}t\right),
+  b_n & = \dfrac{2}{T}\int_{0}^{T}dt\,f\left(t\right) \sin\left(\dfrac{\pi n}{T}t\right),
 \end{align}
 となる．奇関数に拡張したときのフーリエ級数をフーリエ正弦級数と呼ぶ．
 %
@@ -396,7 +396,7 @@ $f(x)$として，
  \vspace*{-\intextsep}
  \centering
  %\includegraphics[width=0.5\linewidth]{figures/delta-func.eps}
- \includegraphics[width=0.5\linewidth]{/Users/kasa/GitHub/lectures/osaka-u/2021/kaenI/chap02_fr/figures/delta-func.eps} 
+ \includegraphics[width=0.5\linewidth]{/Users/kasa/Dropbox/GitHub/lectures/osaka-u/2021/kaenI/chap02_fr/figures/delta-func.eps} 
 \end{figure}
 
 \noindent
@@ -441,7 +441,7 @@ $\delta (x-a)$のように定数がついている場合には，$x=a$で鋭い�
 \begin{figure}[htbp]
   \centering
   %\includegraphics[width=1.0\linewidth]{figures/delta-func_extract.eps} 
-  \includegraphics[width=0.5\linewidth]{/Users/kasa/GitHub/lectures/osaka-u/2021/kaenI/chap02_fr/figures/delta-func_extract.eps} 
+  \includegraphics[width=0.5\linewidth]{/Users/kasa/Dropbox/GitHub/lectures/osaka-u/2021/kaenI/chap02_fr/figures/delta-func_extract.eps} 
 \end{figure}
 
 \noindent
@@ -555,7 +555,7 @@ $x=-\infty,~\infty$でデルタ関数の値はゼロなので当然，1項目は
 %
 \begin{figure}[htbp]
  \centering
- \includegraphics[width=1.0\linewidth]{/Users/kasa/GitHub/lectures/osaka-u/2021/kaenI/chap02_fr/figures/delta-func_explicit.eps} 
+ \includegraphics[width=1.0\linewidth]{/Users/kasa/Dropbox/GitHub/lectures/osaka-u/2021/kaenI/chap02_fr/figures/delta-func_explicit.eps} 
 \end{figure}
 %
 \subsection{3次元空間のデルタ関数}
@@ -632,7 +632,7 @@ $a=0$の場合は，
 %
 なので，1のフーリエ逆変換を考えると，
 \begin{align}
- \delta\left(x\right) = \dfrac{1}{2\pi}\int_{-\infty}^{\infty}dk\,e^{ikx}, 
+ \delta\left(x\right) = \dfrac{1}{2\pi}\int_{-\infty}^{\infty}dk\,e^{ikx}, \label{deltafunc_fourier} 
 \end{align}
 が得られる．
 %
@@ -669,7 +669,7 @@ $a=0$の場合は，
 	\end{align}
   \item 畳み込み積分のフーリエ変換
 	\begin{align}
-	  \mathcal{F}\left[\int_{-\infty}^{\infty}dy\,f\left(y\right)g\left(x-y\right)\right] = F\left(k\right)G\left(k\right),
+	  \mathcal{F}\left[\int_{-\infty}^{\infty}dy\,f\left(y\right)g\left(x-y\right)\right] = F\left(k\right)G\left(k\right), \label{fourier_convolution}
 	\end{align}
 
 \end{itemize}
@@ -737,7 +737,7 @@ $X=ax$と変数変換を行うと，$a>0$のとき，
 %
 $f(x)$の導関数のフーリエ変換は次式のように表すことができる．
 \begin{align}
- \mathcal{F}\left[\dfrac{d^n}{dx^n}f\left(x\right)\right] = \left(ik\right)^{n} F\left(k\right). 
+  \mathcal{F}\left[\dfrac{d^n}{dx^n}f\left(x\right)\right] = \left(ik\right)^{n} F\left(k\right). \label{deriv_fourier} 
 \end{align}
 無条件で成り立つわけではないが，それは導出の過程で述べることにする．
 ここでは，1階の導関数の場合

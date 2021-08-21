@@ -68,6 +68,9 @@
 \begin{document}
 \section*{第2回 演習問題(2021/04/22) 略解とヒント}
 %
+\begin{flushright}
+ 最終更新日 : 2021/07/14 
+\end{flushright}
 \hrule
 %
 \vspace*{.2cm}
@@ -88,7 +91,7 @@ A, B, C, Dの初期濃度を$a,~2a,~0,~0$とする．
 \vspace*{.2cm}
 %
 \begin{enumerate}[(1)]
-\item これは問題文が良くなかったです．$k^{\prime}$も2次の反応速度定数としている解答が多かったです\footnote{白状すると，$k^{\prime}$を2次の速度定数と書いて出題したつもりだったのですが，うっかりしていました．．．ただ，いずれにしても難易度はほとんど変わりません．}．1次, 2次どちらで扱っても正解ということにします．
+\item これは問題文が良くなかったです．$k^{\prime}$も2次の反応速度定数としている解答が多かったです\footnote{白状すると，$k^{\prime}$を2次の速度定数と書いて出題したつもりだったのですが，うっかりしていました．．．ただ，いずれにしても難易度はほとんど変わりません．問題設定として化学的に気持ち悪いところはあるのですが，$k^{\prime}$を1次の速度定数とした場合を考えることにします．}．1次, 2次どちらで扱っても正解ということにします．
 $k^{\prime}$を1次の速度定数とした場合は，
 \begin{align*}
  \dfrac{dx}{dt} = k(a-x)(2a-x) - k^{\prime}x 
@@ -100,15 +103,25 @@ $k^{\prime}$を1次の速度定数とした場合は，
 %
 \item $k^{\prime}$を1次の速度定数とした場合を示します．
 \begin{align*}
-x\left(t\right) & =\dfrac{\beta e^{\alpha kt}-\alpha e^{\beta kt}}{e^{\alpha kt}-e^{\beta kt}}
+x=\dfrac{\alpha\beta\left(e^{k\beta t}-e^{k\alpha t}\right)}{\beta e^{k\beta t}-\alpha e^{k\alpha t}}
 \end{align*}
 ただし，
-\begin{align}
- \alpha = \dfrac{3a+2-\sqrt{a^2+12a+4}}{4},~\beta = \dfrac{3a+2+\sqrt{a^2+12a+4}}{4}, 
-\end{align}
+\textcolor{red}{
+\begin{align*}
+ \alpha & = \dfrac{3a+2-\sqrt{a^{2}+12a+4}}{2} \\
+ \beta  & = \dfrac{3a+2+\sqrt{a^{2}+12a+4}}{2}
+\end{align*}
+}
 です．
 
 (1)で立てた微分方程式の右辺は$x$に関する2次の多項式なので，その根を求めれば因数分解の形で表せます．そうすると，例題6と似たような式変形が可能になります．
+
+\vspace*{.2cm}
+\noindent
+\textcolor{red}{
+\fbox{訂正 2021.07.14}\\[.2cm]
+$\alpha$と$\beta$の式が微妙に間違っていたので訂正しました．
+}
 
 %
 \end{enumerate}
@@ -135,8 +148,7 @@ x\left(t\right) & =\dfrac{\beta e^{\alpha kt}-\alpha e^{\beta kt}}{e^{\alpha kt}
 \vspace*{.2cm}
 %
 \begin{enumerate}[(1)]
-\item 誘導に従って変数変換することで導けます．もし誘導に従っても導けなかった場合は，
-        ベルヌーイ型の微分方程式などのキーワードで調べてみてください．
+\item ベルヌーイ型の微分方程式などのキーワードで調べてみてください．
 \item 
 \begin{align*}
 y\left(x\right) & =\dfrac{1}{\left(c_{1}x^{4/3}+4x\right)^{1/4}}
@@ -191,26 +203,106 @@ $x\left(t\right),~y\left(t\right),~z\left(t\right)$,
 \begin{enumerate}[(1)]
   \item 
 \begin{align*}
-  & \dfrac{dx}{dt} = -k_1 x + k_{-1} y \cdots \textcircled{1}\\
-  & \dfrac{dy}{dt} = k_1 x -(k_{-1}+k_2)y + k_{-2}z \cdots \textcircled{2}\\
-  & \dfrac{dz}{dt} = k_2 y - k_{-2}z \cdots \textcircled{3}
+  & \dfrac{dx}{dt} = -k_1 x + k_{-1} y\\
+  & \dfrac{dy}{dt} = k_1 x -(k_{-1}+k_2)y + k_{-2}z\\
+  & \dfrac{dz}{dt} = k_2 y - k_{-2}z
 \end{align*} 
+%
+  \item
+\begin{align*}
+ x\left(t\right) & =\dfrac{k_{-1}k_{-2}c_{0}}{\beta}+\left(x_{0}-\dfrac{k_{1}x_{0}-k_{-1}y_{0}}{\lambda_{1}-\lambda_{2}}+\dfrac{k_{-1}k_{-2}c_{0}}{\lambda_{2}\left(\lambda_{1}-\lambda_{2}\right)}-\dfrac{k_{-1}k_{-2}c_{0}}{\beta}\right)e^{\lambda_{1}t} \notag \\
+&\quad +\left(\dfrac{k_{1}x_{0}-k_{-1}y_{0}}{\lambda_{1}-\lambda_{2}}-\dfrac{k_{-1}k_{-2}c_{0}}{\lambda_{2}\left(\lambda_{1}-\lambda_{2}\right)}\right)e^{\lambda_{2}t}
+\end{align*}
+ただし，
+\begin{align*}
+  & c_0 = x_0 + y_0 + z_0 \\
+  & \alpha = \dfrac{k_1 + k_{-1} + k_{2} + k_{-2}}{2} \\
+  & \beta  = k_{1}k_{2}+k_{1}k_{-2}+k_{-1}k_{-2} \\
+  & \lambda_{1}  =-\alpha+\sqrt{\alpha^{2}-\beta} \\
+  & \lambda_{2}=-\alpha-\sqrt{\alpha^{2}-\beta}
+\end{align*}
 \end{enumerate}
+%
+皆さんの解答を見る感じ，(1)で導出した微分方程式のセットから
+$x(t)$だけを含む微分方程式の形に持っていくのが難しかったようです．
+まず，今回の反応系では，A, B, Cの濃度の和は一定です\footnote{$\dfrac{d}{dt}(x+y+z)$を考えてみましょう．}．
+\begin{align*}
+  x(t) + y(t) + z(t) = 一定 \equiv c_0 
+\end{align*}
+従って，$z$はすぐに消去することができます．
+次に，$x$に関する微分方程式を$t$で微分してみてください．
+そうするとだいぶ見通しよく式変形できます．
+次式が導出できれば，もう半分くらいこの問題は解けたようなものです．
+\begin{align}
+\dfrac{d^{2}x}{dt^{2}}+\left(k_{1}+k_{-1}+k_{2}+k_{-2}\right)\dfrac{dx}{dt}+\left(k_{1}k_{2}+k_{1}k_{-2}+k_{-1}k_{-2}\right)x & =k_{-1}k_{-2}c_{0}
+\end{align}
 %
 \newpage
 %
+\hrule
 \enshu
 微分方程式
 \begin{align*}
  \dfrac{d^2x}{dt^2} + 2\gamma \dfrac{dx}{dt} + \omega_{0}^{2}x = f_0 \cos \omega t, 
 \end{align*}
-を考える\footnote{この方程式の斉次形が何者かは第1回の演習問題4を参照すること．粘性流体の中でバネに繋がれたおもりに，外力$f_0 \cos \omega t$が加えられた状態に対応するのが今回の微分方程式である．}．ただし，$0< \gamma < \omega_{0}$とする．
+を考える．ただし，$0< \gamma < \omega_{0}$とする．
 \begin{enumerate}[(1)]
   \item 一般解を求めよ．
   \item 初期条件を$x(0)=0, d x(t)/dt|_{t=0}=0$として，$x(t)$の概形を描いてみよ．
 	また$t$が十分に大きいときの$x(t)$を求めよ．
 \end{enumerate}
 %
+\hrule
+\vspace*{.2cm}
+%
+\begin{enumerate}[(1)]
+ \item
+\begin{align*}
+ x\left(t\right) & =e^{-\gamma t}\left(c_{1}\cos\tilde{\omega}t+c_{2}\textcolor{red}{\sin}\tilde{\omega}t\right)\\
+ & \quad+\dfrac{\omega_{0}^{2}-\omega^{2}}{\left(\omega_{0}^{2}-\omega^{2}\right)^{2}+4\omega^{2}\gamma^{2}}f_{0}\cos\omega t+\dfrac{2\omega\gamma}{\left(\omega_{0}^{2}-\omega^{2}\right)^{2}+4\omega^{2}\gamma^{2}}f_{0}\sin\omega t
+\end{align*}
+ただし，
+\begin{align*}
+ \tilde{\omega}&=\sqrt{\omega_{0}^{2}-\gamma^{2}}  
+\end{align*}
+%
+\item
+
+\textcolor{red}{
+$t$が十分に大きいとき，
+\begin{align*}
+x\left(t\right) & =
+ \dfrac{f_{0}}{\left(\omega_{0}^{2}-\omega^{2}\right)^{2}+4\omega^{2}\gamma^{2}}\left\{ \left(\omega_{0}^{2}-\omega^{2}\right)\cos\omega t+2\omega\gamma\sin\omega t\right\} 
+\end{align*}
+}
+\end{enumerate}
+%
+%
+\vspace*{1cm}
+よく出来ていました．
+まずは，
+斉次方程式
+\begin{align*}
+ \dfrac{d^2 x}{dt^2} + 2\gamma \dfrac{dx}{dt} + \omega_0^2 x = 0  
+\end{align*}
+の一般解を求めておいて，与えられた非斉次方程式の特殊解を求めれば良いです．
+特殊解の形として，
+\begin{align*}
+  x_s (t) = A\cos \omega t + B \sin \omega t 
+\end{align*}
+を仮定してみるとうまくいきます．もちろん，与えられた方程式の右辺を複素数に拡張した上で特殊解を求めても大丈夫です．
+
+\vspace*{.2cm}
+\noindent
+\textcolor{red}{
+\fbox{訂正 2021.07.14}\\[.2cm]
+(1) $\sin$が抜けていたので，修正しました．\\
+(2) $t\to \infty$なのに余計な項が入っていたので，修正しました． 
+}
+
+\newpage
+%
+\hrule
 \enshu (べき級数解法)
 %
 
@@ -256,4 +348,15 @@ $x\left(t\right),~y\left(t\right),~z\left(t\right)$,
   \dfrac{d^2y}{dx^2} + y = 0,
 \end{align*}
 を解いてみよう．
+\vspace*{.2cm}
+\hrule
+\vspace*{.2cm}
+%
+これも，皆さんよく出来ていました．
+既に，
+\begin{align*}
+  y = c_1 \cos x + c_2 \sin x 
+\end{align*}
+と解の形を知っているわけで，それをべき級数解法によっても導けるかを確認してもらうための問題でした．
+
 \end{document}

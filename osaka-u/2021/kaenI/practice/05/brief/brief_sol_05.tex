@@ -1,0 +1,161 @@
+\documentclass[11pt,a4]{jsarticle}
+\pagestyle{empty}
+\setcounter{secnumdepth}{3}
+\setcounter{tocdepth}{2}
+\bibliographystyle{h-physrev3}
+\usepackage[T1]{fontenc}
+\usepackage[active]{srcltx}
+\usepackage[version=3]{mhchem}
+
+\makeatletter
+%\usepackage{tgtermes}
+%\usepackage[T1]{fontenc}
+\usepackage[top=10truemm,bottom=10truemm,left=20truemm,right=20truemm]{geometry}
+\usepackage{fancyhdr, lastpage}
+\usepackage{amsmath}
+%\usepackage[lite,subscriptcorrection,slantedGreek,nofontinfo]{mtpro2}
+\usepackage{bm,braket,ascmac,enumerate,multirow}
+\usepackage{amssymb,wrapfig,afterpage,booktabs,url}
+\usepackage{listings}
+\numberwithin{equation}{section}
+%
+\usepackage{graphicx}
+\usepackage[dvips]{color}
+\usepackage{makeidx}
+\usepackage{fancyvrb}
+\usepackage{cprotect}
+\usepackage[dvipdfmx]{hyperref}
+\usepackage{pxjahyper}
+%
+\newcommand{\vred}{\color{red}}
+\newcommand{\vblue}{\color{blue}}
+\newcommand{\vgreen}{\color{green}}
+\newcommand{\at}{@}
+%
+\renewcommand{\baselinestretch}{1.1}
+\renewcommand{\figurename}{Fig.}
+\renewcommand{\tablename}{Table }
+
+\makeindex 
+%\renewcommand{\contentsname}{\Large \centerline{目 次}}
+%\renewcommand{\figurename}{Fig.}
+%\renewcommand{\tablename}{Table }
+%\renewcommand{\refname}{}
+
+\makeatother
+
+\newcommand{ \Sec }[1]{Sec.~\ref{sec:#1}}
+\newcommand{ \Appendix }[1]{Appendix \ref{sec:#1}}
+
+\newcommand{ \Eq   }[1]{Eq.~(\ref{#1})}
+\newcommand{ \Eqs  }[2]{Eqs.~(\ref{#1}) and (\ref{#2})}
+\newcommand{ \Equation }[1]{Equation (\ref{#1})}
+
+\newcommand{ \Table }[1]{Table \ref{tab:#1}}
+
+%\newcommand{ \Ref  }[1]{Ref.~\onlinecite{#1}}
+\newcommand{ \Refs }[2]{Refs.~\onlinecite{#1} and \onlinecite{#2}}
+
+\newcommand{ \Fig     }[1]{Fig.~\ref{fig:#1}}
+\newcommand{ \Figs    }[2]{Figs.~\ref{fig:#1} and \ref{fig:#2}}
+\newcommand{ \Figure  }[1]{Figure \ref{fig:#1}}
+%.........................................................
+
+%.........................................................
+\newtheorem{reidai}{例題}
+\newtheorem{enshu}{演習問題}
+%
+\begin{document}
+%
+\section*{第5回 演習問題(2021/06/16) 略解とヒント}
+\begin{flushright}
+ 最終更新日 : 2021/07/04 
+\end{flushright}
+\hrule
+%\vspace*{.2cm}
+\enshu
+%
+テキストの「ラプラス変換の性質」と「ラプラス逆変換の性質」について復習し，
+自分なりにまとめてみよ．式の羅列のみは採点しない．
+また，テキストでは導出を省略した
+\begin{align*}
+ &\mathcal{L}\left[f^{(n)}(t)\right] = s^n F(s) - s^{n-1}f(0) - s^{n-2}f^{\prime}(0) - \cdots -sf^{(n-2)}(0) - f^{(n-1)}(0), \\
+ &\mathcal{L}^{-1}\left[F^{(n)}(s)\right] = (-t)^{n}f(t),
+\end{align*}
+を導出してみよ．
+\vspace*{.2cm}
+\hrule
+\vspace*{.2cm}
+(省略)
+%
+\newpage
+%
+\hrule
+\enshu
+%
+次の関数$f(t)$のラプラス変換$F(s)$を求めよ．導出過程も含めて書くこと．
+(ラプラス変換表より...で，解答を終わらせないこと．もちろん，答え合わせには使っても良い)
+\begin{enumerate}[(1)]
+  %\item $f(t) = \dfrac{1}{\sqrt{\pi t}}$
+  \item $f(t) = \sinh(at)$
+  \item $f(t) = \cos^{2}(at)$
+  %\item $f(t) = \dfrac{1}{t}\left(e^{-at}-e^{-bt}\right)$
+  %\item $f(t) = e^{-at}\cos \omega_0 t$
+  \item $f(t) = te^{-at}\cos\omega_0 t$
+\end{enumerate}
+%
+\hrule
+\vspace*{.2cm}
+\begin{enumerate}[(1)]
+  \item 
+    \begin{align*}
+      F(s) = \dfrac{a}{s^2 - a^2}
+    \end{align*}
+  \item
+    \begin{align*}
+      F(s) = \dfrac{s^2 + 2a^2}{s^3 + 4a^2 s} 
+    \end{align*}
+  \item
+    \begin{align*}
+      F(s) = \dfrac{\left(s+a\right)^{2} - \omega_{0}^{2}}{\left((s+a)^2 + \omega_{0}^{2}\right)^{2}} 
+    \end{align*}
+\end{enumerate}
+
+\newpage
+%
+\hrule
+\enshu
+%
+次の関数$F(s)$のラプラス逆変換$f(t)$を求めよ．テキストのラプラス変換表は用いて良い．
+\begin{enumerate}[(1)]
+  \item $F(s) = \dfrac{1}{s-2}$
+  \item $F(s) = \dfrac{1}{s^2+2s}$
+  %\item $F(s) = \dfrac{s}{s^2-3}$ 
+\end{enumerate}
+\hrule
+\vspace*{.2cm}
+%
+\begin{enumerate}[(1)]
+  \item 
+    \begin{align*}
+      f(t) = e^{2t} 
+    \end{align*}
+  \item
+    \begin{align*}
+      f(t) = \dfrac{1}{2}\left(1-e^{-2t}\right) 
+    \end{align*}
+\end{enumerate}
+%
+\newpage
+%
+\hrule
+\enshu
+%
+2階の線形常微分方程式を自分で作ってみて，それをラプラス変換で解いてみよ．
+ただし，テキストと同じ式にはしないこと．
+%
+\vspace*{.2cm}
+\hrule
+\vspace*{.2cm}
+(省略)
+\end{document}
