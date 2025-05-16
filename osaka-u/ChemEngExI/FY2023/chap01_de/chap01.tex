@@ -1,0 +1,1478 @@
+\chapter{常微分方程式入門}
+\section{微分方程式とは}
+%
+皆さんは既に物理学の講義等でニュートンの運動方程式を学んでいることと思う．例えば，バネ定数$k$のバネに繋がれた
+球の位置を$x(t)$とすると，調和振動子の運動方程式は，
+\begin{align}
+  m\dfrac{d^2 x(t)}{dt^2} = -kx\left(t\right), 
+\end{align}
+と表される．この方程式の解$x(t)$を求めれば，球の運動の軌跡を知ることが出来る．未知関数$x\left(t\right)$に関して，その導関数を含む等式のことを微分方程式と呼ぶ．もし，1変数についての導関数しか含まない場合はその方程式のことを常微分方程式と呼び，複数の変数についての導関数を含む場合は偏微分方程式と呼ぶ．
+
+上記の例に示したように，
+微分方程式はニュートン力学の根幹に関わっている．
+また，ニュートン力学に限らず，
+皆さんがこれから化学工学として学ぶことの多くの現象に微分方程式は
+登場する\footnote{そう遠くない将来に，皆さんは移動現象論や量子化学でいろいろな形をした微分方程式に出会うことになる．}．これは，微分方程式が
+物理・化学現象を数式として表現する上で極めて便利な道具であるためである．従って，微分方程式に慣れ親しむことは，
+今後皆さんが様々な学問を学ぶ上で役に立つはずである．
+そこで本章では，解法が確立している初等的な常微分方程式とその解法について学んでいこう．
+
+%
+\section{初期条件，特殊解，一般解 –最も簡単な常微分方程式を通して–}
+まずは，最も簡単な形の常微分方程式を通して，微分方程式の考え方に慣れていこう．
+ここでは，下記の形の方程式を扱うことにする．
+\begin{align}
+ \dfrac{dy}{dx} &= g(x), \label{eq:PDE_01} 
+\end{align}
+$g(x)$の関数形は与えられていて，例えば$g(x) = x$などをイメージしても良い．
+ここでは特定の$g(x)$の形によらない議論を行うために，$g(x)$については何も設定しない．
+また，上記の方程式に加えて，$x = x_0$のときの$y$の値が分かっていて，$y\left(x_0\right) = y_{0}$であったとする．このように，微分方程式に加えて満たすべき要請を初期条件と呼ぶ．
+微分方程式を解くということは，その与えられた方程式と条件を満たす関数$y\left(x\right)$を
+求める，ということを意味する．
+
+最初なので，丁寧に式変形を示していくことにする．
+まず，式中の$x$を$x^\prime$と置き換えておく．
+%
+\begin{align}
+ \dfrac{dy}{dx^{\prime}} & =g\left(x^{\prime}\right).
+\end{align}
+%
+両辺を，
+$x^{\prime}$について$x_0$から$x$まで積分する．
+\begin{align}
+ \int_{x_{0}}^{x}dx^{\prime}\,\dfrac{dy}{dx^{\prime}} & =\int_{x_{0}}^{x}dx^{\prime}\,g\left(x^{\prime}\right). \label{eq:PDE_01_teiseki}
+\end{align}
+そうすると，左辺は
+\begin{align}
+ \int_{y\left(x_{0}\right)}^{y\left(x\right)}dy & =y\left(x\right)-y_{0},
+\end{align}
+と書き直せる．右辺については，$g(x^\prime)$の形が具体的に与えられないことには
+積分を実行できないので，そのままにしておく．つまり，
+\begin{align}
+ y = \int_{x_0}^{x} dx^\prime \, g(x^\prime) + y\left(x_0\right), \label{eq:PDE_01_sol_01}
+\end{align}
+という形で$y$の表式が得られる．これが\Eq{eq:PDE_01}の解である．
+
+本テキストでは，定積分\Eq{eq:PDE_01_teiseki}を実行することで，
+微分方程式の解を求めた．教科書の多くでは，
+不定積分を用いた形で解の形を出しているかもしれない．
+その場合は，積分定数$C$を用いて，
+\begin{align}
+y & =\int dx\, g\left(x\right)+C, \label{eq:PDE_01_sol_02}
+\end{align}
+と表される．$C$は初期条件によって決まる定数(任意定数)である\footnote{本テキストでは，断りなく$C$と書いたときは，任意定数を表すこととする．}．
+つまり，この微分方程式において初期条件の違いは全て定数$C$の値に反映される．実際，\Eq{eq:PDE_01_sol_01}と\Eq{eq:PDE_01_sol_02}を見比べると，
+$C=y_0$であることが分かる．
+\Eq{eq:PDE_01_sol_02}は，考えうる全ての初期条件に対応できる解の形になっており，そのような解のことを一般解と呼ぶ．
+そして，無数にある解の一つのことを，一般解と区別して特殊解と呼ぶ．
+このテキストでも，以後は不定積分を用いた形で一般解を表していくことにする．
+
+言うまでもないことかもしれないが，
+自身が導き出した解が，本当に微分方程式の解になっているかどうか
+は簡単に確認できるということはちゃんと認識しておくべきであろう．
+今回の場合では，\Eq{eq:PDE_01_sol_02}を\Eq{eq:PDE_01}に代入すると，
+\begin{align}
+  \dfrac{d}{dx}\left(\int dx\,g\left(x\right)+C\right) & =g\left(x\right),
+\end{align}
+となり，確かに微分方程式の解になっていることが分かる．
+このように，解を導出した後に確認する習慣を身につけておけば，
+思わぬケアレスミスを防ぐことが出来る．
+%
+\newpage
+\hrule
+\reidai
+微分方程式
+\begin{align}
+ \dfrac{dy}{dx} & =-2x^{2}
+\end{align}
+の一般解と初期条件が$y(0)=1$のときの解を求めよ．
+\vspace*{.2cm}
+\hrule
+\vspace*{.2cm}
+
+両辺を$x$で積分すると，
+\begin{align}
+ y = -\dfrac{2}{3}x^3 + C~(一般解) 
+\end{align}
+$y(0)=1$のとき，上式は$C=1$なので，
+\begin{align}
+  y = -\dfrac{2}{3}x^3 + 1 
+\end{align}
+%
+\newpage
+%
+\section{微分方程式の解を求めるときのアプローチ}
+%
+本章で扱うレベルの微分方程式の一般解を求めるときのアプローチは，
+次の3つに大別される．
+\begin{enumerate}[(1)]
+  \item 方程式の形に応じた系統立てた式変形による一般解の導出
+  \item 方程式の形から解の形を予測して一般解を構成
+  \item (1)と(2)の組み合わせによる一般解の導出 
+\end{enumerate}
+%
+(1)は，四則演算や微分・積分操作によって解を導き出す，というもので求積法と呼ばれる．これは次節以降で学んでいく．
+(2)では，前節で述べたように，ある関数が今注目している微分方程式の解かどうかは代入することで確認できるわけだから，
+適当にいくつか解になりそうなものを用意して，本当に解になっているものを引き当てる，というものである．
+例えば，$3x=18$という方程式について，私たちは既に両辺を3で割って$x=6$と即座に解を出せるわけだが，
+愚直に$x=1,2,3,\cdots$と順番に代入していって「$3\times 6=18$だから$x=6$は解だ!」とやっても(数学的には)良いわけだ．
+もちろん，これは極端な例で，微分方程式の場合にはちゃんと解の候補を絞りこんでいかないと到底解には行き着かないわけだが，
+慣れてくると，簡単な方程式の場合には予測できるようになるし，実は解の候補の見つけ方も
+ある程度は体系化されている．そのようにして特殊解を何個か見つけ出せれば，それらに対して適切な場所に任意定数をつけることで
+一般解を構成できる．
+(3)のアプローチは，現段階では想像がつかないかもしれないが，後で学ぶ非斉次型の方程式を解く上で極めて有効になる．
+
+ここでは，簡単な微分方程式を例に，(2)のアプローチについて述べることにする．
+次の形の微分方程式を考えてみよう．
+\begin{align}
+  \dfrac{dy}{dx} + a y = 0. \label{eq:example_prediction}
+\end{align}
+ここでは$a$を実数とする．式を漫然と眺めているだけでは何も進展しないので，アレコレ手を動かしてみよう．ここでは
+一度，微分の定義に立ち返って，次のように書き換えてみる．
+\begin{align}
+  \lim_{\Delta x \to 0} \dfrac{y\left(x+\Delta x\right) - y\left(x\right)}{\Delta x} + ay\left(x\right) = 0. 
+\end{align}
+今は$\lim$を使っているが，$\Delta x$が無限小ではなく有限だが十分に小さいとして，
+\begin{align}
+ \dfrac{y\left(x+\Delta x\right) - y\left(x\right)}{\Delta x} + ay\left(x\right) = 0,
+\end{align}
+と書く．これを$y\left(x+\Delta x\right)$について解けば，
+\begin{align}
+ y\left(x+\Delta x\right) &= \left(1-a\Delta x\right) y\left(x\right) \notag \\
+                          &= \gamma y\left(x\right).
+\end{align}
+となる．2行目では$\gamma = \left(1-a\Delta x\right)$とおいた．この式は，
+$x=x$での$y$の値$y(x)$を知っていれば，そこから$\Delta x$だけずれたときの値$y\left(x+\Delta x\right)$
+が計算できることを意味している．
+いま，$x$軸を$\Delta x$刻みで考え，$x = n\Delta x~(n=1,2,3,\cdots)$と表すと，
+\begin{align}
+  y\left((n+1)\Delta x\right) = \gamma y\left(n\Delta x\right), 
+\end{align}
+となる．このように連続的に変化する変数を有限の幅に区切って考えることを離散化と呼ぶ．
+離散化は，微分方程式をコンピュータを使って数値的に解くための最初の手続きでもある
+ので，今後この考え方は身につけておくと色々と役に立つ\footnote{微分方程式の数値解法については岡野先生の講義で学ことになる．}．
+上式は高校数学で学んだ等比数列型の漸化式であり，一般項は
+\begin{align}
+  y\left(n\Delta x\right) = \gamma^{n}y\left(0\right), 
+\end{align}
+である．この形をみると，微分方程式の解は指数関数になりそうだと予測が立つ．
+なので，解の候補として$y=e^{\lambda x}$を挙げてみて，\Eq{eq:example_prediction}に代入してみる．
+すると，
+\begin{align}
+  \dfrac{d}{dx}\left(e^{\lambda x}\right)+ae^{\lambda x} & =\left(\lambda+a\right)e^{\lambda x}=0,
+\end{align}
+なので，$\lambda=-a$つまり，$y=e^{-ax}$は微分方程式の解の一つ(特殊解)であると分かる．
+すぐに確認できるが，$e^{-ax}$を定数倍したものも解であるから，任意定数$C$を使って一般解は
+\begin{align}
+  y = Ce^{-ax},
+\end{align}
+と表せることが分かった．
+
+実は，もっと簡単に解の形を推測することも出来る．
+まず，\Eq{eq:example_prediction}を左辺第2項を右辺に移しておく．
+\begin{align}
+ \dfrac{dy}{dx} = -ay.
+\end{align}
+この式を日本語に翻訳すると，「方程式の解は1回微分したら，定数$\times$元々の関数」となる．
+もちろんこのような性質を持つのは指数関数$e^{\lambda x}$ならではなので，解は指数関数の形をとっているだろう，
+と予測することが出来る．
+高校数学の問題を解く際，何回微分しても元々の関数がずっと残るという性質に，
+皆さんは助けられたことも苦しめられたこともあるだろう．
+\footnote{私は苦しめられた辛い経験の方が多いような気がする．何度部分積分しても指数関数があるせいで簡単になってくれなかったりとか．}．
+式をただ眺めるだけでは予測は立たないが，
+一度，言語化することで既に持っている知識や過去の経験と問題が結びついて，
+解の予測が立つ，ということもあるかもしれない\footnote{他にも，2回微分したら元々の関数が出てきてかつ符号が逆転するもの，といえば，三角関数!というように，色々な関数に対するぼんやりとしたイメージを持っておくことは役に立つ，と個人的には思う．}．
+何れにせよ，ここで言いたかったのは離散化にせよ，言語化による式の解釈にせよ，
+アレコレ試行錯誤して解の形を予測してみることが重要，ということである．
+%
+\section{物理・化学でよく現れる常微分方程式}
+%
+微分方程式の教科書では，
+初めのうちに常微分方程式をその形に応じて分類していることが多い(例えば線形 or 非線形など)．
+本テキストでは，
+まずは初等的な物理・化学でよく現れる常微分方程式の解法について
+一つ一つ学び，その後にそれらの方程式がどのように分類されるかを学んでいくことにする．
+
+\subsection{$\dfrac{dy}{dx} + a y = 0$\label{sec:PDE_02}}
+%
+次の形の微分方程式を考える．
+\begin{align}
+ \dfrac{dy}{dx} + a y = 0. \label{eq:PDE_02} 
+\end{align}
+この方程式の一般解は解の予測によるアプローチに基づいて既に求めているが，ここでは式変形から導出を試みる．
+$y\neq 0$のとき，両辺を$y$で割る．
+\begin{align}
+\dfrac{1}{y}\dfrac{dy}{dx} = -a. 
+\end{align}
+両辺を積分すると左辺は
+\begin{align}
+ \int dx\,\dfrac{1}{y}\dfrac{dy}{dx} 
+ & = \int dx\,\dfrac{d}{dx}\log \left|y\right|, 
+\end{align}
+だから，
+\begin{align}
+\log \left| y \right| = -ax + C,\\
+\left| y \right| = e^{C} e^{-ax}, 
+\end{align}
+である．$A>0$として，
+$y> 0 $のときは$e^C \to A$, $y < 0$のときは$e^{C} \to -A$と置き換えれば良い．
+また，$y=0$も明らかに解であるが，これは$A=0$に対応している．
+従って，いずれの場合においても，
+\begin{align}
+ y = C e^{-ax}, 
+\end{align}
+と表すことが出来る．ただし，これまでの慣習に従って
+任意定数を$A$ではなく$C$で表している．
+ 
+%
+\subsection{$\dfrac{dy}{dx} + a y = g(x)$\label{sec:PDE_03}}
+%
+次の形の常微分方程式を考える．
+\begin{align}
+ \dfrac{dy}{dx} + a y = g(x). \label{eq:PDE_03}
+\end{align}
+%\Eq{eq:PDE_01}とは異なり，単純に両辺を積分しても上手くいかない．
+%実際にやってみると，
+%\begin{align}
+%  y+a\int dx^{\prime}\,y & =\int dx^{\prime}\,g\left(x^{\prime}\right)+C, \label{eq:PDE_02}
+%\end{align}
+%となり，左辺に未知関数$y$の積分が残ってしまい，これ以上式変形を進められなくなってしまう．
+%今，私たちが解の求め方を知っているのは\Eq{eq:PDE_01}の形をした方程式のみである．そこで，
+\Eq{eq:PDE_02}を式変形して\Eq{eq:PDE_01}の形に書き換えることを考えてみる．
+まず，\Eq{eq:PDE_01}の両辺に何らかの関数$f\left(x\right)$をかけてみる．
+\begin{align}
+ f\left(x\right)\dfrac{dy}{dx}+af\left(x\right)y&=f\left(x\right)g\left(x\right). \label{eq:PDE_03_01}
+\end{align}
+もし左辺が
+\begin{align}
+ f\left(x\right)\dfrac{dy}{dx}+af\left(x\right) & =\dfrac{d}{dx}\left(f\left(x\right)y\right), \label{eq:PDE_03_lhs}
+\end{align}
+の形でまとめられると都合が良い．
+というのも，$Y=f\left(x\right)y$とおくと，\Eq{eq:PDE_03}は
+\begin{align}
+ \dfrac{dY}{dx} & =f\left(x\right)g\left(x\right), 
+\end{align}
+となり，既に解法を知っている\Eq{eq:PDE_01}の形に帰着するからだ．
+従って，\Eq{eq:PDE_03_lhs}を満たす$f\left(x\right)$を見つければ良い．積の微分法より，
+\begin{align}
+ \dfrac{d}{dx}\left(f\left(x\right)y\right)=f\left(x\right)\dfrac{dy}{dx}+\left(\dfrac{d}{dx}f\left(x\right)\right)y, 
+\end{align}
+であるから，\Eq{eq:PDE_03_lhs}の左辺と比較すると，$f\left(x\right)$は
+\begin{align}
+ \dfrac{df\left(x\right)}{dx} = af\left(x\right),
+\end{align}
+を満たせば良い．この$f\left(x\right)$に対する微分方程式の解(の一つ)は
+\begin{align}
+  f\left(x\right) = e^{ax},
+\end{align}
+である．従って，\Eq{eq:PDE_03}は，
+\begin{align}
+  \dfrac{d}{dx}\left(e^{ax}y\right) & =e^{ax}g\left(x\right).
+\end{align}
+と書き直すことが出来るので，一般解は
+\begin{align}
+  e^{ax}y & =\int dx\,e^{ax}g\left(x\right)+C, \\
+  y & =e^{-ax}\int dx\,e^{ax}g\left(x\right)+Ce^{-ax},
+\end{align}
+である．
+%
+
+このような形で微分方程式の一般解が求められたワケだが，
+これを公式のように覚えておくのはおすすめできないし，
+私自身は覚えていない．もし式を少し覚え間違えてしまっただけで，
+その式は使い物にならないし，
+これから登場する微分方程式の
+一般解を一つ一つ覚えるとなると，相当に大変である．
+それよりも導出方法を理解した方が圧倒的に楽だし，応用も利く．
+
+この解法のキーポイントは『積の微分法』である．上で書いた導出は長々としているが，
+要するに微分方程式
+\begin{align}
+ \dfrac{dy}{dx} + ay = g(x), 
+\end{align}
+の左辺を，積の微分の形で表せるように，何らかの関数をかけてみよう，というアプローチである．
+既に上記の解法を見ている皆さんは知っているように，$e^{ax}$を両辺にかければ，
+\begin{align}
+ & e^{ax}\dfrac{dy}{dx} + ae^{ax}y = e^{ax}g(x), \notag \\
+ & \rightarrow e^{ax}\dfrac{dy}{dx} + \left(\dfrac{d}{dx}e^{ax}\right)y = e^{ax}g(x), \notag \\
+ & \rightarrow \dfrac{d}{dx}\left(e^{ax}y\right) = e^{ax}g(x), \notag
+\end{align}
+と出来るのだった．後は積分するだけである．
+「積の微分の形に持っていけば良いのでは$\cdots$」という意識さえあれば，$e^{ax}$を両辺にかけることを
+思いつくのはそんなに難しいことではないはずである．
+%
+\newpage
+%
+\hrule
+\reidai
+微分方程式
+\begin{align}
+  \dfrac{dy}{dx} - 4y = 2xe^{4x} 
+\end{align}
+の一般解を求めよ．
+また，初期条件が$y(0)=0$のときの解を求めよ．
+\vspace*{.2cm}
+\hrule
+\vspace*{.2cm}
+
+両辺に$e^{-4x}$をかけると，
+左辺は
+\begin{align}
+ e^{-4x}\dfrac{dy}{dx} - 4e^{-4x}y = \dfrac{d}{dx}\left(e^{-4x}y\right) 
+\end{align}
+なので，与えられた微分方程式は
+\begin{align}
+ \dfrac{d}{dx}\left(e^{-4x}y\right) = 2x 
+\end{align}
+となる．両辺を$x$で積分して，
+\begin{align}
+  &e^{-4x}y = x^2 + C \notag \\
+  &\rightarrow y = (x^2+C)e^{4x} 
+\end{align}
+$y(0)=0$より，$C=-1$なので，
+\begin{align}
+ y = (x^2 - 1)e^{4x} 
+\end{align}
+%
+\newpage
+
+\subsection{$\dfrac{d^2y}{dx^2} + a \dfrac{dy}{dx} + by = 0$\label{sec:PDE_04}}
+%
+微分方程式
+\begin{align}
+  \dfrac{d^2y}{dx^2} + a \dfrac{dy}{dx} + by = 0, \label{eq:PDE_04}
+\end{align}
+は，2階微分を含んでおり，これまで見てきた微分方程式よりも複雑そうに見えるが，
+実は少し式変形することで，\Eq{eq:PDE_03}の形に直すことが出来る．まず，
+\begin{align}
+  \dfrac{d^{2}y}{dx^{2}}+a\dfrac{dy}{dx}+by & =\dfrac{d}{dx}\left(\dfrac{dy}{dx}-py\right)-q\left(\dfrac{dy}{dx}-py\right),
+  \label{eq:PDE_04_rewrite}
+\end{align}
+と表すことを考える．$Y = dy/dx - py$とおけば，これは元々の式を
+\begin{align}
+  \dfrac{dY}{dx} - qY = 0, \label{eq:PDE_04_convert} 
+\end{align}
+の形に書き換えたことになる．従って，\Eq{eq:PDE_04_rewrite}の式変形が出来る$p,~q$を見つければ良い．
+\Eq{eq:PDE_04_rewrite}の右辺を展開してみると，
+\begin{align}
+  \dfrac{d}{dx}\left(\dfrac{dy}{dx}-py\right)-q\left(\dfrac{dy}{dx}-py\right) & =\dfrac{d^{2}y}{dx^{2}}-\left(p+q\right)\dfrac{dy}{dx}+pqy. 
+\end{align}
+元々の方程式と係数を比較すると，$p,~q$は
+\begin{align}
+  \begin{cases}
+    p + q &= -a \\
+    pq    &= b 
+  \end{cases},
+\end{align}
+である．つまり，$p,~q$は
+\begin{align}
+  \left(\lambda-p\right)\left(\lambda-q\right) & =\lambda^{2}-\left(p+q\right)\lambda+pq\notag\\
+   & =\lambda^{2}+a\lambda+b\notag\\
+   & =0,
+\end{align}
+で表される$\lambda$に関する2次方程式の解である．
+このようにして得られる2次方程式を特性方程式と呼ぶ．
+\Eq{eq:PDE_04_convert}を解くと，
+\begin{align}
+  \dfrac{dy}{dx} - py & = C_{1}e^{qx},
+\end{align}
+であり，この形の微分方程式は\Eq{eq:PDE_03}と同じなので，
+\begin{align}
+y = C_{1}e^{px}\int dx\, e^{\left(q-p\right)x} + C_{2}e^{px}, \label{eq:PDE_04_sol_general} 
+\end{align}
+である．
+ここからは$p = q$と$p\neq q$ の場合に分けて式変形を進める．
+まず，$p=q$の場合，\Eq{eq:PDE_04_sol_general}より，
+\begin{align}
+  y &= C_{1}e^{px}\int dx + C_{2}e^{px} \notag \\
+    &= C_{1} x e^{px} + C_{2}e^{px}, \label{eq:solution_PDE_04_degenerate}
+\end{align}
+である．次に，$p \neq q$ の場合では，\Eq{eq:PDE_04_sol_general}内の積分を実行して，
+\begin{align}
+ y = \dfrac{C_{1}}{q-p} e^{qx} + C_{2}e^{px},
+\end{align}
+と書ける．$C_1/\left(q -p \right)$を改めて$C_{1}$とおいて，
+\begin{align}
+ y = C_{1} e^{qx} + C_{2}e^{px}, 
+\end{align}
+と書き直しても良い．
+$p,~q$が虚数の場合，実数$\alpha,~\beta$を用いて，
+\begin{align}
+  p &= \alpha + i \beta, \\
+  q &= \alpha - i \beta, 
+\end{align}
+と表すことにすれば，
+\begin{align}
+  y = e^{\alpha x}\left(C_1 e^{i\beta x} + C_{2}e^{-i\beta x} \right) ,
+\end{align}
+である．オイラーの公式
+\begin{align}
+  e^{\pm i a} = \cos a \pm i\sin a, 
+\end{align}
+を用いると，定数$A$, $B$を用いて
+\begin{align}
+ y = e^{ax}\left(A\cos \beta x + B\sin \beta x\right), 
+\end{align}
+のように表せる(各自でやってみよう\footnote{やってみればすぐに$A=C_1+C_2$，$B=i(C_1-C_2)$とおいただけと分かるだろう．})
+
+これまでに出てきた微分方程式とは異なり，
+今回の微分方程式\Eq{eq:PDE_04}の一般解には
+2つの任意定数が現れている．これは，これまでの微分方程式が1階の導関数だけを
+含んでいたのに対し，\Eq{eq:PDE_04}では2階の導関数が含まれているためである\footnote{後に用語としてまとめるが，$n$階の導関数を含む常微分方程式のことを$n$階常微分方程式と呼ぶ．}．
+このように微分方程式に含まれる階数と任意定数の数は対応している．
+
+最後に，特性方程式について触れておく．
+この2次方程式は\Eq{eq:PDE_04}の導関数を
+\begin{align}
+ \dfrac{d^{2}y}{dx^{2}} & \to \lambda^{2}, \\
+ \dfrac{dy}{dx}         & \to \lambda, 
+\end{align}
+に置き換えたものになっている．
+少し別のアプローチから特性方程式を導き出そう．
+微分方程式\Eq{eq:PDE_04}の形を見て，
+$e^{\lambda x}$が解になりそうだと予想し代入してみる．すると，
+\begin{align}
+  \dfrac{d^{2}}{dx^{2}}\left(e^{\lambda x}\right)+a\dfrac{d}{dx}\left(e^{\lambda x}\right)+be^{\lambda x} & =\left(\lambda^{2}+a\lambda+b\right)e^{\lambda x}\notag \\
+ & =0,
+\end{align}
+つまり
+\begin{align}
+  \lambda^2 + a \lambda + b = 0, 
+\end{align}
+が得られるが，これは特性方程式である．
+従って，特性方程式の解となる$\lambda$の値を用いれば，
+$e^{\lambda x}$は微分方程式の解となる．
+ただし，このアプローチだと，特性方程式が2つの解$\lambda_1,~\lambda_2$を持つ場合は，
+特解$e^{\lambda_1 x}$，$e^{\lambda_2 x}$の線形結合で
+一般解を構成できる特性方程式が重解を持つ場合は，特性方程式からは
+特殊解が1つしか得られないので，一般解を出すためにはもう一つ特殊解を求める必要があるが，
+後で学ぶ定数変化法を用いると，簡単に求めることができる．
+%
+\newpage
+\hrule
+\reidai
+次の微分方程式を解け．
+\begin{enumerate}[(1)]
+  \item $\dfrac{d^2y}{dx^2} + 2 \dfrac{dy}{dx} - 3y = 0$,\quad $y(0)=0$, \quad $\dfrac{dy}{dx}\biggr|_{x=0} = 0$
+  \item $\dfrac{d^2y}{dx^2} + 6 \dfrac{dy}{dx} + 9y = 0$,\quad $y(0)=0$, \quad $\dfrac{dy}{dx}\biggr|_{x=0} = 0$ 
+\end{enumerate}
+\vspace*{.2cm}
+\hrule
+\vspace*{.2cm}
+%
+(1) 解の形を$y=e^{\lambda x}$と仮定して与えられた微分方程式に代入すると，
+\begin{align}
+  e^{\lambda x}\left(\lambda^2 + 2\lambda - 3\right) = 0 
+\end{align}
+なので，$\lambda$について解くと，
+\begin{align}
+ \lambda = 1,~ -3 
+\end{align}
+である．従って，一般解は
+\begin{align}
+ y = C_{1}e^{x} + C_{2}e^{-3x} 
+\end{align}
+で表される．
+初期条件より，
+\begin{align}
+  \begin{cases}
+    C_1 + C_2   &= 1 \\
+    C_1 - 3C_2  &= 0 
+  \end{cases}
+\end{align}
+であるから，これを解くと$C_1=3/4,~C_2 = 1/4$となるので，
+\begin{align}
+ y = \dfrac{3}{4}e^{x} + \dfrac{1}{4}e^{-3x} 
+\end{align}
+%
+(2) (1)と同様にすると，特性方程式は
+\begin{align}
+  \lambda^2 + 6\lambda + 9 = 0 
+\end{align}
+なので，$\lambda = -3$となり，特殊解が$e^{-3x}$の一つしか得られない．
+そこで，テキストにある特性方程式の導出まで遡って，与えられた微分方程式を
+\begin{align}
+  \dfrac{d}{dx}\left(\dfrac{dy}{dx}+3y\right) + 3\left(\dfrac{dy}{dx}+3y\right) = 0 
+\end{align}
+と書き換える．$Y=dy/dx+3y$とおくと，
+\begin{align}
+  \dfrac{dY}{dx} + 3Y = 0 
+\end{align}
+なので，これを解くと$Y=C_1 e^{-3x}$だから，一般解は
+\begin{align}
+ y = C_1 x e^{-3x} + C_2 e^{-3x}
+\end{align}
+となる．初期条件より，$C_1=-3$, $C_2=-1$なので，
+\begin{align}
+  y = -\left(3x+1\right)e^{-3x} 
+\end{align}
+%
+\newpage
+%
+%
+\subsection{$\dfrac{dy^2}{dx^2} \pm \beta^2 y =0$}
+$\beta$を実数として，
+\begin{align}
+  \dfrac{d^2 y}{dx^2} - \beta^{2}y = 0, \label{eq:PDE_05_01}
+\end{align}
+を考える．
+特性方程式は，
+\begin{align}
+  \lambda^2 -\beta^2 = 0,
+\end{align}
+なので，$\lambda = \pm \beta$である．従って，
+\begin{align}
+  y = C_{1} e^{-\beta x} + C_{2} e^{\beta x},
+\end{align}
+である．
+
+次に，
+\begin{align}
+  \dfrac{d^2 y}{dx^2} + \beta^{2} y = 0, \label{eq:PDE_05_02}
+\end{align}
+を考える．特性方程式
+\begin{align}
+  \lambda^2 + \beta^2 = 0,
+\end{align}
+より，$\lambda = \pm i\beta$だから，一般解は
+\begin{align}
+  y = C_1 e^{-i\beta x} + C_{2} e^{i\beta x}, \label{eq:PDE_05_02_sol_01} 
+\end{align}
+である．オイラーの公式
+\begin{align}
+  e^{\pm i a} = \cos a \pm i\sin a, 
+\end{align}
+を用いると，
+\begin{align}
+  y & =  C_{1}\left(\cos \beta x - i \sin \beta x\right) 
+       + C_{2}\left(\cos \beta x + i \sin \beta x\right) \notag \\
+    & =  \left(C_1 + C_2 \right)\cos \beta x + i (C_2 - C_1) \sin \beta x,
+\end{align}
+である．従って，三角関数の係数を改めて$C_1,~C_2$と置き直して，
+\begin{align}
+  y = C_1 \cos \beta x + C_2 \sin \beta x, \label{eq:PDE_05_02_sol_02}
+\end{align}
+と表すことが出来る．
+導出過程を見れば分かるとおり，\Eq{eq:PDE_05_02_sol_01}と\Eq{eq:PDE_05_02_sol_02}のどちらも正しい一般解である．
+\Eq{eq:PDE_05_02_sol_02}をさらに式変形してみることも出来る．
+
+1階の導関数の係数の符号で場合分けして解を求めたが，
+これから皆さんが物理や化学を勉強していて，よく目にするのは$d^2y/dx^2+\beta^2 y = 0~(\beta>0)$の方である．
+例えば，調和振動子に関する微分方程式
+\begin{align}
+  m \dfrac{d^2 x}{dt^2} = -k x, \quad (m>0,~k>0), 
+\end{align}
+は$\omega = \sqrt{k/m}$とおいて，
+\begin{align}
+ \dfrac{d^2 x}{dt^2} = -\omega^2 x, 
+\end{align}
+のように表せる．また，波や振動の振幅$u(x)$に関する微分方程式は，
+\begin{align}
+ \dfrac{d^2 u}{dx^2} = -k^2 u, 
+\end{align}
+で与えられる\footnote{まだ学んでいないかもしれないので，こういう形になる，ということで受け入れてほしい．}．
+振幅に関する微分方程式は，境界条件と呼ばれる，初期条件とは異なる問題設定に触れる絶好の機会なのだが，
+それについては偏微分方程式を学ぶときまで後回しにしておこう．
+
+特性方程式を出発点として一般解を求めてきたが，
+この形の微分方程式を日本語に解釈すると，「方程式の解は，2回微分すると，符号が逆になって元々の関数が出てくるもの」である．
+このような性質を持つ関数は三角関数である．実際，一般解は三角関数で表されるものになっている．
+つまり，この場合も解を推測することは出来るわけだ\footnote{実際，このような説明で微分方程式の解を持ってくる物理の教科書も少なくないし，そのように説明する気持ちは理解できる．微分方程式の解法ではなく，物理の中身に集中したいということだろう．}．
+%
+\newpage
+%
+\hrule
+\reidai
+調和振動子の微分方程式
+\begin{align}
+ \dfrac{d^2x}{dt^2} = -\omega^2 x, \quad \omega > 0, 
+\end{align}
+を解け，ただし$x(0)=1,~dx/dt|_{t=0}=0$とする．
+\vspace*{.2cm}
+\hrule
+\vspace*{.2cm}
+%
+$\cos\omega t$と$\sin\omega t$が特殊解であることはすぐ分かるので\footnote{もちろん，特性方程式から出発しても良い．}，
+一般解は
+\begin{align}
+ x(t) = C_1 \cos \omega t + C_2 \sin \omega t, 
+\end{align}
+である．初期条件より，$C_1=1,~C_2=0$なので，
+\begin{align}
+ x(t) = \cos \omega t. 
+\end{align}
+
+\newpage
+%
+
+%
+\section{変数分離}
+%
+1階微分方程式のうち，
+\begin{align}
+  \dfrac{dy}{dx} & =f\left(y\right)g\left(x\right),
+\end{align}
+の形をしたものを，変数分離形と呼ぶ．$f\left(x\right) \neq 0$のとき，
+両辺を$f\left(x\right)$で割り，
+\begin{align}
+  \dfrac{1}{f\left(y\right)}\dfrac{dy}{dx} = g\left(x\right),
+\end{align}
+とした後，$x$について積分することで解を得ることが出来る．
+変数分離形の最もシンプルな例は，\Eq{eq:PDE_02}である．
+\begin{align}
+ \dfrac{dy}{dx} + ay = 0. 
+\end{align}
+確認してみると分かるが，
+この方程式の解を解くときにも，上記の手続きを踏んでいる．
+%
+\newpage
+%
+\hrule
+\reidai
+
+次の微分方程式の一般解を求めよ．
+\begin{enumerate}[(1)]
+  \item  $\dfrac{dy}{dx} = 2xy$
+  \item  $\dfrac{dy}{dx} = -xy^2$
+\end{enumerate}
+\vspace*{.2cm}
+\hrule
+\vspace*{.2cm}
+
+\noindent
+(1) $y\neq 0$のとき，両辺を$y$で割ると，
+\begin{align}
+  \dfrac{1}{y}\dfrac{dy}{dx} = 2x. 
+\end{align} 
+両辺を$x$で積分すると，
+\begin{align}
+  & \int dx\, \dfrac{1}{y}\dfrac{dy}{dx} = \int dx\,2x, \notag \\
+  & \rightarrow \int dx \dfrac{d}{dx} \log \left|y\right| = x^2 + C, \notag \\
+  & \rightarrow \log \left|y\right| = x^2 + C, \notag \\
+  & \rightarrow y = Ce^{x^2}. 
+\end{align}
+最後の行の$C$と式変形途中の$C$は異なることに注意すること．
+$y=0$もこの方程式の解であり，一般解に対して$C=0$としたものがこれに対応する．\\
+(2) $y\neq 0$のとき，両辺を$y$で割って，
+\begin{align}
+  \dfrac{1}{y^2}\dfrac{dy}{dx} = - x. 
+\end{align}
+両辺を$x$で積分して，
+\begin{align}
+  & \int dx\, \dfrac{1}{y^2}\dfrac{dy}{dx} = -\int dx\,x, \notag \\
+  & \rightarrow -\int dx\, \dfrac{d}{dx}\left(\dfrac{1}{y}\right) = -x^2 + C, \notag \\
+  & \rightarrow \dfrac{1}{y} = x^2 +C, \notag \\
+  & \rightarrow y = \dfrac{1}{x^2 + C}. 
+\end{align}
+一方で，$y=0$も方程式の解であるが，$C$をどのような値にとっても$y=0$とすることは出来ない．
+このような解のことを特異解と呼ぶ．
+以上より，微分方程式の解は
+\begin{align}
+  y = \dfrac{1}{x^2 + C}, \quad y = 0. 
+\end{align}
+
+\newpage
+%
+\hrule
+\reidai
+次の微分方程式を解け．
+\begin{align}
+ \dfrac{dy}{dx} = -k \left(a-y\right)\left(b-y\right). 
+\end{align}
+ただし，$k,~a,~b$は正の定数とし，$y<a<b$の範囲で考えよ．
+\vspace*{.2cm}
+\hrule
+\vspace*{.2cm}
+両辺を$(a-y)(b-y)$で割って，
+\begin{align}
+ \dfrac{1}{(a-y)(b-y)}\dfrac{dy}{dx} = -k. 
+\end{align}
+ここで，
+\begin{align}
+ \dfrac{1}{(a-y)(b-y)} = \dfrac{1}{b-a}\left(\dfrac{1}{a-y} - \dfrac{1}{b-y}\right),
+\end{align}
+と式変形できることに注目すると，
+\begin{align}
+ & \int dx\,\dfrac{1}{a-y}\dfrac{dy}{dx} - \int dx\, \dfrac{1}{b-y}\dfrac{dy}{dx}
+ =  - (b-a)k x + C, \notag \\
+ & \rightarrow \log \dfrac{\left|y-b\right|}{\left|y-a\right|} = -\left(b-a\right)kx + C,
+ \notag \\
+ & \rightarrow \dfrac{y-b}{y-a} = \exp\left[-(b-a)x + C \right], \notag \\
+ & \rightarrow y = \dfrac{b-a\exp\left[-(b-a)x + C\right]}{1-\exp\left[-(b-a)x + C\right]}.
+\end{align}
+である．\\
+\fbox{補足}
+
+$a=0$として，
+\begin{align}
+ \dfrac{dy}{dx} & = kby\left(1-\dfrac{y}{b}\right) \notag \\
+                & = r y \left(1-\dfrac{y}{b}\right), \quad (r \equiv kb) 
+\end{align}
+の形をした方程式をロジスティック方程式と呼ぶ．
+この方程式は生物の個体数の変化を表す数理モデルに用いられたりする．
+
+\newpage
+%
+\subsection{同次形}
+%
+1階の微分方程式が
+\begin{align}
+  \dfrac{dy}{dx} = f\left(\dfrac{y}{x}\right),
+\end{align}
+の形であるとき，この微分方程式のことを同次形と呼ぶ．
+同次形の場合，変数変換により変数分離形に書き直すことが出来る．
+まず，$y=u\left(x\right)x$とおくと，
+\begin{align}
+ x\dfrac{du\left(x\right)}{dx}+u\left(x\right) & =f\left(u\left(x\right)\right),
+\end{align}
+だから，$f\left(u\right) - u\left(x\right) \neq 0$のとき，
+\begin{align}
+ \dfrac{1}{f\left(u\left(x\right)\right)-u\left(x\right)}\dfrac{du\left(x\right)}{dx}=\dfrac{1}{x},
+\end{align}
+と出来るので，確かに変数分離形になっている．
+%
+\newpage
+%
+\hrule
+\reidai
+次の
+微分方程式を解け．
+\begin{enumerate}[(1)]
+  \item $\dfrac{dy}{dx} = 1 + \dfrac{y}{x} $
+  \item $3xy\dfrac{dy}{dx} = 4y^2 + 3x^2$ 
+\end{enumerate}
+ただし，(2)については解を$y^2 = \cdots$の形で表しても良い．
+
+\vspace*{.2cm}
+\hrule
+\vspace*{.2cm}
+
+\noindent
+(1) $y=ux$とおくと，
+\begin{align}
+  &\dfrac{d(ux)}{dx} = 1 + u, \notag \\
+  &\rightarrow x\dfrac{du}{dx} + u = 1 + u, \notag \\
+  &\rightarrow x\dfrac{du}{dx} = 1. 
+\end{align}
+$x\neq 0$のとき，
+\begin{align}
+  \dfrac{du}{dx} = \dfrac{1}{x}. 
+\end{align}
+両辺を積分して，
+\begin{align}
+  u = \log \left| x \right| + C,
+\end{align}
+なので，$y=ux$より，
+\begin{align}
+  y = x\log \left|x\right| + Cx. 
+\end{align}
+%
+(2) 両辺を$x^2$で割ると，
+\begin{align}
+  3\dfrac{y}{x}\dfrac{dy}{dx} = 4\left(\dfrac{y}{x}\right)^{2} + 3,
+\end{align}
+これは同次形であるから，$y=ux$とおいて，
+\begin{align}
+  & 3u\dfrac{d(ux)}{dx} = 4u^2 + 3, \notag \\
+  & \rightarrow 3ux\dfrac{du}{dx} + 3u^2 = 4u^2 + 3, \notag \\
+  & \rightarrow 3ux\dfrac{du}{dx} = u^2 + 3. 
+\end{align}
+$x\neq 0$とすれば，
+\begin{align}
+  \dfrac{3u}{u^2 + 3}\dfrac{du}{dx} = \dfrac{1}{x}. 
+\end{align}
+両辺を積分すると，
+\begin{align}
+ &\int dx\,\dfrac{3u}{u^2 + 3}\dfrac{du}{dx} = \log \left|x\right| + C, \notag\\
+ &\rightarrow \dfrac{3}{2}\int dx\, \dfrac{d}{dx}\left(\log \left(u^2 + 3\right)\right) 
+              = \log \left|x\right| + C, \notag \\
+ &\rightarrow \dfrac{3}{2}\log \left(u^2 + 3\right) = \log \left|x\right| + C, \notag \\
+ &\rightarrow u^2 = Cx^{2/3} - 3.
+\end{align}
+従って，$y=ux$より，
+\begin{align}
+  y^2 = Cx^{8/3} - 3x^2. 
+\end{align}
+$x=0$のとき解は$y=0$であるが，上式はこの場合を含んでいる．
+%
+\newpage
+%
+%
+\section{常微分方程式の分類}
+\subsection{線形と非線形}
+$x$を引数とする関数$y\left(x\right)$に関する常微分方程式を考える．
+導関数$\left\{d^{i}y/dx^{i}\right\}$の1次式で表された常微分方程式を
+線形微分方程式と呼ぶ．式の中に含まれる最大階数が$n$のとき，その常微分方程式を
+$n$階常微分方程式と呼び，一般に次式のように表される．
+\begin{align}
+a_{n}\left(x\right)\dfrac{d^{n}y}{dx^{n}}+a_{n-1}\left(x\right)\dfrac{d^{n-1}y}{dy^{n-1}}+\cdots+a_{1}\left(x\right)\dfrac{dy}{dx}+a_{0}\left(x\right) y & =b\left(x\right).
+\end{align}
+%このテキストでこれまで扱ってきた常微分方程式は，変数分離で紹介したものを除けば線形である．
+この形で表せない常微分方程式のことを非線形常微分方程式と呼ぶ．
+例えば，
+\begin{align}
+  \dfrac{d^{2}y}{dx^{2}} & =-a\sin y, \label{eq:PDE_general}
+\end{align}
+は$y\left(x\right)$が三角関数の引数になっているため非線形微分方程式である．
+また，変数分離を学んだときに例題として扱った
+\begin{align}
+  \dfrac{dy}{dx} = -xy^2, 
+\end{align}
+は$y^2$を含んでいるため，1階の非線形常微分方程式である．
+このような変数分離形で表せるもの等を除けば，
+非線形微分方程式を解析的に解くことは極めて難しく\footnote{実際，\Eq{eq:PDE_general}は(解析的には)解けない．}，
+実際に解ける例は僅かである．
+そのため，非線形微分方程式の解の振る舞いを調べる研究は，
+数学や数理物理における最先端の一つである．
+従って，このテキストで取り扱うのは主に線形とする．
+
+%
+\subsection{斉次と非斉次}
+%
+線形常微分方程式\Eq{eq:PDE_general}において，
+$b(x) = (定数)$のとき，斉次線形常微分方程式と呼び，
+$b(x) \neq (定数)$のとき，非斉次線形常微分方程式と呼ぶ．
+従って，これまで扱った方程式を斉次か非斉次かで分類すると以下のようになる．
+\begin{align}
+  &\text{\Eq{eq:PDE_01}}\quad  \dfrac{dy}{dx} = g(x) \text{ : 非斉次}\\
+  &\text{\Eq{eq:PDE_02}}\quad  \dfrac{dy}{dx} + a y = 0 \text{ : 斉次} \\
+  &\text{\Eq{eq:PDE_03}}\quad  \dfrac{dy}{dx} + ay = g(x) \text{ : 非斉次} \\
+  &\text{\Eq{eq:PDE_04}}\quad  \dfrac{d^2y}{dx^2} + a \dfrac{dy}{dx} + by = 0 \text{ : 斉次}
+\end{align}
+容易に想像がつくが，非斉次方程式の解を求める方が斉次の場合よりも一般解を求めるのが難しくなるが，
+代表的な形の微分方程式については，解法が確立されている．
+%
+\section{線形常微分方程式に関する基本的な定理}
+%
+\subsection{斉次形 : 解の線形結合もまた解}
+%
+\begin{shadebox}
+斉次形の$n$階線形常微分方程式
+\begin{align}
+ \sum_{i=0}^{n}a_{i}\left(x\right)\dfrac{d^{i}y}{dx^{i}}& =0, 
+\label{eq:homo_linear}
+\end{align}
+の解を$y_1,~y_2$とすると，その線形結合
+\begin{align}
+  y\left(x\right) = C_{1}y_{1} + C_{2}y_{2},  \label{eq:homo_linear_comb_sol}
+\end{align}
+もまた解である．
+\end{shadebox}
+%
+ここまでで経験してきた微分方程式の解の導出を考えれば，
+定理として証明するまでもないかもしれないが，一応証明しておく．
+\Eq{eq:homo_linear}の左辺に\Eq{eq:homo_linear_comb_sol}を代入すると，
+\begin{align}
+ \sum_{i=0}^{n}a_{i}\left(x\right)\dfrac{d^{i}}{dx^{i}}\left(C_{1}y_{1}+C_{2}y_{2}\right) & =C_{1}\left(\sum_{i=0}^{n}a_{i}\left(x\right)\dfrac{d^{i}y_{1}}{dx^{i}}\right)+C_{2}\left(\sum_{i=0}^{n}a_{i}\left(x\right)\dfrac{d^{i}y_{2}}{dx^{i}}\right),
+\end{align}
+$y_1,~y_2$は微分方程式の階であるから，右辺の括弧内はゼロになるので，
+確かに\Eq{eq:homo_linear_comb_sol}は微分方程式の解になっていることが分かる．
+%
+\subsubsection{斉次形 : $n$階微分方程式の一般解の形}
+%
+斉次の$n$階線形常微分方程式の一般解について，
+証明なしに述べる．これは，
+\Sec{PDE_04}で述べた事項の一般化に当たる．
+%
+\begin{shadebox}
+ 斉次の$n$階線形常微分方程式
+\begin{align}
+ \sum_{i=0}^{n}a_{i}\left(x\right)\dfrac{d^{i}y}{dx^{i}}& =0, 
+\end{align}
+の一般解は，$n$個の線形独立な特殊解$\left\{y_i\right\}$の線形結合
+\begin{align}
+  y & =\sum_{i=1}^{n}C_{1}y_{1},
+\end{align} 
+で表される．
+\end{shadebox}
+ここで，$\{y_i\}$が線形独立であるとは，
+\begin{align}
+  C_1 y_1(x) + C_2 y_2(x) + \cdots + C_n y_n (x) = 0, \label{eq:linear_independ} 
+\end{align}
+を満たす$C_1,~C_2,\cdots,C_n$が
+\begin{align}
+ C_1 = C_2 = \cdots = C_n = 0, 
+\end{align}
+のみであることをいう．いま，$y^{(n)}= d^n y/dx^n$という記法を導入すると，
+\Eq{eq:linear_independ}を$x$で0回，1回，2回，$\cdots$, $n$回微分したものは次式で表される．
+\begin{align}
+  &C_1 y_1 + C_2 y_2 + \cdots + C_n y_n  = 0, \\ 
+  &C_1 y_{1}^{(1)} + C_2 y_{2}^{(1)} + \cdots + C_n y_{n}^{(1)} = 0, \\  
+  &C_1 y_{1}^{(2)} + C_2 y_{2}^{(2)} + \cdots + C_n y_{n}^{(2)} = 0, \\
+  & \cdots \\ 
+  &C_1 y_{1}^{(n)} + C_2 y_{2}^{(n)} + \cdots + C_n y_{n}^{(n)} = 0.
+\end{align}
+これを行列の形に表すと，
+\begin{align}
+ \underbrace{\left(\begin{array}{cccc}
+y_{1} & y_{2} & \cdots & y_{n}\\
+y_{1}^{\left(1\right)} & y_{2}^{\left(1\right)} & \cdots & y_{n}^{\left(1\right)}\\
+y_{1}^{\left(2\right)} & y_{2}^{\left(2\right)} & \cdots & y_{n}^{\left(2\right)}\\
+\vdots & \vdots &  & \vdots\\
+y_{1}^{\left(n\right)} & y_{2}^{\left(n\right)} & \cdots & y_{n}^{\left(n\right)}
+\end{array}\right)}_{\equiv\hat{A}}\left(\begin{array}{c}
+C_{1}\\
+C_{2}\\
+\vdots\\
+C_{n}
+\end{array}\right) & =\left(\begin{array}{c}
+0\\
+0\\
+\vdots\\
+0
+\end{array}\right). 
+\end{align}
+従って，$C_1 = C_2 = \cdots = C_n = 0$のみがこの方程式の解であるためには，
+$\hat{A}$の逆行列$\hat{A}^{-1}$が存在すること，
+つまり$\hat{A}$の行列式を$W\left(y_1, y_2, \cdots , y_n\right)$とおくと，
+\begin{align}
+ W\left(y_1,y_2,\cdots, y_n\right) = 
+ \left|\begin{array}{cccc}
+y_{1} & y_{2} & \cdots & y_{n}\\
+y_{1}^{\left(1\right)} & y_{2}^{\left(1\right)} & \cdots & y_{n}^{\left(1\right)}\\
+y_{1}^{\left(2\right)} & y_{2}^{\left(2\right)} & \cdots & y_{n}^{\left(2\right)}\\
+\vdots & \vdots &  & \vdots\\
+y_{1}^{\left(n\right)} & y_{2}^{\left(n\right)} & \cdots & y_{n}^{\left(n\right)}
+\end{array}\right|
+ \neq 0,
+\end{align}
+である．$W\left(y_1,y_2,\cdots,y_n\right)$のことをロンスキー行列式(ロンスキアン)と呼ぶ．
+
+例えば，2階の斉次の線形常微分方程式の線形独立な解を$y_1,~y_2$とすると，ロンスキアンは，
+\begin{align}
+  W\left(y_1,y_2\right) = y_1 y_2^{(1)} - y_2 y_1^{(1)}, 
+\end{align}
+で表される\footnote{本講義で扱うのは一部をのぞいて2階程度なので，一般の場合はほとんど必要にならない．}．
+
+\subsubsection{非斉次形 : 非斉次形の一般解は，斉次形の一般解と非斉次形の特殊解の和\label{sec:inhomo_strategy}}
+\begin{shadebox}
+非斉次の$n$階線形常微分方程式
+\begin{align}
+ \sum_{i=0}^{n}a_{i}\left(x\right)\dfrac{d^{i}y}{dx^{i}} & =b\left(x\right), \quad b\left(x\right) \neq \mathrm{Const.}
+\label{eq:inhomo_linear}
+\end{align}
+の特殊解を$y_s$, 対応する斉次形
+\begin{align}
+ \sum_{i=0}^{n}a_{i}\left(x\right)\dfrac{d^{i}y}{dx^{i}} & = 0,
+\end{align}
+の一般解を$y_h$とすると，\Eq{eq:inhomo_linear}の一般解は
+\begin{align}
+  y = y_{h} + y_{s}, \label{eq:inhomo_linear_sol}
+\end{align}
+で表される．
+\end{shadebox}
+%
+\Eq{eq:inhomo_linear}に，\Eq{eq:inhomo_linear_sol}を代入すると，
+\begin{align}
+ \sum_{i=0}^{n}\dfrac{d^{i}}{dx^{i}}\left(y_{h}+y_{s}\right) & =\sum_{i=0}^{n}a_{i}\left(x\right)\dfrac{d^{i}y_{h}}{dx^{i}}+\sum_{i=0}^{n}a_{i}\left(x\right)\dfrac{d^{i}y_{s}}{dx^{i}}\notag\\
+ & =0+b\left(x\right)\notag\\
+ & =b\left(x\right), 
+\end{align}
+となるので，確かに\Eq{eq:inhomo_linear_sol}は非斉次形の解になっている．これが一般解であるかどうかを確認する必要があるが，
+これは本テキストの範疇を超えるので，省略することにする．
+
+この定理は非斉次の線形常微分方程式を解く上で有用な定理である．
+というのも，比較的簡単に解ける斉次方程式の一般解と，
+どんな方法でも良いので非斉次方程式の特殊解を一つでも見つけさえすれば，
+その2つから非斉次方程式の一般解を求められたことになるからだ．
+そこで，この後は斉次方程式の一般解を求める方法をいくつか学んだ後，
+非斉次方程式の特殊解を探し出す方法について述べる．
+
+%
+%
+\section{非斉次方程式の解法}
+%
+\subsection{未定係数法}
+%
+非斉次の2階線形常微分方程式
+\begin{align}
+\dfrac{d^{2}y}{dx^{2}}+a\dfrac{dy}{dx}+by & = g\left(x\right),
+\label{eq:inhomo_linear2}
+\end{align}
+を考える．ただし，$a,~b$は定数とする．
+対応する斉次方程式の一般解については\Sec{PDE_04}で既に述べた．
+従って，非斉次方程式の特殊解を求められれば，
+一般解が求まったことになる．
+そこで，ここでは非斉次項$g(x)$の形に応じて，
+特殊解$y_p$の形を予測するというアプローチをとることにする．
+例えば，微分方程式
+\begin{align}
+\dfrac{d^{2}y}{dx^{2}}+2\dfrac{dy}{dx}+y & =e^{3x},
+\end{align}
+については，特殊解が$e^{3x}$を含んでいるだろうと予測がつく．
+実際，$A$を未定係数として$y_p = Ae^{3x}$の形を仮定して
+微分方程式に代入してみると，
+\begin{align}
+9Ae^{3x}+6Ae^{3x}+Ae^{3x} & =e^{3x}, 
+\end{align}
+となり，$A=1/16$であれば確かに特殊解になっていることが分かる．
+このように，特殊解の形を予測して未定係数を
+決定することで特殊解を求める方法を未定係数法と呼ぶ．
+未定係数法を利用するに当たって，次の2つのコツがある．
+
+\begin{itemize}
+  \item 非斉次項の形に応じた特殊解の候補は下記． 
+  \begin{table}[htbp]
+  \centering
+  \begin{tabular}{cc}
+  \hline
+  \hline
+  非斉次項$g\left(x\right)$ & 特殊解$y_{p}$の候補\tabularnewline
+  \hline 
+  $e^{ax}$ & $Ae^{ax}$\tabularnewline
+  $\sin ax,\,\cos ax$ & $A\sin ax+B\cos ax$\tabularnewline
+  $n$次多項式 & $n$次多項式\tabularnewline
+  \hline 
+  \end{tabular}
+  \end{table}
+  \item 上記のように予測した候補を用いたときに，
+	未定係数がうまく決められないときは，
+	その候補に$x$や$x^2$をかけたものを検討してみる．
+\end{itemize}
+この方法は非斉次項の関数形が単純である場合に有効であり，
+より高階の微分方程式に対しても適用できる．
+複雑な非斉次項については，次節以降で述べる定数変化法を用いる必要がある．
+%
+\newpage
+%
+\hrule
+\reidai
+次の微分方程式の一般解を求めよ．
+\begin{enumerate}[(1)]
+  \item $\dfrac{d^2 y}{dx^2} - 4y = \sin 2x$
+  \item $\dfrac{d^2 y}{dx^2} - \dfrac{dy}{dx} - 2 y = \sin 4x$
+  \item $\dfrac{d^2 y}{dx^2} -5\dfrac{dy}{dx} + 6 y = e^{2x}$ 
+\end{enumerate}
+\hrule
+\vspace*{.2cm}
+
+\noindent
+(1) まず，斉次方程式
+\begin{align}
+  \dfrac{d^2 y}{dx^2} - 4y = 0,
+\end{align}
+を考える．解として$e^{\lambda x}$の形を予測して代入すると，特性方程式
+\begin{align}
+  \lambda^2 - 4 = 0, 
+\end{align}
+を得る．これを解くと，$\lambda = \pm 2$なので，斉次方程式の一般解は，
+\begin{align}
+  y = C_1 e^{2x} + C_2 e^{-2x}, 
+\end{align}
+である．
+
+次に，非斉次方程式の特殊解を求める．解の形として，$A\sin 2x$を予測して代入すると，
+\begin{align}
+  & -4A \sin 2x - 4 A \sin 2x = \sin 2x, \notag \\
+  & \rightarrow -8 A = 1, \notag \\
+  & \rightarrow    A = -\dfrac{1}{8}. 
+\end{align} 
+従って，与えられた微分方程式の一般解は
+\begin{align}
+  y = C_1 e^{2x} + C_2 e^{-2x} - \dfrac{1}{8}\sin 2x.  
+\end{align}
+%
+(2)
+斉次方程式の一般解については結果だけを示すと，$y = C_1 e^{-x} + C_2 e^{2x}$である．
+非斉次方程式の特殊解として，$y = A\cos 4x + B\sin 4x$の形を仮定して与えられた微分方程式に代入すると，
+\begin{align}
+ & -16(A \cos 4x + B \sin 4x ) -4 (- A \sin 4x + B \cos 4x) - 2 (A\cos 4x + B\sin 4x)= \sin 4x, \notag \\
+ & \rightarrow (-18 A + 4B)\cos 4x + (-18 B -4A)\sin 4x = \sin 4x, 
+\end{align}
+なので，両辺を係数比較すると，
+\begin{align}
+  \begin{cases}
+    -18 A - 4B = 0 \\ 
+    -18 B + 4A = 1 
+  \end{cases},
+\end{align}
+を得る．これを解くと，$A=1/85$, $B=-9/170$なので，特殊解は$y=(1/85)\cos 4x - (9/170)\sin 4x$である．従って，一般解は
+\begin{align}
+ y = C_1 e^{-x} + C_2 e^{2x} + \dfrac{1}{85} \cos 4x - \dfrac{9}{170}\sin 4x.
+\end{align}
+
+\noindent
+\fbox{補足}
+
+非斉次項が三角関数の場合は$e^{i\theta}$の形に書き換えた微分方程式を考え，
+その微分方程式の解の実部か虚部をとることで，元々の微分方程式の解を求めることが出来る．
+実部と虚部のどちらをとれば良いのかは非斉次項がsinであるかcosであるかによる．
+このような解の求め方は物理ではよく登場する．そのような方法が何故許されるのか簡単に解説する．
+
+非斉次項$\sin 4x$を$e^{4ix}$に書き換えた微分方程式は
+\begin{align}
+ \dfrac{d^2y}{dx^2} - \dfrac{dy}{dx} - 2y = e^{4ix}, 
+\end{align}
+である．この微分方程式の解が$y = f(x) + i g(x)$ ($f(x),~g(x)$は実関数)の形で得られたとする．
+これを代入して，実部と虚部に分けて書くと，
+\begin{align}
+  \left(\dfrac{d^2f}{dx^2} - \dfrac{df}{dx} - 2f \right) 
+  + i \left(\dfrac{d^2 g}{dx^2} - \dfrac{dg}{dx} - 2g\right) = \cos 4x + i\sin 4x, 
+\end{align}
+となる．両辺で実部と虚部を比較すると，$f$は次の微分方程式の解になっていることが分かる．
+\begin{align}
+ \dfrac{d^2f}{dx^2} - \dfrac{df}{dx} - 2f = \cos 4x.
+\end{align}
+同様に，$g$は
+\begin{align}
+ \dfrac{d^2g}{dx^2} - \dfrac{dg}{dx} - 2g = \sin 4x,
+\end{align}
+の解になっているが，これは元々の解くべき方程式そのものである．
+従って，非斉次項の三角関数を$e^{i\theta}$の形に書き換えた方程式を解いて，
+その解の虚部をとってくれば，それが元々の方程式の解になっている．
+
+今回の問題について，この方法を使って特殊解を出してみよう．
+書き換えた方程式の特殊解は$Ae^{4ix}$の形をしていると予測して代入してみると，
+\begin{align}
+  &  -16Ae^{4ix} - 4iAe^{4ix} -2Ae^{4ix} = e^{4ix}, \notag \\
+  &\rightarrow A \left(-18 - 4i\right) e^{4ix} = e^{4ix}, \notag \\
+  &\rightarrow A = -\dfrac{1}{18 + 4i} = -\dfrac{9 - 2 i}{170},
+\end{align}
+となるので，特殊解は
+\begin{align}
+  y &= -\dfrac{9-2i}{170}e^{4ix} \notag \\
+    &= -\dfrac{9}{170}\cos 4x - \dfrac{1}{85}\sin 4x 
+      + i\left(\dfrac{1}{85}\cos 4x - \dfrac{9}{170}\sin 4x\right).
+\end{align}
+虚部をとってくると，確かに書き換える前の微分方程式の特殊解になっている．
+
+非斉次項を複素数に拡張することで，元々の場合よりも計算が楽になっていることが分かる．
+今後物理や化学の勉強を進めていくと，
+上記のような手続きで微分方程式を解いている文献にしばしば遭遇することになると思うので，
+そのときに面食らわないようにしてもらえれば幸いである．
+
+\noindent
+(3) まず，斉次方程式の一般解を求めると，
+\begin{align}
+  y = C_1 e^{2x} + C_2 e^{3x}. 
+\end{align}
+%
+次に，非斉次方程式の特殊解を求める．
+解の候補として，
+$y=Ae^{2x}$を予測したくなるが，これはうまくない．
+何故なら，これは既に斉次方程式の一般解の中に含まれているからだ．
+実際左辺に代入してみると，
+\begin{align}
+  &\dfrac{d^2}{dx^2}\left(Ae^{2x}\right) - 5 \dfrac{d}{dx}\left(Ae^{2x}\right) + 6Ae^{2x} \notag \\
+  &=4Ae^{2x} -10Ae^{2x} + 6 Ae^{2x} \notag \\
+  &=0, 
+\end{align}
+となり，$A$が消えてしまうので，特殊解が定まらない(考えてみたら当たり前)．
+そこで，コツのところで書いたように，特殊解として$y=Axe^{2x}$を候補として挙げてみる．
+これを代入してみると，
+\begin{align}
+ &A\left\{ \dfrac{d^2}{dx^2}xe^{2x} - 5 \dfrac{d}{dx}xe^{2x} - 6 xe^{2x}\right\}  = e^{2x}, \notag \\
+ &\rightarrow -Ae^{2x} = e^{2x}, \notag \\
+ &\rightarrow A = -1, 
+\end{align}
+なので，特殊解は$y=-xe^{2x}$である．従って，一般解は
+\begin{align}
+ y = C_1 e^{2x} + C_2 e^{3x} - x e^{2x}. 
+\end{align}
+%
+\newpage
+%
+\subsection{定数変化法その1 –簡単な非斉次方程式への応用–}
+%
+次の形の非斉次の微分方程式を考える．
+\begin{align}
+ \dfrac{dy}{dx}+a\left(x\right)y & =g\left(x\right), \label{eq:PDE_06}
+\end{align}
+%
+\Eq{eq:PDE_03}に似ているが，違うところは$y$の項の係数も
+$x$の関数になっているところである．
+\Sec{inhomo_strategy}で述べた通り，非斉次方程式の解を求める際には，
+まず対応する斉次方程式の一般解を求めることを考えると良い．
+つまり，
+\begin{align}
+ \dfrac{dy}{dx}+a\left(x\right)y & = 0,
+\end{align}
+の一般解を求めることから始める．この方程式は変数分離形なので，
+$y\neq 0$のとき，
+\begin{align}
+ \dfrac{1}{y}\dfrac{dy}{dx} & =-a\left(x\right),
+\end{align}
+であるから，
+\begin{align}
+ \log\left|y\right| & =\int dx\,a\left(x\right),
+\end{align}
+である．
+\Sec{PDE_02}のときと全く同じ議論から，
+\begin{align}
+ y & =C\exp\left[-\int dx\,a\left(x\right)\right], \label{eq:PDE_06_homo_sol}
+\end{align}
+とできる．これは$y=0$のときも対応できる形になっており(つまり$C=0$)，一般解である．これで，非斉次方程式の一般解を求めるに当たっての最初の関門は突破したことになる．次は非斉次方程式の特殊解を求めよう．
+ここで次のように考える．
+非斉次であろうが，斉次方程式と解の形は似ていると推測する．
+ただし確認してみれば分かるが，
+一般に\Eq{eq:PDE_06_homo_sol}は\Eq{eq:PDE_06}の解にはならない．そこで，非斉次の場合に対応するために，任意定数$C$を$x$の関数$C\left(x\right)$にしてみる，つまり
+\begin{align}
+ y & =C\left(x\right)\exp\left[-\int dx\,a\left(x\right)\right],
+\end{align}
+を非斉次方程式の解の候補として考える．$A\left(x\right) = -\int dx\,a\left(x\right)$とおいた上で\Eq{eq:PDE_06}に代入してみると，左辺は
+\begin{align}
+ & \dfrac{d}{dx}\left[C\left(x\right)e^{A\left(x\right)}\right]+a\left(x\right)C\left(x\right)e^{A\left(x\right)}\notag\\
+ & =\dfrac{dC\left(x\right)}{dx}e^{A\left(x\right)}+C\left(x\right)\dfrac{d}{dx}e^{A\left(x\right)}-a\left(x\right)C\left(x\right)e^{A\left(x\right)}\notag\\
+ & =\dfrac{dC\left(x\right)}{dx}e^{A\left(x\right)}+C\left(x\right)a\left(x\right)e^{A\left(x\right)}-a\left(x\right)C\left(x\right)e^{A\left(x\right)}\notag\\
+ & =\dfrac{dC\left(x\right)}{dx}e^{A\left(x\right)},
+\end{align}
+なので，元々の微分方程式から次式が得られる．
+\begin{align}
+ \dfrac{dC\left(x\right)}{dx}e^{A\left(x\right)} & =g\left(x\right).
+\end{align}
+この方程式の解の1つは
+\begin{align}
+ C\left(x\right) & =\int dx\,e^{-A\left(x\right)}g\left(x\right),
+\end{align}
+なので，斉次方程式の一般解と組み合わせることで，
+非斉次方程式の一般解は
+\begin{align}
+ y & = C e^{A\left(x\right)} + e^{A\left(x\right)}\int dx\, 
+       g\left(x\right) e^{-A\left(x\right)},\notag \\
+   & = e^{A\left(x\right)}\left[\int dx\, e^{-A\left(x\right)}g\left(x\right) + C\right]. 
+\end{align}
+となることが分かった．
+このように，斉次方程式の一般解の任意定数を関数とみなして，
+非斉次方程式の特殊解を求める方法を定数変化法と呼ぶ．
+この方法はより高階の方程式に対しても使える．
+
+実は，この非斉次方程式について，\Eq{eq:PDE_03}のときと同じで，積の微分法から解を求めることが出来る．その解法も紹介しておこう．
+\Eq{eq:PDE_06}の両辺に，何らかの関数$f\left(x\right)$をかける．
+\begin{align}
+ f\left(x\right)\dfrac{dy}{dx}+a\left(x\right)f\left(x\right)y & =f(x)g\left(x\right).
+ \label{eq:PDE_06_fx}
+\end{align}
+左辺を
+\begin{align}
+  f\left(x\right)\dfrac{dy}{dx}+a\left(x\right)y & =\dfrac{d}{dx}\left[f\left(x\right)y\right],
+\end{align}
+と書き直せるような関数$f\left(x\right)$を求めれば，この方程式は解けたことになる．つまり，
+\begin{align}
+ \dfrac{df\left(x\right)}{dx} & =a\left(x\right)f\left(x\right),
+\end{align}
+を$f\left(x\right)$が満たせば良い．既に知っているようにこの方程式の解の一つは，
+\begin{align}
+ f\left(x\right) & =\exp\left[\int dx\,a\left(x\right)\right]\notag \\ 
+                 & =e^{-A\left(x\right)}
+\end{align}
+である．従って，\Eq{eq:PDE_06_fx}は，
+\begin{align}
+ \dfrac{d}{dx}\left(e^{-A\left(x\right)}y\right) = e^{-A\left(x\right)}g\left(x\right), 
+\end{align}
+である．
+くどくなってしまうので途中は省略するが，丁寧に式変形すれば，
+\begin{align}
+ y & =\exp\left(A\left(x\right)\right)\left[\int dx\,\exp\left(-A\left(x\right)\right)g\left(x\right)+C\right],
+\end{align}
+を得る．
+%
+%
+\newpage
+%
+\hrule
+\reidai
+微分方程式
+\begin{align}
+ \dfrac{dy}{dx} + 4x y= 2x,
+\end{align}
+の一般解を求めよ．
+\vspace*{.2cm}
+\hrule
+\vspace*{.2cm}
+%
+斉次方程式
+\begin{align}
+  \dfrac{dy}{dx} + 4xy = 0, 
+\end{align}
+をまず考える．両辺に$e^{2x^2}$をかけて，
+\begin{align}
+  &e^{2x^2}\dfrac{dy}{dx} + 4xe^{2x^2} y = 0, \notag \\
+  &\rightarrow \dfrac{d}{dx}\left(e^{2x^2}y\right) = 0,
+\end{align}
+なので，
+\begin{align}
+  y = Ce^{-2x^2}. 
+\end{align}
+非斉次方程式の特殊解の形として，
+\begin{align}
+ y = C(x)e^{-2x^2}, 
+\end{align}
+を考える．これを代入すると，
+\begin{align}
+ & \dfrac{d}{dx}\left(Ce^{-2x^2}\right) + 4xCe^{-2x^2} = 2x, \notag \\
+ & \rightarrow e^{-2x^2}\dfrac{dC}{dx}-4xe^{-2x^2}C + 4xCe^{-2x^2}= 2x, \notag \\
+ & \rightarrow \dfrac{dC}{dx} = 2xe^{2x^2},
+\end{align}
+が得られる．
+この微分方程式の特殊解は，
+\begin{align}
+  C(x) = \dfrac{1}{2}e^{2x^2} 
+\end{align}
+である．従って，非斉次方程式の一般解は，
+\begin{align}
+  y = Ce^{-2x^2} + \dfrac{1}{2}. 
+\end{align}
+%
+\newpage
+%
+\subsection{定数変化法その2–斉次方程式への応用–}
+%
+定数変化法は斉次の線形微分方程式の解を求めるのにも使える．
+ここでは，2階の微分方程式
+\begin{align}
+ \dfrac{d^2 y}{dx^2} - 2a\dfrac{dy}{dx} + a^2 y= 0, 
+\end{align}
+を考える．解として$y=e^{\lambda x}$の形を仮定して上式に代入すると，
+\begin{align}
+  &\lambda^2 - 2a \lambda + a^2 = 0,\notag \\
+  &\rightarrow \lambda = a, \notag 
+\end{align}
+なので，このアプローチからは特殊解が
+\begin{align}
+  y = e^{ax}, 
+\end{align}
+の一つしか求まらないため，一般解を導くためにはもう一つ特殊解を求める必要がある．
+もちろん，\Eq{eq:solution_PDE_04_degenerate}で示したように，既に我々はもう一つの特殊解の
+形を知っているが，一度忘れてしまったことにして，
+定数変化法から求めることを考えてみる．
+もう一つの特殊解の候補として，
+\begin{align}
+  y = f(x) e^{ax}, 
+\end{align}
+を考えて，与えられた微分方程式に代入すると，
+\begin{align}
+  &\dfrac{d^2}{dx^2}\left(fe^{ax}\right) - 2a\dfrac{d}{dx}\left(fe^{ax}\right) + a^2 fe^{ax}=0, \notag \\
+  &\rightarrow \dfrac{d^2 f}{dx^2} = 0, 
+\end{align}
+この方程式を満たす$f$の一つは$f=x$なので，与えられた微分方程式について，
+$e^{ax}$以外の特殊解は$xe^{ax}$である．従って，一般解は
+\begin{align}
+ y = C_1 e^{ax} + C_2 xe^{ax},
+\end{align}
+であり，これは以前求めた一般解(\Eq{eq:solution_PDE_04_degenerate})と一致する．
+
+定数変化法に基づく特殊解の導出は，より高階の微分方程式に対しても有効である．
+そのことを次の例題を通して見ていこう．
+%
+\newpage
+\hrule
+\reidai
+微分方程式
+\begin{align}
+  \dfrac{d^3y}{dx^3}-4\dfrac{d^2y}{dx^2}+5\dfrac{dy}{dx}-2y = 0,
+\end{align}
+の一般解を求めよ．
+\vspace*{.2cm}
+\hrule
+\vspace*{.2cm}
+%
+解の形として$y=e^{\lambda x}$を仮定して微分方程式に代入すると，
+\begin{align}
+ &\lambda^3 - 4\lambda^2 + 5 \lambda -2  = 0, \notag \\
+ &\rightarrow (\lambda -1)^2 (\lambda -2) = 0, \notag \\
+ &\rightarrow \lambda = 1~(重解),~2, 
+\end{align}
+を得る．従って，$e^{x},~e^{2x}$は特殊解であるが，今回の微分方程式は
+3階なので，あと1つ特殊解を求める必要がある．
+そこで，特殊解として
+\begin{align}
+ y = f(x)e^{x}, 
+\end{align}
+の形を仮定して，微分方程式に代入すると，
+\begin{align}
+ & \dfrac{d^3}{dx^3}\left(fe^x\right) - 4 \dfrac{d^2}{dx^2}\left(fe^x\right)
+   + 5 \dfrac{d}{dx}\left(fe^x\right) - 2 fe^x = 0, \notag \\
+ & \rightarrow \dfrac{d^3 f}{dx^3} - \dfrac{d^2 f}{dx^2} = 0. 
+\end{align}
+ここで，$F=d^2 f/dx^2$とおくと，
+\begin{align}
+ \dfrac{dF}{dx} - F = 0, 
+\end{align}
+なので，$F$は
+\begin{align}
+  F = \dfrac{d^2f}{dx^2} = Ae^{x}, 
+\end{align}
+であり，$f$について解くと，
+\begin{align}
+  f = Ae^{x} + Bx + C, 
+\end{align}
+である．従って，$y=fe^{x}$より，
+\begin{align}
+  y = Ae^{2x} + Bxe^{x} + Ce^{x}, 
+\end{align}
+である．$e^{x},~e^{2x}$は既に求めた特殊解と同じであるから，
+新たに得られた特殊解は$xe^{x}$である．
+従って，与えられた微分方程式の一般解は
+\begin{align}
+  y = C_1 e^{x} + C_2 xe^{x} + C_3 e^{2x}, 
+\end{align}
+である．
+%
+\subsection{定数変化法その3 –2階の非斉次線形方程式–}
+%
+2階の非斉次線形方程式として最も一般的な形である次式
+\begin{align}
+ \dfrac{d^2y}{dx^2} + a(x)\dfrac{dy}{dx} + b(x)y = g(x), \label{eq:PDE_2nd_inhomo_general} 
+\end{align}
+を考え，既に斉次方程式の(線形独立な)解が$y_1(x),~y_2(x)$のように求まっている場合，
+一般解は
+\begin{align}
+ y = C_1 y_1(x) + C_2 y_2(x), 
+\end{align}
+で表される．非斉次方程式の特殊解の候補として次式を考える．
+\begin{align}
+  y = f_1(x) y_1(x) + f_2(x) y_2 (x). 
+\end{align}
+これを\Eq{eq:PDE_2nd_inhomo_general}に代入すると，
+\begin{align}
+   & \left(f_{1}^{\prime\prime}y_{1}+2f_{1}^{\prime}y_{1}^{\prime}+f_{!}y_{1}^{\prime\prime}+f_{2}^{\prime\prime}y_{2}+2f_{2}^{\prime}y_{2}^{\prime}+f_{2}y_{2}^{\prime\prime}\right)\notag\\
+ & +a\left(x\right)\left(f_{1}^{\prime}y_{1}+f_{1}y_{1}^{\prime}+f_{2}^{\prime}y_{2}+f_{2}y_{2}^{\prime}\right)\notag\\
+ & +b\left(x\right)\left(f_{1}y_{1}+f_{2}y_{2}\right)=g(x). \label{eq:PDE_2nd_inhomo_general_prep1}
+\end{align}
+ただし，$y^{\prime}_i = dy_i/dx , ~ y^{\prime\prime}_{i} = d^2 y_i/dx^2 ~(i=1,2)$と定義した．
+この式だけでは$f_1,~f_2$は定まらないので，次の条件を追加で課すことにする．
+\begin{align}
+ f_1^\prime y_1 + f_2^\prime y_2 = 0. \label{eq:PDE_2nd_inhomo_general_prep2}
+\end{align}
+さらに，この式を$x$で1回微分して，
+\begin{align}
+  f_1^{\prime\prime} y_1 + f_1^{\prime} y_1^{\prime} + f_2^{\prime\prime}y_2 
+  + f_2^{\prime} y_2^{\prime} = 0, \label{eq:PDE_2nd_inhomo_general_prep3}
+\end{align}
+を得ておく．
+Eq. \eqref{eq:PDE_2nd_inhomo_general_prep2}, \eqref{eq:PDE_2nd_inhomo_general_prep3}を
+\Eq{eq:PDE_2nd_inhomo_general_prep1}に代入すると，
+\begin{align}
+ &f_1^{\prime} y_1^{\prime} + f_1y_1^{\prime\prime} + f_2^{\prime} y_2^{\prime} + f_2 y_2^{\prime\prime} +a(x)\left(f_1 y_1^{\prime} + f_2 y_2^{\prime}\right) + b(x)(f_1y_1+f_2y_2) = g(x), \notag \\
+ &\rightarrow f_1\underbrace{\left(y_1^{\prime\prime} + a(x)y_1^{\prime} + b(x)y_1\right)}_{=0}
+  + f_2\underbrace{\left(y_2^{\prime\prime} + a(x)y_2^{\prime} + b(x)y_2\right)}_{=0} 
+  + f_1^{\prime}y_1^{\prime}
+  + f_2^{\prime} y_2^{\prime} = g(x), \notag \\
+ &\rightarrow 
+    f_1^{\prime}y_1^{\prime}
+  + f_2^{\prime} y_2^{\prime} = g(x), \label{eq:PDE_2nd_inhomo_general_prep4} 
+\end{align}
+を得る．\Eq{eq:PDE_2nd_inhomo_general_prep2}と\Eq{eq:PDE_2nd_inhomo_general_prep4}
+を連立させることで，
+\begin{align}
+ f_1^\prime &= -\dfrac{y_2 g(x)}{W(y_1, y_2)}, \\
+ f_2^\prime &= \dfrac{y_1 g(x)}{W(y_1, y_2)}, 
+\end{align}
+を得る．ただし，$W(y_1, y_2)$はロンスキー行列式であり，次式で定義される．
+\begin{align}
+  W(y_1,y_2) = y_1 y_2^{\prime} - y_2 y_1^{\prime}. 
+\end{align}
+従って，特殊解は
+\begin{align}
+ y = -y_1\int dx\,\dfrac{y_2 g(x)}{W(y_1,y_2)} + y_2\int dx\,\dfrac{y_1 g(x)}{W(y_1,y_2)}, \label{pde_sol_with_wronski} 
+\end{align}
+なので，\Eq{eq:PDE_2nd_inhomo_general}の一般解は，
+\begin{align}
+ y = C_1 y_1 + C_2 y_2 -y_1\int dx\,\dfrac{y_2 g(x)}{W(y_1,y_2)} + y_2\int dx\,\dfrac{y_1 g(x)}{W(y_1,y_2)},
+\end{align}
+である．
+この式は導関数の係数が定数でない場合にも適用できるが，
+そもそも定数係数でない場合の斉次方程式を求めることが難しいので，
+実際にこの解法を使うのは，主に定数係数の微分方程式の場合である．
+係数が関数の場合は，(本テキストでは扱わないが)べき級数解法などを用いて，斉次方程式の一般解を求めていく必要がある．
+%

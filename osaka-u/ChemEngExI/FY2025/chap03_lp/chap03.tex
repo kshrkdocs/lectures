@@ -1,0 +1,1001 @@
+\setcounter{chapter}{2}
+\chapter{ラプラス解析入門}
+%
+前章でフーリエ変換を学んだ．簡単に振り返っておくと，
+周期関数$f(x)$を三角関数のセットで表現するのがフーリエ級数展開，そして
+周期無限大の極限をとったものがフーリエ変換なのだった．
+%
+フーリエ変換には，実空間($x$)上での畳み込み積分が
+フーリエ空間($k$)上では単純な2つの関数の積になるなど，理論展開や数値解析を行う上で有用な
+性質を持つ．
+一方で，物理や化学で現れる時刻$t$の関数$f(t)$の多くは$t>0$で定義されるものであり，
+区間$-\infty \sim \infty$の積分で表されるフーリエ変換ではこれらを扱うのは不便である．
+本章で学ぶラプラス(Laplace)変換は，フーリエ変換と似たような性質を持ちつつ
+$t=0\sim \infty$の区間で定義された関数を扱うのに長けた応用数学的な手法である．
+これを数学的に厳格な立場から学んでいこうとすると，
+(化学系としては)いささか高度な数学知識が要求されるが，
+化学工学を始めとする様々な工学分野で広く使われるようになった結果，
+現在ではラプラス変換の道具としての使い方がかなり整備されている．
+理論の詳細にこだわらなければ，様々な微分方程式を初等的な式変形によって解くことができる．
+本章では，その道具としてのラプラス変換の使い方に重きをおいて解説していくことにする．
+%
+\section{ラプラス変換・逆変換}
+%
+\subsection{ラプラス変換}
+%
+天下り的ではあるが，まずラプラス変換の定義について述べておく．
+$t>0$で区分的に連続な関数$f(t)$と\textbf{複素数}$s$に対し，
+\begin{align}
+ F(s) = \mathcal{L}\left[f\left(t\right)\right] = \int_{0}^{\infty}dt\,f\left(t\right)e^{-st},
+\end{align}
+で定義される$f(t)$から$F(s)$への変換$\mathcal{L}$のことをラプラス変換と呼ぶ．
+加えて，変換された後の関数$F(s)$のこともラプラス変換と呼ぶのが一般的である．
+複素数$s$がとりうる値には制限があるのだが，それは例題を通して言及していくことにする．
+%
+\newpage
+%
+\gl
+\reidai
+関数
+\begin{align}
+  f(t) = 1,
+\end{align}
+のラプラス変換を求めよ．
+\vspace*{.2cm}
+\gl
+\vspace*{.2cm}
+
+ラプラス変換の定義に則ると，
+\begin{align}
+ F\left(s\right) = \int_{0}^{\infty}dt\,e^{-st} = \left[-\dfrac{1}{s}e^{-st}\right]_{0}^{\infty} \notag \\
+                 = -\dfrac{1}{s}\lim_{t\to \infty}e^{-st} + \dfrac{1}{s}, \label{chap03_reidai01} 
+\end{align}
+である．$s$は複素数なので実数$\alpha,~\beta$を用いて，
+\begin{align}
+  s = \alpha + i \beta,  
+\end{align}
+と表せる．今後しばしば$\mathrm{Re}(s)$, $\mathrm{Im}(s)$なる記号を用いるが，
+これらはそれぞれ複素数$s$の実部，虚部を表す．つまり今回の場合では，
+\begin{align}
+ \mathrm{Re}(s) &= \alpha, \\
+ \mathrm{Im}(s) &= \beta, 
+\end{align}
+である．
+\Eq{chap03_reidai01}の第1項は，
+\begin{align}
+  \dfrac{1}{s}\lim_{t\to \infty}e^{-st} = \dfrac{1}{s}\lim_{t\to \infty}e^{-\alpha t}e^{-i\beta t}, 
+\end{align}
+と表せるので，極限が特定の値に収束するためには，
+\begin{align}
+  \mathrm{Re}(s) = \alpha > 0, 
+\end{align}
+とする必要がある．この条件を満たす場合，極限は0に収束するので，ラプラス変換は
+\begin{align}
+  F(s) = \dfrac{1}{s}, \quad (\mathrm{Re}(s) > 0) 
+\end{align}
+である．
+%
+\newpage
+%
+この例題で見たように，
+任意の$s$について，ラプラス変換が存在するわけではなく，とりうる$s$の範囲は$f(t)$に依存する．
+
+ラプラス変換の存在について議論するために，
+まず指数位数(exponential order)なるものを導入する．
+$f(t)$が指数$\alpha$位の関数であるとは，定数$M,~\alpha$に対して$f(t)$が
+\begin{align}
+ \left|f(t)\right| \leq M e^{\alpha t}, \quad (0< t < \infty)
+\end{align}
+を満たすことをいう．
+そして，$f(t)$が区分的に連続で指数$\alpha$位の関数であるならば，
+$\mathrm{Re}(s)>\alpha$を満たす任意の$s$に対し，ラプラス変換が存在する．
+これは，次の不等式を考えることで示せる．
+\begin{align}
+  \left|\int_{0}^{\infty}dt,f(t)e^{-st}\right| 
+    & \leq \int_{0}^{\infty}dt \, \left|e^{-st}\right| \left|f(t)\right| \notag \\
+    & = \int_{0}^{\infty}dt \, e^{-\mathrm{Re}(s)t} \left|f(t)\right| \notag \\
+    & \leq \int_{0}^{\infty}dt \, e^{-\mathrm{Re}(s)t} Me^{\alpha t} \notag \\
+    & = \left[-\dfrac{M}{\mathrm{Re}(s)-\alpha}e^{-\left(\mathrm{Re}(s)-\alpha\right)t}\right]_{0}^{\infty}. 
+\end{align}
+$\mathrm{Re}(s) - \alpha > 0$であるから，最後の行は有限の値に収束する．従って，
+\begin{align}
+  \int_{0}^{\infty}dt\,f(t)e^{-st},
+\end{align}
+も収束する．つまり，確かにラプラス変換が存在する．
+
+ラプラス変換には，
+$\mathrm{Re}(s)>\alpha$ではラプラス変換が存在するが，$\mathrm{Re}(s)<\alpha$では存在しないような定数$\alpha$が存在する．
+この$\alpha$のことを収束座標と呼び，
+複素平面上の$\mathrm{Re}(s)>\alpha$の領域を収束半平面と呼ぶ．
+%
+\newpage
+%
+\gl
+\reidai
+次の関数$f(t)$のラプラス変換$F(s)$を求めよ．
+\begin{enumerate}[(1)]
+  \item $f(t)=a$
+  \item $f(t)=t^n$
+  \item $f(t)=e^{at}$
+  \item $f(t)=\sin(at)$
+  \item $f(t)=\cos(at)$ 
+\end{enumerate}
+\gl
+\begin{enumerate}[(1)]
+\item  
+\begin{align}
+  F(s) & = \int_{0}^{\infty}dt\,ae^{-st} = a\int_{0}^{\infty}dt\,e^{-st}
+         = \dfrac{a}{s} 
+\end{align}
+\item
+\begin{align}
+  F(s) = \int_{0}^{\infty}dt\,t^n e^{-st} 
+\end{align}
+上式で$st=u$とおくと，
+\begin{align}
+  F(s) &= \dfrac{1}{s}\int_{0}^{\infty}du\,\left(\dfrac{u}{s}\right)^{n}e^{-u}
+        = \dfrac{1}{s^{n+1}}\int_{0}^{\infty}du\,u^n e^{-u} \notag \\
+       &= \dfrac{\Gamma(n+1)}{s^{n+1}} 
+\end{align}
+ただし，$\Gamma(n)$はガンマ関数と呼ばれ，
+\begin{align}
+  \Gamma(n) = \int_{0}^{\infty}du\, u^{n-1}e^{-u} 
+\end{align}
+で定義される．$n$が整数のとき，
+\begin{align}
+  \Gamma(n) = (n-1)! 
+\end{align}
+であることから，階乗を一般化したものと言える．
+\item
+\begin{align}
+  F(s) &= \int_{0}^{\infty}dt\,e^{at}e^{-st} = \left[ - \dfrac{e^{-(s-a)t}}{s-a} \right]_{0}^{\infty} \notag \\
+       &= \dfrac{1}{s-a}
+\end{align}
+\item
+\begin{align}
+  F(s) &= \int_{0}^{\infty}dt\,\sin(at)e^{-st} = \int_{0}^{\infty}dt\,\dfrac{e^{iat}-e^{-iat}}{2i}e^{-st} \notag \\
+       &= \dfrac{1}{2i}\int_{0}^{\infty}dt\,\left(e^{-(s-ia)t}-e^{-(s+ia)t}\right) \notag \\
+       &= \dfrac{a}{s^{2}+a^{2}}
+\end{align}
+\item (4)とほとんど同じなので，答えだけ記す．
+\begin{align}
+  F(s) &= \dfrac{s}{s^{2}+a^{2}} 
+\end{align}
+\end{enumerate}
+\newpage
+%
+\subsection{ラプラス変換が持つ性質}
+%
+冒頭で述べたように，ラプラス変換はフーリエ変換とよく似た性質を持つ．
+ここではそれを紹介する．ただし，以下では
+関数$f(t)$ (指数$\alpha$位, $t<0$でゼロ)のラプラス変換をそれぞれ$F(s)$とする．また，$\mathrm{Re}(s)>\alpha$とする．
+%
+\begin{itemize}
+  \item 線形性
+	\begin{align}
+	  \mathcal{L}\left[af(t)+bg(t)\right] = aF(s) + bG(s).
+	  \label{laplace_linear}
+	\end{align}
+  \item 移動性
+	\begin{align}
+          \mathcal{L}\left[f(t-a)\Theta(t-a)\right] = e^{-as}F(s), \label{laplace_shift01}\\
+          \mathcal{L}\left[e^{at}f(t)\right]   = F(s-a),           \label{laplace_shift02}
+	\end{align}
+	ただし，$a>0$である．
+	$\Theta(t)$はヘヴィサイドの階段(step)関数と呼ばれるものであり，
+	次式で定義される．
+	\begin{align}
+	  \Theta(t) = 
+	  \begin{cases}
+	    0 & t < 0 \\
+            1 & t > 0 
+	  \end{cases}.
+	\end{align}
+  \item 拡大性
+	\begin{align}
+	  \mathcal{L}\left[\dfrac{1}{a}f\left(\dfrac{t}{a}\right)\right] = F(as), \quad a > 0. 
+	\end{align}
+  \item 導関数のラプラス変換
+	\begin{align}
+	  \mathcal{L}\left[\dfrac{d}{dt}f(t)\right] = sF(s) - f(0). \label{laplace_diff0} 
+	\end{align}
+	$n$階導関数$f^{(n)}(t)$のラプラス変換は
+	\begin{align}
+	  \mathcal{L}\left[f^{(n)}(t)\right] 
+          &= s^n F(s) - s^{n-1}f(0) - s^{n-2}f^{\prime}(0) -\cdots - s f^{(n-2)}(0) - f^{(n-1)}(0), \label{laplace_diff1}
+	\end{align}
+	である．ラプラス変換をすることで微分演算子が消えるので，微分方程式を解くのに有効な公式である．
+  \item 積分のラプラス変換
+	\begin{align}
+          \mathcal{L}\left[\int_{0}^{t}d\tau\,f(\tau)\right] = \dfrac{1}{s}F(s). \label{laplace_integrate}
+	\end{align}
+	ラプラス変換をすることで積分が消えるので，積分方程式(方程式の中に積分が含まれる)を解くのに有効な公式である．
+  \item 畳み込み積分のラプラス変換
+	\begin{align}
+	  \mathcal{L}\left[\int_{0}^{t}d\tau\,f(\tau)g(t-\tau)\right] = F(s)G(s). 
+	\end{align}
+	積分のラプラス変換と同様，積分方程式を解くのに有効である．
+	畳み込み積分の定義がフーリエ変換の場合と少し異なることに注意すること．
+\end{itemize}
+%
+\subsubsection{線形性}
+%
+ラプラス変換では次の関係性が成り立つ．
+\begin{align}
+  \mathcal{L}\left[af(t)+bg(t)\right] = aF(s) + bG(s). 
+\end{align}
+これが成り立つのは積分の線形性があるからである．
+フーリエ変換の場合と同じなので，証明は省略する．
+%
+\subsubsection{移動性}
+%
+定数$a>0$に対し，次式が成り立つ．
+\begin{align}
+  \mathcal{L}\left[f(t-a)\Theta(t-a)\right] = e^{-as}F(s), \\
+  \mathcal{L}\left[e^{at}f(t)\right]   = F(s-a).
+\end{align}
+第1式の左辺は，
+\begin{align}
+ \mathcal{L}\left[f(t-a)\Theta(t-a)\right] &= \int_{a}^{\infty}dt\, f(t-a)e^{-st}, 
+\end{align}
+であり，$\tau=t-a$と変数変換することで，
+\begin{align}
+ \mathcal{L}\left[f(t-a)\Theta(t-a)\right] 
+  &= \int_{0}^{\infty}d\tau \,f(\tau)e^{-s(\tau + a)} \notag \\
+  &= e^{-sa}F(s),
+\end{align}
+となるので，右辺と一致する．
+第2式の左辺は，
+\begin{align}
+  \mathcal{L}\left[e^{at}f(t)\right] 
+  &= \int_{0}^{\infty}dt\,e^{at}f(t)e^{-st} \notag \\
+  &= \int_{0}^{\infty}dt\,f(t)e^{-(s-a)t} \notag \\
+  &= F(s-a), 
+\end{align}
+となり，右辺と一致する．
+%
+\subsubsection{拡大性}
+%
+定数$a>0$に対し，次の関係性が成り立つ．
+\begin{align}
+ \mathcal{L}\left[\dfrac{1}{a}f\left(\dfrac{t}{a}\right)\right] = F(as). 
+\end{align}
+左辺に対し$\tau=t/a$と変数変換することで，
+\begin{align}
+ \mathcal{L}\left[\dfrac{1}{a}f\left(\dfrac{t}{a}\right)\right]
+ &= \dfrac{1}{a}\int_{0}^{\infty}dt\,f\left(\dfrac{t}{a}\right)e^{-st} \notag \\
+ &= \int_{0}^{\infty}d\tau \, f(\tau)e^{-sa\tau} \notag \\
+ &= F(sa),
+\end{align}
+を得る．
+%
+\subsubsection{導関数のラプラス変換}
+%
+$f(t)$の導関数のラプラス変換は次式のように表される．
+\begin{align}
+  \mathcal{L}\left[\dfrac{d}{dt}f(t)\right] = sF(s) - f(0). 
+\end{align}
+%
+左辺は部分積分により，
+\begin{align}
+ \mathcal{L}\left[\dfrac{d}{dt}f(t)\right]
+ & = \int_{0}^{\infty}dt\, \left(\dfrac{d}{dt}f(t)\right)e^{-st} \notag \\
+ & = \left[f(t)e^{-st}\right]_{0}^{\infty} +s \int_{0}^{\infty}dt\, f(t)e^{-st} \notag \\
+ & = \lim_{t\to \infty}f(t)e^{-st} - f(0) + sF(s), 
+\end{align}
+となる．$f(t)$の指数位数$\alpha$は，
+\begin{align}
+  \mathrm{Re}(s) > \alpha, 
+\end{align}
+とすると
+\begin{align}
+  \left|f(t)e^{-st}\right| 
+  &\leq e^{-\mathrm{Re}(s)t}Me^{\alpha t} \notag \\
+  & = M e^{-(\mathrm{Re}(s)-\alpha)t} \notag \\
+  & \xrightarrow{t\to \infty} 0, 
+\end{align}
+なので，第1項はゼロとなり，目的の式を得る．
+%
+
+この証明は$n$階微分$f^{(n)}(t)$のラプラス変換の場合に容易に拡張することが出来る．
+ここではその結果のみを記すことにする(各自でやってみると良い)．
+\begin{align}
+ \mathcal{L}\left[f^{(n)}(t)\right] = s^n F(s) - s^{n-1}f(0) - s^{n-2}f^{\prime}(0) - \cdots sf^{(n-2)}(0)-f^{(n-1)}(0). 
+\end{align}
+%
+\subsubsection{積分のラプラス変換}
+%
+積分のラプラス変換は
+\begin{align}
+  \mathcal{L}\left[\int_{0}^{t}d\tau\,f(\tau)\right] = \dfrac{1}{s}F(s),
+\end{align}
+のように表すことができる．
+左辺を書き直すと，
+\begin{align}
+ \mathcal{L}\left[\int_{0}^{t}d\tau\, f(\tau)\right]
+ &=\int_{0}^{\infty}dt\,\left(\int_{0}^{\infty}d\tau\,f(\tau)\right)e^{-st} \notag \\
+ &=\left[-\dfrac{1}{s}e^{-st}\int_{0}^{t}d\tau\,f(\tau)\right]_{0}^{\infty} 
+   +\dfrac{1}{s}\int_{0}^{\infty}dt\,f(t)e^{-st} \notag \\
+ &=-\dfrac{1}{s}\lim_{t\to\infty}e^{-st}\int_{0}^{t}d\tau\,f(\tau) + \dfrac{1}{s}F(s), 
+\end{align}
+となる．ここで，$f(t)$の指数位数$\alpha$に対し，$\mathrm{Re}(s) > \alpha$なので，
+\begin{align}
+ \left|e^{-st}\int_{0}^{t}d\tau\, f(\tau)\right| 
+ & \leq e^{-\mathrm{Re}(s)t}\int_{0}^{t}d\tau\, Me^{\alpha t} \notag \\
+ & = e^{-\mathrm{Re}(s)t}\dfrac{M}{\alpha}\left(e^{-\alpha t}-1\right) \notag \\
+ & = \dfrac{M}{\alpha}\left(e^{-(\mathrm{Re}(s)-\alpha)t}-e^{-\mathrm{Re}(s)t}\right) \notag \\
+ & \xrightarrow{t\to \infty} 0,
+\end{align}
+となる．従って，第1項の極限はゼロとなり，目的の式を得る．
+%
+\subsubsection{畳み込み積分のラプラス変換}
+%
+次式で定義される畳み込み積分(フーリエ変換の場合と少し違うので注意)
+\begin{align}
+ \int_{0}^{t}d\tau\, f(\tau)g(t-\tau), 
+\end{align}
+のラプラス変換は
+\begin{align}
+ \mathcal{L}\left[\int_{0}^{t}d\tau\,f(\tau)g(t-\tau)\right] = F(s)G(s), 
+\end{align}
+のように，$f(s),~g(s)$それぞれのラプラス変換の積で表される．
+ただし，$g(t)$は$t<0$でゼロで，$g(t)$のラプラス変換を$G(s)$とする．
+右辺は
+\begin{align}
+ F(s)G(s) 
+ &= \int_{0}^{\infty}ds\,e^{-sx}\int_{0}^{\infty}dy\, e^{-sy}f(x)g(y) \notag \\
+ &= \int_{0}^{\infty}\int_{0}^{\infty}dxdy\,e^{-s(x+y)}f(x)g(y),
+\end{align}
+であるが，ここで$t=x+y$, $\tau=x$と変数変換すると$dxdy = dtd\tau$であるから，
+\begin{align}
+ F(s)G(s) = \int_{0}^{\infty}dt\int_{0}^{\infty}d\tau\,e^{-st}f(\tau)g(t-\tau), 
+\end{align}
+である．さらに，$g(t)$は$t<0$でゼロだから，
+\begin{align}
+ F(s)G(s) = \int_{0}^{\infty}dt\int_{0}^{t}d\tau\, e^{-st}f(\tau)g(t-\tau), 
+\end{align}
+となり，目的の式を得る．
+%
+\subsection{ラプラス逆変換}
+%
+フーリエ変換の場合と同様，ラプラス変換にも逆変換が存在する．
+ラプラス変換が$f(t)$から$F(s)$への変換であったのに対し，
+逆変換は$F(s)$から$f(t)$への変換
+\begin{align}
+ f(t) = \mathcal{L}^{-1}\left[F(s)\right], 
+\end{align}
+を指す．
+%
+例えば，例題1で見たように，
+\begin{align}
+  f(t) = 1 \ce{<=>[ラプラス変換][ラプラス逆変換]} F(s) = \dfrac{1}{s}, 
+\end{align}
+である．
+なので，関数$f_1(t),~f_2(t),\cdots,~f_N(t)$のラプラス変換$F_1(s),~F_2(s),\cdots,F_N(s)$が
+既知であった場合，ラプラス変換
+\begin{align}
+ F(s) = a_1 F_1(s) + a_2 F_2(s) + \cdots + a_N F_N(s), 
+\end{align}
+の逆変換$f(t)$は，ラプラス変換の線形性\Eq{laplace_linear}より
+\begin{align}
+ f(t) = a_1 f_1 (t) + a_2 f_2(t) + \cdots a_N f_N(t), 
+\end{align}
+のように求めることができる．
+
+ラプラス逆変換が積分表示でどのような形になるかを結果だけ示しておく．
+まず，絶対収束座標なるものを新たに導入する．積分
+\begin{align}
+ \int_{0}^{\infty}dt\,\left|e^{-st}f(t)\right|, 
+\end{align}
+が，$\mathrm{Re}(s)>\beta$で収束し，$\mathrm{Re}(s)<\beta$で収束しないとする．
+このような$\beta$のことを絶対収束座標と呼ぶ．
+ラプラス逆変換は任意の$a>\beta$に対して，
+\begin{align}
+ f(t) = \dfrac{1}{2\pi i}\int_{a-i\infty}^{a+i\infty}ds\, F(s)e^{st}, 
+\end{align}
+で表される．この積分はブロムウィッチ(Bromwich)積分と呼ばれている．
+ブロムウィッチ積分を用いて逆変換を求めるには，複素関数論の知識が要求される．
+しかし，代表的な関数のラプラス変換・逆変換はラプラス解析の教科書に
+表(ラプラス変換表)としてまとめられているので，
+それと紹介した公式を駆使することで，逆変換を計算できることが多い．
+\footnote{と言いつつ，私の専門に関わるある理論(Smoluchowski-Collins-Kimball)に登場する関数は，そのラプラス変換がとても複雑な形をしていて，
+未だに逆変換を自分の手で導出することをサボっている．もしかしたら，変換表と諸定理を使って導出出来るのかもしれないが，
+その気力が起きないくらいにゴチャゴチャしているので，試す気も起きなかった．ちなみに，導出自体はかなり昔に報告されているので，頑張れば出来るはずではある．}．
+このテキストでも簡易版ではあるが，変換表を掲載しておく．
+\begin{table}[htbp]
+\centering
+\renewcommand{\arraystretch}{1.2}
+\begin{tabular}{c|c}
+\hline
+\hline 
+$f\left(t\right)$ & $F\left(s\right)$\tabularnewline
+\hline 
+$1$ & $\dfrac{1}{s}$\tabularnewline
+$\dfrac{t^{n-1}}{\left(n-1\right)!}$ & $\dfrac{1}{s^{n}}$\tabularnewline
+$\cos\text{\ensuremath{\omega}}t$ & $\dfrac{s}{s^{2}+\omega^{2}}$\tabularnewline
+$\sin\omega t$ & $\dfrac{\omega}{s^{2}+\omega^{2}}$\tabularnewline
+$\cosh\omega t$ & $\dfrac{s}{s^{2}-\omega^{2}}$\tabularnewline
+$\sinh\omega t$ & $\dfrac{\omega}{s^{2}-\omega^{2}}$\tabularnewline
+$e^{bt}\sin at$ & $\dfrac{a}{\left(s-b\right)^{2}+a^{2}}$\tabularnewline
+$e^{bt}\cos at$ & $\dfrac{a}{\left(s-b\right)^{2}+a^{2}}$\tabularnewline
+$\dfrac{t^{n-1}}{\left(n-1\right)!}e^{at}$ & $\dfrac{1}{\left(s-a\right)^{n}}$\tabularnewline
+$t\cos at$ & $\dfrac{s^{2}-a^{2}}{\left(s^{2}+a^{2}\right)^{2}}$\tabularnewline
+$t\sin at$ & $\dfrac{2sa}{\left(s^{2}+a^{2}\right)^{2}}$\tabularnewline
+$\delta\left(t\right)$ & 1\tabularnewline
+\hline 
+\end{tabular} 
+\end{table}
+%
+\clearpage
+%
+\gl
+\reidai
+ラプラス逆変換
+\begin{align}
+ \mathcal{L}^{-1}\left[\dfrac{1}{s^n}\right] = \dfrac{t^{n-1}}{(n-1)!}, 
+\end{align}
+を示せ．
+\vspace*{.2cm}
+\gl
+\vspace*{.2cm}
+%
+まず，
+\begin{align}
+ \mathcal{L}^{-1}\left[\dfrac{1}{s^n}\right] = \mathcal{L}^{-1}\left[\dfrac{1}{s}\dfrac{1}{s^{n-1}}\right], 
+\end{align}
+のように書き直してみる．すると，積分のラプラス変換\Eq{laplace_integrate}が使えることに気づく．
+\begin{align}
+ \mathcal{L}^{-1}\left[\dfrac{1}{s^{n}}\right] = \int_{0}^{t}d\tau_{n}\,\mathcal{L}^{-1}\left[\dfrac{1}{s^{n-1}}\right]. 
+\end{align}
+これをもう一度繰り返すと，
+\begin{align}
+  \mathcal{L}^{-1}\left[\dfrac{1}{s^{n}}\right] 
+  &= \int_{0}^{t}d\tau_{n}\,\mathcal{L}^{-1}\left[\dfrac{1}{s}\dfrac{1}{s^{n-2}}\right] \notag \\
+  &= \int_{0}^{t}d\tau_{n}\int_{0}^{\tau_{n}}d\tau_{n-1}\,\mathcal{L}^{-1}\left[\dfrac{1}{s^{n-2}}\right],
+\end{align}
+となる．この操作を何度も繰り返すことで次式を得る．
+\begin{align}
+  \mathcal{L}^{-1}\left[\dfrac{1}{s^{n}}\right] = \int_{0}^{t}d\tau_{n}\int_{0}^{\tau_{n}}d\tau_{n-1}\cdots 
+     \int_{0}^{\tau_{3}}d\tau_{2}\,\mathcal{L}^{-1}\left[\dfrac{1}{s}\right]. 
+\end{align}
+ここで，例題1や変換表が示すように，
+\begin{align}
+ \mathcal{L}^{-1}\left[\dfrac{1}{s}\right] = 1, 
+\end{align}
+なので，結局，
+\begin{align}
+  \mathcal{L}^{-1}\left[\dfrac{1}{s^{n}}\right] 
+     &= \int_{0}^{t}d\tau_{n}\int_{0}^{\tau_{n}}d\tau_{n-1}\cdots 
+     \int_{0}^{\tau_{3}}d\tau_{2} \notag \\
+     &= \dfrac{t^{n-1}}{(n-1)!},
+\end{align}
+となる．
+%
+\newpage
+%
+\subsection{ラプラス逆変換の性質}
+%
+\begin{itemize}
+  \item 微分のラプラス逆変換\\
+%
+ラプラス変換の1階微分について次式が成り立つ．
+\begin{align}
+ \mathcal{L}^{-1}\left[\dfrac{d}{ds}F(s)\right] = -tf(t). \label{invlaplace_diff} 
+\end{align}
+%
+$n$階導関数$F^{(n)}(s)$については，
+\begin{align}
+ \mathcal{L}^{-1}\left[F^{(n)}(s)\right] = (-t)^n f(t),
+\end{align}
+が成り立つ．
+
+この公式によると，$F(s)$をラプラス逆変換が既知の関数$F_{0}(s)$ (ラプラス逆変換は$f_0(t)$)を用いて，
+\begin{align}
+F(s) = \dfrac{d}{ds}F_{0}(s), 
+\end{align}
+と書き直すことで，逆変換を$f(t)=-tf_0(t)$と求めることが出来る．
+
+もちろん，これらの公式をラプラス変換の形で，
+\begin{align}
+  \mathcal{L}\left[-tf(t)\right] &= \dfrac{d}{ds}F(s), \\
+  \mathcal{L}\left[(-t)^n f(t)\right] &= F^{(n)}(s), 
+\end{align}
+と書いても良い．
+%
+\item 積分のラプラス逆変換
+
+
+積分のラプラス逆変換は，
+\begin{align}
+  \mathcal{L}^{-1}\left[\int_{s}^{\infty}du\,F(u)\right] = \dfrac{f(t)}{t}, \label{invlaplace_int01}
+\end{align}
+と表すことが出来る．先ほどと同様，
+\begin{align}
+  \mathcal{L}\left[\dfrac{f(t)}{t}\right] = \int_{s}^{\infty}du\,F(u),  \label{invlaplace_int02}
+\end{align}
+と表しても良い．
+%
+\end{itemize}
+%
+\subsubsection{微分のラプラス逆変換}
+%
+ここでは，ラプラス変換
+\begin{align}
+ \mathcal{L}\left[-tf(t)\right] = \dfrac{d}{ds}F(s),
+\end{align}
+を示す．
+右辺は，
+\begin{align}
+ \dfrac{d}{ds}F(s) 
+  &= \dfrac{d}{ds}\int_{0}^{\infty}dt\,f(t)e^{-st} \notag \\
+  &= \int_{0}^{\infty}dt\,\dfrac{d}{ds}\left(f(t)e^{-st}\right) \notag \\
+  &= \int_{0}^{\infty}dt\,(-t)f(t)e^{-st}\notag \\
+  &= \mathcal{L}\left[(-t)f(t)\right], 
+\end{align}
+となるので\footnote{ホントは微分と積分の順序を入れ替えれるかどうか示さなければならないのだが，細かいことは気にしないことにする．}，1階微分に関するラプラス変換の公式が示せた．$n$階微分についても全く同じ手続きで導出出来る．
+%
+\subsubsection{積分のラプラス逆変換}
+%
+ラプラス変換
+\begin{align}
+ \mathcal{L}\left[\dfrac{f(t)}{t}\right] = \int_{s}^{\infty}du\,F(u), 
+\end{align}
+を示す．
+右辺は，
+\begin{align}
+ \int_{s}^{\infty}du\, F(u) 
+    & = \int_{s}^{\infty}du\,\int_{0}^{\infty}dt\,e^{-ut}f(t) \notag \\
+    & = \int_{0}^{\infty}dt\int_{s}^{\infty}du\, e^{-ut}f(t)  \notag \\
+    & = \int_{0}^{\infty}dt\,f(t)\left[-\dfrac{e^{-ut}}{t}\right]_{u=s}^{u=\infty}\notag \\
+    & = \int_{0}^{\infty}dt\,\dfrac{f(t)}{t}e^{-st} \notag \\
+    & = \mathcal{L}\left[\dfrac{f(t)}{t}\right],
+\end{align}
+と書き直せるので，目的の式が得られた．
+%
+\newpage
+%
+\gl
+\reidai
+
+ラプラス逆変換
+\begin{align}
+  \mathcal{L}^{-1}\left[\dfrac{s}{(s^2+a^2)^2}\right], 
+\end{align}
+を求めよ．
+\vspace*{.2cm}
+\gl
+\vspace*{.2cm}
+
+\begin{align}
+  \mathcal{L}^{-1}\left[\dfrac{s}{(s^2+a^2)^2}\right]
+  &= -\dfrac{1}{2a}\mathcal{L}^{-1}\left[\dfrac{d}{ds}\left(\dfrac{a}{s^2+a^2}\right)\right].
+\end{align}
+ラプラス変換表を見ると，
+\begin{align}
+ \mathcal{L}^{-1}\left[\dfrac{a}{s^2+a^2}\right] = \sin(at), 
+\end{align}
+なので，微分のラプラス変換より，
+\begin{align}
+  \mathcal{L}^{-1}\left[\dfrac{s}{(s^2+a^2)^2}\right]
+  &= -\dfrac{1}{2a}(-t)\sin(at) \notag \\
+  &= \dfrac{t}{2a}\sin(at).
+\end{align}
+%
+\newpage
+%
+\gl
+\reidai
+関数
+\begin{align}
+ f(t) = \dfrac{\sin(at)}{t}, 
+\end{align}
+のラプラス変換を求めよ．
+\vspace*{.2cm}
+\gl
+\vspace*{.2cm}
+
+積分のラプラス逆変換\Eq{invlaplace_int02}を用いることで，
+\begin{align}
+  \mathcal{L}\left[\dfrac{\sin(at)}{t}\right] 
+  &= \int_{s}^{\infty}du\, \mathcal{L}\left[\sin(at)\right] \notag \\
+  &= \int_{s}^{\infty}du\, \dfrac{a}{u^2 + a^2} \notag \\
+  &= \left[\tan^{-1}\dfrac{u}{a}\right]_{s}^{\infty} = \dfrac{\pi}{2} - \tan^{-1}\dfrac{s}{a}. 
+\end{align}
+
+\subsection{ラプラス変換を学ぶ動機 : 線形常微分方程式への応用}
+%
+ここまで，ラプラス変換・逆変換の性質や計算方法について述べてきたが，
+肝心の「何に使えるのか？」については，あんまり触れていなかったので，
+ここで明らかにしておこう．
+このテキストでは，ラプラス変換を微分方程式の解法に応用することを目標にしている．
+まだ，技巧的なことについて解説すべきことがあるが，まずは簡単な線形常微分方程式を例に
+ラプラス変換の有効性について見ていこう．
+
+次の微分方程式を考えよう．
+\begin{align}
+ \dfrac{d^2f}{dt^2} + 4f = 0, \quad f(0)=f_0, \quad \dfrac{df}{dt}\biggr|_{t=0} = f^{\prime}_0. 
+\end{align}
+1章で私たちはこの方程式の解き方を知っていて，実際に解いてみると，
+\begin{align}
+  f(t) = f_0 \cos(2t) + \dfrac{f_0^{\prime}}{2}\sin(2t), 
+\end{align}
+となる．これをラプラス変換を用いて解いてみよう．まず，両辺をラプラス変換する．
+導関数のラプラス変換\Eq{laplace_diff1}を用いると，
+\begin{align}
+  &\mathcal{L}\left[\dfrac{d^2 f}{dt^2}\right] + 4 \mathcal{L}\left[f\right] = 0, \notag \\
+  &\rightarrow \left(s^2 F(s)-sf_0-f_0^{\prime}\right) + 4F(s) = 0, \notag \\
+  &\rightarrow (s^2+4)F(s) = sf_0 + f_0^{\prime}, \notag \\
+  &\rightarrow F(s) = f_0 \dfrac{s}{s^2+4} + f_0^{\prime}\dfrac{1}{s^2+4}. 
+\end{align}
+このように，微分方程式にラプラス変換を施すと，初等的な代数方程式に変化する．
+これを解のラプラス変換$F(s)$について解くことは上で見たように簡単で，あとは逆変換するだけである．
+\begin{align}
+ f(t) = f_0 \mathcal{L}^{-1}\left[\dfrac{s}{s^2+4}\right] + f_0^{\prime}\mathcal{L}^{-1}\left[\dfrac{1}{s^2+4} \right].
+\end{align}
+微分方程式が簡単な代数方程式になった分，皺寄せが逆変換にきているのだが，
+私たちはラプラス変換表を持っている．表を眺めて，式中に現れている逆変換がないか調べてみる，もしくは
+式変形によって表に載っている形に直せないかを検討する．
+今回は既に表に載っているので当てはめると，
+\begin{align}
+ f(t) = f_0 \cos(2t) + \dfrac{f_0^\prime}{2}\sin(2t), 
+\end{align}
+となり，確かに微分方程式の解になっている．
+
+この例を見て分かるように，ラプラス変換を使った解法は最後の逆変換が実行出来るかどうかにかかっている．
+次節からは，ラプラス変換を変換表に載っている形に書き直す技巧について解説する．
+%
+\newpage
+%
+%
+%\subsection{単根} 
+%
+%\begin{align}
+%F\left(s\right) & =\dfrac{B\left(s\right)}{A\left(s\right)}=b_{n}+\sum_{i=1}^{n}\dfrac{c_{i1}}{s+p_{i}}
+%\end{align}
+%
+%\begin{align}
+%f\left(t\right) & =b_{n}\delta\left(t\right)+\sum_{i=1}^{n}c_{i1}e^{-p_{i}t}.
+%\end{align}
+\section{部分分数展開によるラプラス逆変換}
+%
+\subsection{一般論}
+%
+前節で，ラプラス変換を学ぶモチベーションを説明するために，
+ラプラス変換を用いた微分方程式の解法を紹介した．
+微分方程式の解のラプラス変換$F(s)$の多くは，
+\begin{align}
+ F\left(s\right) & =\dfrac{B\left(s\right)}{A\left(s\right)}=\dfrac{b_{n}s^{n}+b_{n-1}s^{n-1}+\cdots+b_{0}}{s^{n}+a_{n-1}s^{n-1}+a_{n-2}s^{n-2}+\cdots+a_{0}},
+\end{align}
+の形をとっている．ここで，$A(s),~B(s)$はそれぞれ分母，分子の多項式を表す．
+上式のような形で表される関数のことを有理関数と呼ぶ．
+ラプラス変換が有理関数の場合には，式変形により$F(s)$をラプラス変換表に載っているシンプルな式の組み合わせで表せる．
+そのことを以下で見ていこう．
+
+$A(s)$は$n$次なので$n$個の根を持つ．
+値の異なる根を$p_1,~p_2,\cdots,~p_r$，そしてそれらの多重度を$m_1,~m_2,\cdots,~m_r$とすると\footnote{$n$と$r$の関係は$n=\displaystyle\sum_{i=1}^{r}m_{i}$.}，
+%
+\begin{align}
+ A\left(s\right) & =\left(s+p_{1}\right)^{m_{1}}\left(s+p_{2}\right)^{m_{2}}\cdots\left(s+p_{r}\right)^{m_{r}}\notag\\
+ & =\prod_{i=1}^{r}\left(s+p_{i}\right)^{m_{i}},
+\end{align}
+と書き表せる．
+$A(s)$をこのような形で表しておけば，$F(s)$を部分分数に展開できる．
+%
+\begin{align}
+ F\left(s\right) & =\dfrac{B\left(s\right)}{A\left(s\right)}=b_{n}+\sum_{i=1}^{r}\sum_{k=1}^{m_{i}}\dfrac{c_{ik}}{\left(s+p_{i}\right)^{k}}. \label{partial_fraction_expansion}
+\end{align}
+%
+この形に直すと，何がありがたいかと言うと，ラプラス変換の移動性\Eq{laplace_shift01}と変換表にある
+\begin{align}
+ &\mathcal{L}\left[\dfrac{t^{n-1}}{(n-1)!}\right] = \dfrac{1} {s^n}, \\
+ &\mathcal{L}\left[\delta(t)\right] = 1,
+\end{align}
+から，ラプラス逆変換が次のように実行できてしまうのである．
+%
+\begin{align}
+f\left(t\right) & =b_{n}\delta\left(t\right)+\sum_{i=1}^{r}\sum_{k=1}^{m_{i}}\dfrac{c_{ik}}{\left(k-1\right)!}t^{k-1}e^{-p_{i}t}\notag\\
+ & =b_{n}\delta\left(t\right)+\sum_{i=1}^{r}e^{-p_{i}t}\left(\sum_{k=1}^{m_{i}}\dfrac{c_{ik}}{\left(k-1\right)!}t^{k-1}\right). 
+\end{align}
+%
+従って，$F(s)$が有理関数の場合には，ラプラス逆変換を求める問題は
+部分分数展開\Eq{partial_fraction_expansion}における
+係数$c_{ik}$を求める問題に帰着する．
+部分分数分解は高校数学でも学ぶものではあるが，係数を求める方法をいくつか紹介する．
+%
+\subsection{未定係数法}
+%
+次に示すラプラス変換$F(s)$を例に考える．
+\begin{align}
+ F(s) = \dfrac{4}{(s+1)^2(s+3)}. 
+\end{align}
+%
+次式のように部分分数展開することを考える．
+\begin{align}
+ F(s) = \dfrac{c_1}{(s+1)^2} + \dfrac{c_2}{s+1} + \dfrac{c_3}{s+3}. 
+\end{align}
+%
+これは
+\begin{align}
+ F(s) &= \dfrac{c_1(s+3)+c_2(s+1)(s+3) + c_3(s+1)^2}{(s+1)^2(s+3)} \notag \\
+      &= \dfrac{(c_2+c_3)s^2+(c_1+4c_2+2c_3)s+(3c_1+3c_2+c_3)}{(s+1)^2(s+3)}, 
+\end{align}
+と書き直せるので，元々の式と比較することで，次の連立方程式を得る．
+\begin{align}
+  &c_2  +  c_3 = 0, \\
+  &c_1  + 4c_2 + 2 c_3 = 0, \\
+  &3c_1 + 3c_2 +   c_3 = 4, 
+\end{align}
+これを解くことにより，$c_1=2,~c_2=-1,~c_3=1$を得るので，
+\begin{align}
+ F(s) = \dfrac{2}{(s+1)^2} - \dfrac{1}{s+1} + \dfrac{1}{s+3}, 
+\end{align}
+である．従って，ラプラス逆変換$f(t)$は
+\begin{align}
+ f(t) = e^{-t}(2t - 1) + e^{-3t}, 
+\end{align}
+である．
+%
+\subsection{ヘヴィサイドの方法}
+%
+未定係数法と同じ$F(s)$を例に考える．この場合でも，
+\begin{align}
+ F(s) = \dfrac{c_1}{(s+1)^2} + \dfrac{c_2}{s+1} + \dfrac{c_3}{s+3}, \label{pfe_ex01} 
+\end{align}
+と展開することを考える．
+まず，両辺に$(s+3)$をかけると，
+\begin{align}
+ &             (s+3)F(s)          = (s+3)\left(\dfrac{c_1}{(s+1)^2}+\dfrac{c_2}{s+1}\right) + c_3, \notag \\
+ &\rightarrow  \dfrac{4}{(s+1)^2} = (s+3)\left(\dfrac{c_1}{(s+1)^2}+\dfrac{c_2}{s+1}\right) + c_3,
+\end{align}
+となる．$s=-3$を代入することで，$c_3=1$を得る．
+次に，\Eq{pfe_ex01}の両辺に$(s+1)^2$をかける．
+\begin{align}
+ \dfrac{4}{s+3} = c_1 + (s+1)c_2 + \dfrac{(s+1)^2}{s+3}. \label{pfe_ex01_heav01} 
+\end{align}
+$s=-1$を代入することで，$c_1 = 2$を得る．さらに，上式を$s$で微分すると，
+\begin{align}
+ -\dfrac{4}{(s+3)^2} = c_2 + (s+1)X(s) + (s+1)^2 Y(s), 
+\end{align}
+の形になる．$(s+1)X(s)$と$(s+1)^2Y(s)$は$(s+1)^2/(s+3)$の微分により生ずる項であるが，具体的に求める必要はない．
+上式に$s=-1$を代入することで，$c_2 = -1$を得るので，未定係数法と同じ結果が得られた．
+ヘヴィサイドの方法では，係数を求めるのに連立方程式を解くことを必要としない一方で，微分演算が(場合によっては)必要となる．
+
+%
+\subsection{混合法}
+%
+未定係数法とヘヴィサイドの方法を混合した方法を紹介する．
+ここでも，未定係数法やヘヴィサイドの方法と同じ$F(s)$を例にし，同様の部分分数分解を行うことを考える．
+%
+\begin{align}
+ \dfrac{4}{(s+1)^2(s+3)} &=  \dfrac{c_1}{(s+1)^2} + \dfrac{c_2}{s+1} + \dfrac{c_3}{s+3} \notag \\
+                         &=  \dfrac{c_1(s+3)+c_2(s+1)(s+3)+c_3(s+1)^2(s+3)}{(s+1)^2(s+3)}.
+\end{align}
+%
+両辺の分子を比較することで，
+\begin{align}
+ 4 = c_1(s+3) + c_2(s+1)(s+3) + c_3(s+1)^2. 
+\end{align}
+$s=-3$を代入することで$c_3 = 1$，そして
+$s=-1$を代入することで$c_1 = 2$を得る．
+両辺を$s$で微分することで，
+\begin{align}
+ 0 = c_1 + c_2(s+3) + (s+1)X(s).
+\end{align}
+これに$s=-1$を代入することで$c_2 = -1$を得る．
+この方法では，通分する手間さえかければ，単純な微分演算から係数を決定できる\footnote{研究室の学生さんにヒアリングしてみたところ，混合法が一番計算がラクに感じるようだ．}．
+%
+\newpage
+%
+\section{線形定数係数常微分方程式}
+%
+$y(t)$に関する定数係数の常微分方程式
+\begin{align}
+ \sum_{k=0}^{n}a_i\dfrac{d^{k}}{dt^{k}}y(t) = \sum_{k=0}^{n}b_{k}\dfrac{d^k}{dt^k}u(t),\quad a_n=1, 
+\end{align}
+を考える．これをラプラス変換を用いて整理してみよう．$y(t)$と$u(t)$のラプラス変換をそれぞれ$Y(s),~U(s)$とする．
+両辺をラプラス変換すると，微分のラプラス変換の公式より，
+\begin{align}
+   &\sum_{k=0}^{n}a_{k}\left(s^{k}Y\left(s\right)-\sum_{l=1}^{k}s^{k-l}y^{\left(l-1\right)}\left(0\right)\right) =\sum_{k=0}^{n}b_{k}\left(s^{k}U\left(s\right)-\sum_{l=1}^{k}s^{k-l}u^{\left(l-1\right)}\left(0\right)\right), \notag \\
+   &\rightarrow \underbrace{\left(\sum_{k=0}^{n}a_{k}s^{k}\right)}_{\equiv A(s)} Y (s) 
+    - \sum_{k=0}^{n}\sum_{l=1}^{k}a_{k}s^{k-l}y^{(l-1)}(0) 
+   = \underbrace{\left(\sum_{k=0}^{n}b_{k}s^{k}\right)}_{\equiv B(s)}U(s) - \sum_{k=0}^{n}\sum_{l=1}^{k}b_{k}s^{k-l}u^{(l-1)}(0), \notag \\
+   &\rightarrow A(s)Y(s) = B(s)U(s) + 
+   \underbrace{\sum_{k=0}^{n}\sum_{l=1}^{k}a_{k}s^{k-l}y^{(l-1)}(0) - \sum_{k=0}^{n}\sum_{l=1}^{k}b_{k}s^{k-l}b^{(l-1)}(0)}_{\equiv C(s)}, \notag \\
+   &\rightarrow Y(s) = \dfrac{B(s)}{A(s)}U(s) + \dfrac{C(s)}{A(s)}.
+\end{align}
+これをラプラス逆変換することで，解$y(t)$に関する表式を得る．
+\begin{align}
+ y(t) = \mathcal{L}^{-1}\left[\dfrac{B(s)U(s)+C(s)}{A(s)}\right]. 
+\end{align}
+$A(s)$, $B(s)$は微分方程式の係数から決まる関数，$C(s)$は係数と初期値から決まる関数である．
+従って，$u(t)$のラプラス変換$U(s)$を計算できれば，上式から$y(t)$を求めることが出来る．
+この式そのものが微分方程式を解くのに便利に使える，というわけでは必ずしもないが，定数係数の線形常微分方程式
+が(逆変換さえ実行できれば)ラプラス変換により解ける，ということを示すものである．
+ここで，
+\begin{align}
+  G(s) = \dfrac{B(s)}{A(s)},\quad g(t) = \mathcal{L}^{-1}\left[G(s)\right],
+\end{align}
+を定義すると，畳み込み積分のラプラス変換の公式より，
+\begin{align}
+ y(t) = \int_{0}^{t}d\tau\,g(t-\tau)u(\tau) + \mathcal{L}^{-1}\left[\dfrac{C(s)}{A(s)}\right], 
+\end{align}
+と表せる．$g(t)$のことを伝達関数と呼ぶ\footnote{正確には，$G(s)$のことを伝達関数と呼ぶ．}．
+%
+\newpage
+%
+\gl
+\reidai
+次の微分方程式を解け．ただし，$y(0)=1$とする．
+\begin{align}
+ \dfrac{d}{dt}y(t) + 3y(t) + \int_{0}^{t}d \tau\, e^{-(t-\tau)}y(\tau) = -e^{-t} 
+\end{align}
+\gl
+\vspace*{.2cm}
+
+まず，両辺をラプラス変換する．その際，
+微分のラプラス変換の公式
+\begin{align}
+  \mathcal{L}\left[\dfrac{d}{dt}f(t)\right] = sF(s) - f(0), 
+\end{align}
+畳み込み積分のラプラス変換の公式
+\begin{align}
+  \mathcal{L}\left[\int_{0}^{\infty}d\tau\,f\left(t-\tau\right)g\left(\tau\right)\right] & =F\left(s\right)G\left(s\right),
+\end{align}
+を用いることで，
+\begin{align}
+ & \left(sY\left(s\right)-y\left(0\right)\right)+3Y\left(s\right)+\dfrac{1}{s+1}Y\left(s\right)=-\dfrac{1}{s+1},\notag\\
+ & \rightarrow\left(s+3+\dfrac{1}{s+1}\right)Y\left(s\right)=\dfrac{s}{s+1},\notag\\
+ & \rightarrow Y\left(s\right)=\dfrac{s}{\left(s+2\right)^{2}},
+\end{align}
+を得る．
+さらに，次のように部分分数分解することを考える．
+\begin{align}
+ Y(s) = \dfrac{a}{(s+2)^2} + \dfrac{b}{s+2}. 
+\end{align}
+$a,~b$はどんな方法を使って求めても良いが，ここでは(かなりくどいが)ヘヴィサイドの方法を使う．
+まず，両辺に$(s+2)^2$をかけて，
+\begin{align}
+  s = a + b(s+2), 
+\end{align}
+となるので，$s=-2$を代入して，$a=-2$を得る．次に，上式を$s$で微分して，
+\begin{align}
+  b = 1, 
+\end{align}
+を得る．
+従って，
+\begin{align}
+ Y(s) = -\dfrac{2}{(s+2)^2} + \dfrac{1}{s+1}, 
+\end{align}
+である．これをラプラス逆変換する．第2項のラプラス変換は既に知っているように，
+\begin{align}
+ \mathcal{L}^{-1}\left[\dfrac{1}{s+2}\right] = e^{-2t}, 
+\end{align}
+である．第2項のラプラス変換は，
+\begin{align}
+ \mathcal{L}^{-1}\left[-\dfrac{2}{(s+2)^2}\right] 
+ &= 2\mathcal{L}^{-1}\left[\dfrac{d}{ds}\left(\dfrac{1}{s+2}\right)\right],
+\end{align}
+と書き直せるので，微分のラプラス逆変換の公式
+\begin{align}
+ \mathcal{L}^{-1}\left[\dfrac{d}{ds}F(s)\right] = -tf(t), 
+\end{align}
+を用いて，
+\begin{align}
+ \mathcal{L}^{-1}\left[-\dfrac{2}{(s+2)^2}\right] 
+ &= 2(-t)\mathcal{L}^{-1}\left[\dfrac{1}{s+2}\right] \notag \\
+ &= -2te^{-2t},
+\end{align}
+である．以上より，
+\begin{align}
+  y(t) = (1-2t)e^{-2t},
+\end{align}
+である．
+%
+\newpage
+%
+\gl
+\reidai
+次の微分方程式を解け．
+\begin{align}
+ \dfrac{d}{dt}y(t) + a y (t) = (1+a^2)\sin t, \quad y(0) = 0 
+\end{align}
+\gl
+\vspace*{.2cm}
+
+両辺をラプラス変換すると，
+\begin{align}
+& sY(s) - y(0) + a Y(s) = (1+a^2)\dfrac{1}{s^2 + 1}, \notag \\
+& \rightarrow Y(s) = (1+a^2)\dfrac{1}{s+a}\dfrac{1}{s^2+1} \notag \\
+& \rightarrow Y(s) = \dfrac{1}{s+a} + \dfrac{a}{s^2+1} - \dfrac{s}{s^2+1}, 
+\end{align}
+となる．従って，ラプラス逆変換することにより，
+\begin{align}
+ y(t) = e^{-at} + a \sin t - \cos t, 
+\end{align}
+を得る．
+\vspace*{.2cm}
+
+比較のために，第1章で学んだ常微分方程式の解法を使って解いてみよう．
+まず，与えられた微分方程式の両辺に$e^{at}$をかけて，
+\begin{align}
+  \dfrac{d}{dt}\left(e^{at}y(t)\right) = (1+a^2)e^{at}\sin t. 
+\end{align}
+両辺を$t=0\sim t$で積分して，
+\begin{align}
+  e^{at}y(t) - y(0) 
+  &= (1+a^2)\int_{0}^{t}d\tau\, e^{at}\sin t \notag \\
+  &= (1+a^2)\dfrac{e^{at}(a\sin t - \cos t) + 1}{1+a^2} \notag \\
+  &= e^{at}(a\sin t - \cos t) + 1.
+\end{align}
+両辺に$e^{-at}$をかけることで，
+\begin{align}
+  y(t) = e^{at} + a\sin t -\cos t, 
+\end{align}
+となり，ラプラス変換を使って求めたものと同じ解を得る．
+両解法で異なるのは，解を求める過程で積分を実行する必要があるか否かである．
+大体の場合，代数的な計算の方が楽なので，ラプラス逆変換を知っている場合はラプラス変換を用いて解く方が計算が楽になる．
+%
+\newpage
+%
+\section{ラプラス逆変換しなくても分かること}
+%
+これまで，
+方程式の解のラプラス変換の表式をまず求め，その後に逆変換を実行することで解を得る，
+という手続きをとってきた．
+しかし，今求めたいものが解$y(t)$そのものではなく，
+例えば初期値$y(0)$や$t\to\infty$での値(最終値, $y(\infty)$)だった場合，
+ラプラス逆変換を実行しなくてもこれらの情報を得ることが出来る．
+%
+\subsection{初期値の定理}
+関数$f(t)$のラプラス変換を$F(s)$とすると，初期値$f(0)$とラプラス変換$F(s)$の間には
+次の関係式が成り立つ．
+\begin{align}
+ f(0) = \lim_{s\to \infty}sF(s). 
+\end{align}
+これを初期値の定理と呼ぶ．
+
+これは微分のラプラス変換の公式より，
+\begin{align}
+  \lim_{s\to\infty}\left(sF(s)-f(0)\right)
+  &=\lim_{s\to\infty}\left(\int_{0}^{\infty}dt\,\left(\dfrac{d}{dt}f(t)\right)e^{-st}\right) \notag \\
+  &=\int_{0}^{\infty}dt\,\left(\dfrac{d}{dt}f(t)\right)\left(\lim_{s\to \infty}e^{-st}\right) \notag \\
+  &= \int_{0}^{\infty}dt\,\left(\dfrac{d}{dt}f(t)\right)\times 0 \notag \\
+  &=0,
+\end{align}
+と出来ることから導かれる．
+%
+\subsection{最終値の定理}
+%
+関数$f(t)$のラプラス変換を$F(s)$とすると，最終値$f(\infty)$とラプラス変換$F(s)$の間には
+次の関係式が成り立つ．
+\begin{align}
+ f(\infty) = \lim_{s\to 0}sF(s). 
+\end{align}
+これを最終値の定理と呼ぶ．
+初期値の定理と同様，微分のラプラス変換の公式から，
+
+\begin{align}
+  \lim_{s\to0}\left(sF(s)-f(0)\right)
+  &=\lim_{s\to 0}\left(\int_{0}^{\infty}dt\,\left(\dfrac{d}{dt}f(t)\right)e^{-st}\right) \notag \\
+  &=\int_{0}^{\infty}dt\,\left(\dfrac{d}{dt}f(t)\right)\left(\lim_{s\to 0}e^{-st}\right) \notag \\
+  &= \int_{0}^{\infty}dt\,\left(\dfrac{d}{dt}f(t)\right)\times 1 \notag \\
+  &=f(\infty)-f(0),
+\end{align}
+と出来ることから導かれる．
+%
+%
+例えば，ある関数$\rho(r,t)$の$t$に関するラプラス変換$\hat{\rho}(r,s)$が次式のように与えられていたとする．
+\begin{align}
+ \hat{\rho}(r,s) = \dfrac{1}{s}\left[1-\dfrac{R}{r}\exp\left\{\left(\dfrac{s}{D}\right)^{1/2}(R-r)\right\}\right]. 
+\end{align}
+$D,~R$は正の定数である．
+具体的には述べないが，この関数は実際にある化学反応モデルに登場するものである．
+この関数のラプラス逆変換を実行すれば，$\rho(r,t)$が当然得られるわけだが，応用上最もよく使われるのはこの関数の
+$t\to \infty$での振る舞いである．
+最終値の定理を用いれば，ラプラス逆変換しなくても，
+\begin{align}
+ \rho(r,\infty) 
+  & = \lim_{s\to 0} s\hat{\rho}(r,s) \notag \\
+  & = 1- \dfrac{R}{r}, 
+\end{align}
+と$\rho(r,\infty)$が簡単に求められる．

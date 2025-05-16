@@ -1,0 +1,34 @@
+\newpage
+\hrule
+\reidai
+次の微分方程式の一般解を求めよ．
+\begin{align}
+  \dfrac{d^2y}{dx^2} + y = \dfrac{1}{\cos^{2}x} 
+\end{align}
+\hrule
+\vspace*{.2cm}
+
+斉次方程式の一般解は
+\begin{align}
+  y = C_1 \cos x + C_2 \sin x, 
+\end{align}
+であるから，$y_1 = \cos x$, $y_2=\sin x$としてロンスキアン$W(y_1, y_2)$を計算すると，
+\begin{align}
+  W\left(y_1, y_2\right) &= y_1 \dfrac{dy_2}{dx} - y_2 \dfrac{dy_1}{dx} \notag \\
+                         &= \cos^{2}x + \sin^{2}x = 1. 
+\end{align}
+従って，特殊解は\Eq{pde_sol_with_wronski}より，
+\begin{align}
+ y &= -y_1\int dx\,\dfrac{y_2 g(x)}{W(y_1,y_2)} + y_2\int dx\,\dfrac{y_1 g(x)}{W(y_1,y_2)} \notag \\
+   &= -\cos x \int dx\, \dfrac{\sin x}{\cos^2 x} + \sin x \int dx\, \dfrac{\cos x}{\cos^2 x}.
+\end{align}
+$X=\cos x$, $Y=\sin x$とおくと，
+\begin{align}
+ y &= \cos x \int dX\, \dfrac{1}{X^2} + \sin x \int dY\,\dfrac{1}{1-Y^2} \notag \\
+   &= \cos x \left(-\dfrac{1}{X}\right) - \dfrac{1}{2} \sin x \left( \log \left|1-Y\right| - \log \left|1+Y\right|\right) \notag \\
+   &= -1 - \dfrac{1}{2}\sin x \left(\log(1-\sin x) - \log (1+\sin x)\right).
+\end{align}
+従って，一般解は
+\begin{align}
+  y = C_1 \cos x + C_2 \sin x -1 -\dfrac{1}{2}\sin x\left(\log (1-\sin x) - \log (1+\sin x)\right) 
+\end{align}
